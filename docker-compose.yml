@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:17-alpine
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "test_password"
+      POSTGRES_DB: "scan"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
+
+networks:
+  scan-network:
