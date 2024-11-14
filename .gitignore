@@ -105,4 +105,4 @@ docs/generated/
 *.pkl
 *.h5
 *.joblib
-*.tfevents.* 
+*.tfevents.*
