@@ -15,7 +15,7 @@ jobs:
       - name: install Just
         uses: taiki-e/install-action@just
       - name: Build backend image
-      - just docker-build-backend
+      - run: just docker-build-backend
   linting:
     runs-on: ubuntu-latest
     steps:
