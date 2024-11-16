@@ -59,6 +59,6 @@ jobs:
       - name: Install Dependencies
         run: just backend-install
       - name: Start docker containers
-        run: just docker-up-detach
+        run: just docker-up-detache
       - name: Test with pytest
         run: just backend-test
