@@ -91,7 +91,7 @@ def test_get_goal(role, expected):
 
 @pytest.mark.parametrize(
     "role, expected",
-    (("DLPFC", "VMPFC"), ("VMPFC", "DLPFC"), ("OFC", "DLPFC"), ("ACC", "DLPFC"), ("MPFC", "DLPFC")),
+    (("DLPFC", "VMPFC"), ("VMPFC", "OFC"), ("OFC", "ACC"), ("ACC", "MPFC"), ("MPFC", None)),
 )
 def test_determine_next_agent(role, expected):
     result = _determine_next_agent(role)
