@@ -59,4 +59,4 @@
 
 @docker-build-backend:
   cd backend && \
-  docker build -t scanue-v .
+  docker build -t scanue-v-backend:test .
