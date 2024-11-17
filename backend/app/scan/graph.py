@@ -67,15 +67,15 @@ class CustomGraph:
 
         for role, analysis in state["history"]:
             if role == "DLPFC":
-                dlpfc_analysis = " ".join(analysis) if analysis else None
+                dlpfc_analysis = analysis if analysis else None
             elif role == "VMPFC":
-                vmpfc_analysis = " ".join(analysis) if analysis else None
+                vmpfc_analysis = analysis if analysis else None
             elif role == "OFC":
-                ofc_analysis = " ".join(analysis) if analysis else None
+                ofc_analysis = analysis if analysis else None
             elif role == "ACC":
-                acc_analysis = " ".join(analysis) if analysis else None
+                acc_analysis = analysis if analysis else None
             elif role == "MPFC":
-                mpfc_analysis = " ".join(analysis) if analysis else None
+                mpfc_analysis = analysis if analysis else None
 
         return AnalysisReport(
             dlpfc_analysis=dlpfc_analysis,
