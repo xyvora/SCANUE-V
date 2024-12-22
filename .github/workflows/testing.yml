@@ -7,6 +7,14 @@ on:
   pull_request:
 env:
   PYTHON_VERSION: "3.13"
+  SECRET_KEY: "someKey"
+  FIRST_SUPERUSER_EMAIL: "some@email.com"
+  FIRST_SUPERUSER_PASSWORD: "somePassword!"
+  POSTGRES_HOST: "127.0.0.1"
+  POSTGRES_USER: "postgres"
+  POSTGRES_PASSWORD: "test_password"
+  POSTGRES_DB: "scan"
+  OPENAI_API_KEY: "someKey"
 jobs:
   docker-build:
     runs-on: ubuntu-latest
@@ -59,6 +67,6 @@ jobs:
       - name: Install Dependencies
         run: just backend-install
       - name: Start docker containers
-        run: just docker-up-detached
+        run: just docker-up-backend-ci
       - name: Test with pytest
         run: just backend-test

@@ -8,10 +8,15 @@ services:
       - db
     ports:
       - "8000:8000"
-    env_file:
-      - .env
     environment:
-      - POSTGRES_HOST=db
+      - SECRET_KEY=someKey
+      - FIRST_SUPERUSER_EMAIL=some@email.com
+      - FIRST_SUPERUSER_PASSWORD=somePassword!
+      - POSTGRES_HOST=127.0.0.1
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=test_password
+      - POSTGRES_DB=scan
+      - OPENAI_API_KEY=someKey
   db:
     image: postgres:17-alpine
     expose:
