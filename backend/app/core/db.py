@@ -17,7 +17,7 @@ class Database:
     async def create_pool(self) -> None:
         self.pool = await asyncpg.create_pool(
             user=settings.POSTGRES_USER,
-            password=settings.POSTGRES_PASSWORD,
+            password=settings.POSTGRES_PASSWORD.get_secret_value(),
             database=settings.POSTGRES_DB,
             host=settings.POSTGRES_HOST,
             port=settings.POSTGRES_PORT,
@@ -138,7 +138,9 @@ class Database:
                 VALUES ($1, $2, $3, $4, $5, $6)
             """
 
-            hashed_password = get_password_hash(settings.FIRST_SUPERUSER_PASSWORD)
+            hashed_password = get_password_hash(
+                settings.FIRST_SUPERUSER_PASSWORD.get_secret_value()
+            )
             await connection.execute(
                 query,
                 create_db_primary_key(),

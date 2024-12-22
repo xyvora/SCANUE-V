@@ -15,7 +15,7 @@ def random_lower_string() -> str:
 async def get_superuser_token_headers(test_client):
     login_data = {
         "username": settings.FIRST_SUPERUSER_EMAIL,
-        "password": settings.FIRST_SUPERUSER_PASSWORD,
+        "password": settings.FIRST_SUPERUSER_PASSWORD.get_secret_value(),
     }
     response = await test_client.post("/login/access-token", data=login_data)
     tokens = response.json()

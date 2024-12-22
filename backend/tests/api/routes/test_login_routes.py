@@ -4,7 +4,7 @@ from app.core.config import settings
 async def test_get_access_token(test_client):
     login_data = {
         "username": settings.FIRST_SUPERUSER_EMAIL,
-        "password": settings.FIRST_SUPERUSER_PASSWORD,
+        "password": settings.FIRST_SUPERUSER_PASSWORD.get_secret_value(),
     }
     response = await test_client.post("/login/access-token", data=login_data)
     tokens = response.json()
