@@ -68,6 +68,9 @@
 @docker-up:
   docker compose up
 
+@docker-up-backend-dev:
+  docker compose up db
+
 @docker-up-detached:
   docker compose up -d
 
