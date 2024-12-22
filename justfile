@@ -74,8 +74,8 @@
 @docker-up-detached:
   docker compose up -d
 
-@docker-up-backend-dev-detached:
-  docker compose up db -d
+@docker-up-backend-ci:
+  docker compose -f docker-compose.ci.yml up db -d
 
 @docker-down:
   docker compose down
