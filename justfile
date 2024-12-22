@@ -45,6 +45,26 @@
   cd backend && \
   uv run uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 
+@frontend-install:
+  cd frontend && \
+  npm install
+
+@frontend-build:
+  cd frontend && \
+  npm run build
+
+@frontend-dev:
+  cd frontend && \
+  npm run dev
+
+@frontend-start:
+  cd frontend && \
+  npm run start
+
+@fronend-line:
+  cd frontend && \
+  npm run lint
+
 @docker-up:
   docker compose up
 
