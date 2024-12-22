@@ -24,7 +24,7 @@ def test_temperature(temperature):
 def test_invalid_temperature(temperature):
     with pytest.raises(ValidationError):
         Settings(
-            SECRET_KEY="a",
+            SECRET_KEY=SecretStr("a"),
             FIRST_SUPERUSER_EMAIL="user@email.com",
             FIRST_SUPERUSER_PASSWORD=SecretStr("Abc123!@#"),
             POSTGRES_HOST="some_host",

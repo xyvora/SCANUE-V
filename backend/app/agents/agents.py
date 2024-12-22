@@ -10,7 +10,7 @@ from app.types import JsonDict
 class DLPFCAgent(BaseAgent):
     """Dorsolateral Prefrontal Cortex Agent - Central Controller"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(model=settings.DLPFC_MODEL)
 
     def _create_prompt(self) -> ChatPromptTemplate:
@@ -56,7 +56,7 @@ class DLPFCAgent(BaseAgent):
 class VMPFCAgent(BaseAgent):
     """Ventromedial Prefrontal Cortex Agent - Emotional Regulation"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(model=settings.VMPFC_MODEL)
 
     def _create_prompt(self) -> ChatPromptTemplate:
@@ -83,7 +83,7 @@ class VMPFCAgent(BaseAgent):
 class OFCAgent(BaseAgent):
     """Orbitofrontal Cortex Agent - Reward Processing"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(model=settings.OFC_MODEL)
 
     def _create_prompt(self) -> ChatPromptTemplate:
@@ -106,7 +106,7 @@ class OFCAgent(BaseAgent):
 class ACCAgent(BaseAgent):
     """Anterior Cingulate Cortex Agent - Conflict Detection"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(model=settings.ACC_MODEL)
 
     def _create_prompt(self) -> ChatPromptTemplate:
@@ -129,7 +129,7 @@ class ACCAgent(BaseAgent):
 class MPFCAgent(BaseAgent):
     """Medial Prefrontal Cortex Agent - Value-based Decision Making"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(model=settings.MPFC_MODEL)
 
     def _create_prompt(self) -> ChatPromptTemplate:
