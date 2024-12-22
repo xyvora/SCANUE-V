@@ -200,7 +200,7 @@ async def test_update_user_me(test_client, normal_user_token_headers, test_db):
 async def test_update_password_me(test_client, superuser_token_headers, test_db):
     new_password = random_lower_string()
     data = {
-        "current_password": settings.FIRST_SUPERUSER_PASSWORD,
+        "current_password": settings.FIRST_SUPERUSER_PASSWORD.get_secret_value(),
         "new_password": new_password,
     }
     response = await test_client.patch(
@@ -260,8 +260,8 @@ async def test_update_user_me_email_exists(test_client, test_db, normal_user_tok
 
 async def test_update_password_me_same_password_error(test_client, superuser_token_headers):
     data = {
-        "currentPassword": settings.FIRST_SUPERUSER_PASSWORD,
-        "newPassword": settings.FIRST_SUPERUSER_PASSWORD,
+        "currentPassword": settings.FIRST_SUPERUSER_PASSWORD.get_secret_value(),
+        "newPassword": settings.FIRST_SUPERUSER_PASSWORD.get_secret_value(),
     }
     response = await test_client.patch(
         "/users/me/password",

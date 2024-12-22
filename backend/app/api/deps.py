@@ -42,7 +42,9 @@ DbConn = Annotated[asyncpg.Connection, Depends(get_db_conn)]
 async def get_current_user(conn: DbConn, token: TokenDep) -> UserInDb:
     try:
         logger.debug("Decoding JWT token")
-        payload = jwt.decode(token, key=settings.SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(
+            token, key=settings.SECRET_KEY.get_secret_value(), algorithms=[ALGORITHM]
+        )
         token_data = TokenPayload(**payload)
     except (InvalidTokenError, ValidationError) as e:
         logger.debug(f"Error decoding token: {e}")

@@ -1,5 +1,5 @@
 import pytest
-from pydantic import ValidationError
+from pydantic import SecretStr, ValidationError
 
 from app.core.config import Settings
 
@@ -7,13 +7,13 @@ from app.core.config import Settings
 @pytest.mark.parametrize("temperature", (0.0, 0.5, 1.0))
 def test_temperature(temperature):
     settings = Settings(
-        SECRET_KEY="a",
+        SECRET_KEY=SecretStr("a"),
         FIRST_SUPERUSER_EMAIL="user@email.com",
-        FIRST_SUPERUSER_PASSWORD="Abc123!@#",
+        FIRST_SUPERUSER_PASSWORD=SecretStr("Abc123!@#"),
         POSTGRES_HOST="some_host",
         POSTGRES_USER="pg",
-        POSTGRES_PASSWORD="pgpassword",
-        OPENAI_API_KEY="some_key",
+        POSTGRES_PASSWORD=SecretStr("pgpassword"),
+        OPENAI_API_KEY=SecretStr("some_key"),
         TEMPERATURE=temperature,
     )
 
@@ -26,10 +26,10 @@ def test_invalid_temperature(temperature):
         Settings(
             SECRET_KEY="a",
             FIRST_SUPERUSER_EMAIL="user@email.com",
-            FIRST_SUPERUSER_PASSWORD="Abc123!@#",
+            FIRST_SUPERUSER_PASSWORD=SecretStr("Abc123!@#"),
             POSTGRES_HOST="some_host",
             POSTGRES_USER="pg",
-            POSTGRES_PASSWORD="pgpassword",
-            OPENAI_API_KEY="some_key",
+            POSTGRES_PASSWORD=SecretStr("pgpassword"),
+            OPENAI_API_KEY=SecretStr("some_key"),
             TEMPERATURE=temperature,
         )

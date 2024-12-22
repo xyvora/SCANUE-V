@@ -6,6 +6,7 @@ from pydantic import (
     AnyUrl,
     BeforeValidator,
     EmailStr,
+    SecretStr,
     computed_field,
     field_validator,
     model_validator,
@@ -26,13 +27,13 @@ class Settings(BaseSettings):
 
     API_V1_PREFIX: str = "/api/v1"
     TITLE: Final = "SCAN"
-    SECRET_KEY: str
+    SECRET_KEY: SecretStr
     # 60 minutes * 24 hours * 8 days = 8 days
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
     ENVIRONMENT: Literal["local", "production"] = "local"
     DOMAIN: str = "127.0.0.1"
     FIRST_SUPERUSER_EMAIL: EmailStr
-    FIRST_SUPERUSER_PASSWORD: str
+    FIRST_SUPERUSER_PASSWORD: SecretStr
     ORGANIZATION: Final = "SCAN"
     BACKEND_CORS_ORIGINS: Annotated[list[AnyUrl] | str, BeforeValidator(_parse_cors)] = []
     LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
@@ -42,14 +43,14 @@ class Settings(BaseSettings):
     POSTGRES_HOST: str
     POSTGRES_PORT: int = 5432
     POSTGRES_USER: str
-    POSTGRES_PASSWORD: str
+    POSTGRES_PASSWORD: SecretStr
     POSTGRES_DB: str = "scan"
-    OPENAI_API_KEY: str
-    DLPFC_MODEL: str = "gpt-3.5-turbo"
-    VMPFC_MODEL: str = "gpt-3.5-turbo"
-    OFC_MODEL: str = "gpt-3.5-turbo"
-    ACC_MODEL: str = "gpt-3.5-turbo"
-    MPFC_MODEL: str = "gpt-3.5-turbo"
+    OPENAI_API_KEY: SecretStr
+    DLPFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
+    VMPFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
+    OFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
+    ACC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
+    MPFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
     MAX_TOKENS: int = 500
     TEMPERATURE: float = 0.7
 
@@ -82,10 +83,12 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def _enforce_non_default_secrets(self) -> Self:
-        self._check_default_secret("SECRET_KEY", self.SECRET_KEY)
-        self._check_default_secret("FIRST_SUPERUSER_PASSWORD", self.FIRST_SUPERUSER_PASSWORD)
+        self._check_default_secret("SECRET_KEY", self.SECRET_KEY.get_secret_value())
+        self._check_default_secret(
+            "FIRST_SUPERUSER_PASSWORD", self.FIRST_SUPERUSER_PASSWORD.get_secret_value()
+        )
         self._check_default_secret("POSTGRES_USER", self.POSTGRES_USER)
-        self._check_default_secret("POSTGRES_PASSWORD", self.POSTGRES_PASSWORD)
+        self._check_default_secret("POSTGRES_PASSWORD", self.POSTGRES_PASSWORD.get_secret_value())
 
         return self
 
