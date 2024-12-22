@@ -74,6 +74,9 @@
 @docker-up-detached:
   docker compose up -d
 
+@docker-up-backend-dev-detached:
+  docker compose up db -d
+
 @docker-down:
   docker compose down
 
