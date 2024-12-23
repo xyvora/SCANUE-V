@@ -7,6 +7,7 @@ from fastapi.responses import ORJSONResponse
 from loguru import logger
 
 from app.api.router import api_router
+from app.core.cache import cache
 from app.core.config import settings
 from app.core.db import db
 
@@ -39,6 +40,13 @@ async def lifespan(_: FastAPI) -> AsyncGenerator:
     except Exception as e:
         logger.error(f"Error creating first superuser: {e}")
         raise e
+
+    logger.info("Initializing cache client")
+    try:
+        await cache.create_client()
+    except Exception as e:
+        logger.error(f"Error creating cache client: {e}")
+        raise
 
     yield
     logger.info("Closing database connection pool")

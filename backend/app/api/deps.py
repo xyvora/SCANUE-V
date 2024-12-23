@@ -3,6 +3,7 @@ from typing import Annotated
 
 import asyncpg
 import jwt
+import valkey.asyncio as valkey
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from jwt.exceptions import InvalidTokenError
@@ -15,6 +16,7 @@ from starlette.status import (
     HTTP_503_SERVICE_UNAVAILABLE,
 )
 
+from app.core.cache import cache
 from app.core.config import settings
 from app.core.db import db
 from app.core.security import ALGORITHM
@@ -37,6 +39,19 @@ async def get_db_conn() -> AsyncGenerator[asyncpg.Connection, None]:
 
 
 DbConn = Annotated[asyncpg.Connection, Depends(get_db_conn)]
+
+
+async def get_cache_client() -> AsyncGenerator[valkey.Valkey, None]:
+    if cache.client is None:
+        logger.error("No cache client created")
+        raise HTTPException(
+            status_code=HTTP_503_SERVICE_UNAVAILABLE, detail="The cache is currently unavailable"
+        )
+
+    yield cache.client
+
+
+CacheClient = Annotated[valkey.Valkey, Depends(get_cache_client)]
 
 
 async def get_current_user(conn: DbConn, token: TokenDep) -> UserInDb:

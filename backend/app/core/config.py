@@ -45,6 +45,9 @@ class Settings(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_PASSWORD: SecretStr
     POSTGRES_DB: str = "scan"
+    VALKEY_HOST: str
+    VALKEY_PASSWORD: SecretStr
+    VALKEY_PORT: int = 6379
     OPENAI_API_KEY: SecretStr
     DLPFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
     VMPFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
@@ -89,6 +92,7 @@ class Settings(BaseSettings):
         )
         self._check_default_secret("POSTGRES_USER", self.POSTGRES_USER)
         self._check_default_secret("POSTGRES_PASSWORD", self.POSTGRES_PASSWORD.get_secret_value())
+        self._check_default_secret("VALKEY_PASSWORD", self.VALKEY_PASSWORD.get_secret_value())
 
         return self
 

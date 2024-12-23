@@ -1,6 +1,6 @@
 from loguru import logger
 
-from app.api.deps import DbConn
+from app.api.deps import CacheClient, DbConn
 from app.core.config import settings
 from app.core.utils import APIRouter
 from app.services.db_services import ping
@@ -11,7 +11,7 @@ router = APIRouter(
 
 
 @router.get("/")
-async def health(*, db_conn: DbConn) -> dict[str, str]:
+async def health(*, cache_client: CacheClient, db_conn: DbConn) -> dict[str, str]:
     """Check the health of the server."""
 
     logger.debug("Checking health")
@@ -24,5 +24,13 @@ async def health(*, db_conn: DbConn) -> dict[str, str]:
     except Exception as e:
         logger.error(f"Unable to ping the database: {e}")
         health["db"] = "unhealthy"
+
+    logger.debug("Checking cache health")
+    try:
+        await cache_client.ping()
+        health["cache"] = "healthy"
+    except Exception as e:
+        logger.error(f"Unable to ping the cache server: {e}")
+        health["cache"] = "unhealthy"
 
     return health
