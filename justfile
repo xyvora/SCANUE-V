@@ -61,15 +61,15 @@
   cd frontend && \
   npm run start
 
-@fronend-line:
+@frontend-lint:
   cd frontend && \
   npm run lint
 
 @docker-up:
-  docker compose up
+  docker compose up --build
 
 @docker-up-backend-dev:
-  docker compose up db
+  docker compose up db valkey
 
 @docker-up-detached:
   docker compose up -d

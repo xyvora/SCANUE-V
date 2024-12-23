@@ -1,6 +1,7 @@
 import pytest
 from httpx import ASGITransport, AsyncClient
 
+from app.core.cache import cache
 from app.core.config import settings
 from app.core.db import db
 from app.main import app
@@ -31,6 +32,17 @@ async def test_db():
         tables = ", ".join(("users",))
         await conn.execute(f"TRUNCATE {tables}")
     await db.close_pool()
+
+
+@pytest.fixture(autouse=True)
+async def test_cache():
+    await cache.create_client()
+    yield cache
+    if cache.client:
+        await cache.create_client()
+
+    await cache.client.flushall()  # type: ignore
+    await cache.close_client()
 
 
 @pytest.fixture

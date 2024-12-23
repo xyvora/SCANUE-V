@@ -4,3 +4,4 @@ async def test_health(test_client):
     assert result.status_code == 200
     assert result.json()["server"] == "healthy"
     assert result.json()["db"] == "healthy"
+    assert result.json()["cache"] == "healthy"

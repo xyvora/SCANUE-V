@@ -28,6 +28,7 @@ dependencies = [
     "python-multipart==0.0.20",
     "uvicorn==0.34.0",
     "uvloop==0.21.0",
+    "valkey==6.0.2",
 ]
 
 [dependency-groups]
