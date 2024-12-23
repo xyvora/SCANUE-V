@@ -13,6 +13,8 @@ def test_temperature(temperature):
         POSTGRES_HOST="some_host",
         POSTGRES_USER="pg",
         POSTGRES_PASSWORD=SecretStr("pgpassword"),
+        VALKEY_HOST="valkey",
+        VALKEY_PASSWORD=SecretStr("valkeypassword"),
         OPENAI_API_KEY=SecretStr("some_key"),
         TEMPERATURE=temperature,
     )
@@ -30,6 +32,8 @@ def test_invalid_temperature(temperature):
             POSTGRES_HOST="some_host",
             POSTGRES_USER="pg",
             POSTGRES_PASSWORD=SecretStr("pgpassword"),
+            VALKEY_HOST="valkey",
+            VALKEY_PASSWORD=SecretStr("valkeypassword"),
             OPENAI_API_KEY=SecretStr("some_key"),
             TEMPERATURE=temperature,
         )
