@@ -46,7 +46,7 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD: SecretStr
     POSTGRES_DB: str = "scan"
     OPENAI_API_KEY: SecretStr
-    DLPFC_MODEL: SecretStr  # = SecretStr("gpt-3.5-turbo")
+    DLPFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
     VMPFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
     OFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
     ACC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
