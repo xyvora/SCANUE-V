@@ -28,7 +28,7 @@ reusable_oauth2 = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_PREFIX}/login
 TokenDep = Annotated[str, Depends(reusable_oauth2)]
 
 
-async def get_db_conn() -> AsyncGenerator[asyncpg.Connection, None]:
+async def get_db_conn() -> AsyncGenerator[asyncpg.Connection]:
     if db.pool is None:
         logger.error("No database pool created")
         raise HTTPException(
@@ -41,7 +41,7 @@ async def get_db_conn() -> AsyncGenerator[asyncpg.Connection, None]:
 DbConn = Annotated[asyncpg.Connection, Depends(get_db_conn)]
 
 
-async def get_cache_client() -> AsyncGenerator[valkey.Valkey, None]:
+async def get_cache_client() -> AsyncGenerator[valkey.Valkey]:
     if cache.client is None:
         logger.error("No cache client created")
         raise HTTPException(
