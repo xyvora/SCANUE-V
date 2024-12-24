@@ -38,8 +38,6 @@ class DLPFCAgent(BaseAgent):
         return ChatPromptTemplate.from_template(template)
 
     async def process(self, state: AgentState) -> JsonDict:
-        logger.debug(f"DLPFC Agent processing state: {state}")
-
         response = await self.llm.ainvoke(
             self.prompt.format_messages(
                 task=state.task,
