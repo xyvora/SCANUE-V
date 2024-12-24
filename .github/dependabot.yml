@@ -8,6 +8,14 @@ updates:
     labels:
       - skip-changelog
       - dependencies
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: weekly
+      day: monday
+    labels:
+      - skip-changelog
+      - dependencies
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
