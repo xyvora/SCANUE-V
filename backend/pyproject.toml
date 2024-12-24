@@ -19,7 +19,7 @@ dependencies = [
     "langchain==0.3.13",
     "langchain-openai==0.2.14",
     "langgraph==0.2.60",
-    "loguru==0.7.2",
+    "loguru==0.7.3",
     "orjson==3.10.12",
     "pwdlib[argon2]==0.2.1",
     "pydantic[email]==2.10.4",
