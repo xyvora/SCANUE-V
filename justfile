@@ -9,6 +9,12 @@
   echo ruff-format
   just --justfile {{justfile()}} ruff-format
 
+@install:
+  echo installing backend
+  just --justfile {{justfile()}} backend-install
+  echo installing frontend
+  just --justfile {{justfile()}} frontend-install
+
 @mypy:
   cd backend && \
   uv run mypy app tests
