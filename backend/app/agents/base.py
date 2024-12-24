@@ -33,9 +33,7 @@ class BaseAgent(ABC):
     async def process(self, state: AgentState) -> JsonDict:
         """Process the current state and return updated state."""
         try:
-            logger.debug(f"Processing state with prompt: {self.prompt}")
             result = await self._process_with_timeout(state)
-            logger.debug(f"Received response: {result}")
             return result
         except TimeoutError:
             error_msg = "Request timed out. Please try again."
@@ -53,7 +51,6 @@ class BaseAgent(ABC):
     async def _process_with_timeout(self, state: AgentState) -> JsonDict:
         """Process with timeout handling."""
         try:
-            logger.debug("Sending request to OpenAI API...")
             response = await self.llm.ainvoke(
                 self.prompt.format_messages(
                     task=state.task,
@@ -63,7 +60,6 @@ class BaseAgent(ABC):
                     feedback_history=state.feedback_history,
                 ),
             )
-            logger.debug(f"Received API response: {response}")
             return self._format_response(response.content)
         except TimeoutError:
             logger.debug("API request timed out")
