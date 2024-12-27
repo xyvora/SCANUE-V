@@ -2,6 +2,7 @@ import warnings
 from pathlib import Path
 from typing import Annotated, Any, Final, Literal, Self
 
+from dotenv import find_dotenv, load_dotenv
 from pydantic import (
     AnyUrl,
     BeforeValidator,
@@ -13,6 +14,8 @@ from pydantic import (
 )
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+load_dotenv(find_dotenv(".env"))
+
 
 def _parse_cors(v: Any) -> list[str] | str:
     if isinstance(v, str) and not v.startswith("["):
@@ -23,7 +26,7 @@ def _parse_cors(v: Any) -> list[str] | str:
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    model_config = SettingsConfigDict(env_file_encoding="utf-8", extra="ignore")
 
     API_V1_PREFIX: str = "/api/v1"
     TITLE: Final = "SCAN"

@@ -1,0 +1,86 @@
+services:
+  proxy:
+    image: traefik:3
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "80:80"
+      - "8090:8080"
+    # Duplicate the command from docker-compose.yml to add --api.insecure=true
+    command:
+      # Enable Docker in Traefik, so that it reads labels from Docker services
+      - --providers.docker
+      # Add a constraint to only use services with the label for this stack
+      - --providers.docker.constraints=Label(`traefik.constraint-label`, `traefik-public`)
+      # Do not expose all Docker services, only the ones explicitly exposed
+      - --providers.docker.exposedbydefault=false
+      # Create an entrypoint "http" listening on port 80
+      - --entrypoints.http.address=:80
+      # Enable the access log, with HTTP requests
+      - --accesslog
+      # Enable the Traefik log, for configurations and errors
+      - --log
+      # Enable debug logging for local development
+      - --log.level=DEBUG
+      # Enable the Dashboard and API
+      - --api
+      # Enable the Dashboard and API in insecure mode for local development
+      - --api.insecure=true
+    labels:
+      # Enable Traefik for this service, to make it available in the public network
+      - traefik.enable=true
+      - traefik.constraint-label=traefik-public
+    networks:
+      - traefik-public
+      - default
+
+  backend:
+    image: backend:dev
+    restart: no
+    ports:
+      - "8000:8000"
+    networks:
+      - traefik-public
+      - default
+    build:
+      context: ./backend
+    container_name: backend
+    depends_on:
+      - db
+      - valkey
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST=db
+
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+
+      # HTTP entry point and rule
+      - traefik.http.routers.${STACK_NAME?Variable not set}-backend-http.rule=Host(`api.${DOMAIN?Variable not set}`)
+      - traefik.http.routers.${STACK_NAME?Variable not set}-backend-http.entrypoints=http
+
+      # Remove reference to HTTPS and its middlewares
+      - traefik.http.routers.${STACK_NAME?Variable not set}-backend-http.middlewares=
+
+      # Clear HTTPS-specific labels
+      - traefik.http.routers.${STACK_NAME?Variable not set}-backend-https.rule=
+      - traefik.http.routers.${STACK_NAME?Variable not set}-backend-https.entrypoints=
+      - traefik.http.routers.${STACK_NAME?Variable not set}-backend-https.tls.certresolver=
+      - traefik.http.routers.${STACK_NAME?Variable not set}-backend-https.middlewares=
+
+  db:
+    restart: "no"
+    ports:
+      - "5432:5432"
+
+  valkey:
+    restart: "no"
+    ports:
+      - 6379:6379
+
+networks:
+  traefik-public:
+    # For local dev, don't expect an external Traefik network
+    external: false
