@@ -92,4 +92,8 @@
 
 @docker-build-backend:
   cd backend && \
-  docker build -t scanue-v .
+  docker build -t scanue-v-backend .
+
+@docker-build-frontend:
+  cd frontend && \
+  docker build -t frontend-frontend .

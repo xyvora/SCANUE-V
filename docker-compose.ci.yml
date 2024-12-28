@@ -3,7 +3,7 @@ services:
     image: backend:dev
     build:
       context: ./backend
-    container_name: backend
+    container_name: scanue-v-backend
     depends_on:
       - db
       - valkey

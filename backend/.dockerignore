@@ -10,3 +10,6 @@ htmlcov
 .venv
 .env
 *.log
+Dockerfile
+.dockerignore
+.git
