@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { ResponsiveHeatMap } from '@nivo/heatmap';
 
 interface AgentHeatmapProps {
@@ -71,4 +71,4 @@ export const AgentHeatmap: React.FC<AgentHeatmapProps> = ({ data }) => {
       />
     </div>
   );
-};
+};*/

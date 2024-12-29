@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { ResponsiveNetwork } from '@nivo/network';
 
 interface NetworkGraphProps {
@@ -43,4 +43,4 @@ export const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
       />
     </div>
   );
-};
+}; */

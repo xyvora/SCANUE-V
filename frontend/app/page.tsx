@@ -1,11 +1,11 @@
 'use client'
 
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { Bot, ArrowRight } from 'lucide-react'
-import { WavyBackground } from '../components/ui/wavy-background'
+// import Link from 'next/link'
+// import { motion } from 'framer-motion'
+// import { Bot, ArrowRight } from 'lucide-react'
+// import { WavyBackground } from '../components/ui/wavy-background'
 
-const containerVariants = {
+/*const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -25,12 +25,12 @@ const itemVariants = {
       stiffness: 100
     }
   }
-}
+}*/
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 bg-black">
-      <WavyBackground className="max-w-4xl mx-auto pb-40">
+      {/*<WavyBackground className="max-w-4xl mx-auto pb-40">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -62,7 +62,7 @@ export default function Home() {
             </Link>
           </motion.div>
         </motion.div>
-      </WavyBackground>
+      </WavyBackground>*/}
     </main>
   )
 }

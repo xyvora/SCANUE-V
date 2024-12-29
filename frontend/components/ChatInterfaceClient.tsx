@@ -1,20 +1,21 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { Send, Bot, User, Upload, ChevronDown, ArrowDown, Heart, Star, AlertTriangle, BarChart } from 'lucide-react'
+// import { Send, Bot, User, Upload, ChevronDown, ArrowDown, Heart, Star, AlertTriangle, BarChart } from 'lucide-react'
+import { Send, Bot, User, Upload, ArrowDown, Heart, Star, AlertTriangle, BarChart } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AgentResponse } from './AgentResponse'
 import { Brain, History } from 'lucide-react'
 import { ThumbsUp, ThumbsDown } from 'lucide-react'
 import { RefreshButton } from './RefreshButton';
-import { ScrollToBottomButton } from './ScrollToBottomButton';
+// import { ScrollToBottomButton } from './ScrollToBottomButton';
 import DOMPurify from 'dompurify'
-import VoiceInput from './VoiceInput';
-import { AgentRadarChart } from './AgentRadarChart';
+// import VoiceInput from './VoiceInput';
+/* import { AgentRadarChart } from './AgentRadarChart';
 import { AgentHeatmap } from './AgentHeatmap';
-import { AgentForceGraph } from './AgentForceGraph';
-import { NetworkGraph } from './NetworkGraph';
-import { Heatmap } from './Heatmap';
+import { AgentForceGraph } from './AgentForceGraph';*/
+// import { NetworkGraph } from './NetworkGraph';
+// import { Heatmap } from './Heatmap';
 
 interface Message {
   id: string
@@ -56,10 +57,10 @@ export function ChatInterfaceClient() {
   const [isAgentMenuOpen, setIsAgentMenuOpen] = useState(false)
   const [isHistoryOpen, setIsHistoryOpen] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  const [showScrollButton, setShowScrollButton] = useState(false)
+  // const [showScrollButton, setShowScrollButton] = useState(false)
   const [hasScrolledUp, setHasScrolledUp] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null);
-  const [isFocusMode, setIsFocusMode] = useState(false);
+  // const [isFocusMode, setIsFocusMode] = useState(false);
   const [visualizationType, setVisualizationType] = useState<'radar' | 'heatmap' | 'force'>('radar');
 
   useEffect(() => {
@@ -139,7 +140,7 @@ export function ChatInterfaceClient() {
     console.log(`Feedback for message ${messageId}: ${messages.find(m => m.id === messageId)?.feedback?.type}, Comment: ${feedbackComment}`)
   }
 
-  const toggleAgentResponses = (messageId: string) => {
+  /*const toggleAgentResponses = (messageId: string) => {
     setMessages(prev => prev.map(message => {
       if (message.id === messageId && message.agentResponses) {
         const showResponses = !message.showAgentResponses;
@@ -151,11 +152,11 @@ export function ChatInterfaceClient() {
       }
       return message;
     }));
-  };
+  };*/
 
   const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
     const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
-    setShowScrollButton(scrollHeight - scrollTop > clientHeight + 100);
+    //setShowScrollButton(scrollHeight - scrollTop > clientHeight + 100);
     setHasScrolledUp(scrollTop < scrollHeight - clientHeight - 10);
   }, []);
 
@@ -199,25 +200,25 @@ export function ChatInterfaceClient() {
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
-      setIsFocusMode(false);
+      // setIsFocusMode(false);
       inputRef.current?.blur();
     } else if (e.key === '/') {
       e.preventDefault();
-      setIsFocusMode(true);
+      // setIsFocusMode(true);
       inputRef.current?.focus();
     }
   };
 
-  const handleVoiceInput = (transcript: string) => {
+  /* const handleVoiceInput = (transcript: string) => {
     setInput(transcript);
-  };
+  };*/
 
-  const calculateAgentScores = (responses: Record<string, string>) => {
-    return Object.entries(responses).map(([agent, response]) => ({
+  /*const calculateAgentScores = (responses: Record<string, string>) => {
+    return Object.entries().map((agent) => (responses).map(([agent, response]) => ({
       agent,
       value: Math.floor(Math.random() * 100) // Replace this with actual score calculation logic
     }));
-  };
+  };*/
 
   const handleVisualizationChange = (type: 'radar' | 'heatmap' | 'force') => {
     setVisualizationType(type);
@@ -307,7 +308,7 @@ export function ChatInterfaceClient() {
                           <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            onClick={() => toggleAgentResponses(message.id)}
+                            // onClick={() => toggleAgentResponses(message.id)}
                             className={`w-full p-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-700 text-white shadow-md transition-all duration-300 hover:shadow-lg hover:from-purple-700 hover:to-indigo-800`}
                           >
                             {message.showAgentResponses ? 'Hide' : 'Show'} Agent Responses
@@ -344,9 +345,9 @@ export function ChatInterfaceClient() {
                                         Relationships
                                       </button>
                                     </div>
-                                    {visualizationType === 'radar' && <AgentRadarChart data={message.agentScores} />}
+                                    {/*{visualizationType === 'radar' && <AgentRadarChart data={message.agentScores} />}
                                     {visualizationType === 'heatmap' && <AgentHeatmap data={message.agentScores} />}
-                                    {visualizationType === 'force' && <AgentForceGraph data={message.agentScores} />}
+                                    {visualizationType === 'force' && <AgentForceGraph data={message.agentScores} />}*/}
                                   </div>
                                 )}
                                 {(Object.keys(message.agentResponses) as Array<keyof typeof message.agentResponses>).map((agent) => (
@@ -466,7 +467,7 @@ export function ChatInterfaceClient() {
               onChange={handleFileUpload}
               accept=".pdf,.doc,.docx,.txt"
             />
-            <VoiceInput onTranscript={handleVoiceInput} />
+            {/*<VoiceInput onTranscript={handleVoiceInput} />*/}
             <input
               ref={inputRef}
               type="text"
@@ -486,7 +487,7 @@ export function ChatInterfaceClient() {
             </motion.button>
           </div>
         </form>
-        <ScrollToBottomButton showScrollButton={showScrollButton} scrollToBottom={scrollToBottom} />
+        {/*<ScrollToBottomButton showScrollButton={showScrollButton} scrollToBottom={scrollToBottom} />*/}
       </div>
       <AnimatePresence>
         {hasScrolledUp && (

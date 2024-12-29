@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { ResponsiveRadar } from '@nivo/radar';
 
 interface AgentRadarChartProps {
@@ -65,4 +65,4 @@ export const AgentRadarChart: React.FC<AgentRadarChartProps> = ({ data }) => {
       />
     </div>
   );
-};
+};*/

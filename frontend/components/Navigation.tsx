@@ -1,3 +1,5 @@
+// TODO: Need real types for any types
+
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -87,6 +89,7 @@ export function Navigation() {
   )
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 function NavLink({ href, children, icon: Icon, active }: { href: string; children: React.ReactNode; icon: any; active: boolean }) {
   return (
     <Link
