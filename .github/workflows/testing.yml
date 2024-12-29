@@ -70,14 +70,14 @@ jobs:
         run: just docker-up-backend-ci
       - name: Test with pytest
         run: just backend-test
-  frontend:
+  frontend-linting:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: install Just
         uses: taiki-e/install-action@just
       - name: Setup node
-      - uses: actions/setup-node@v4
+        uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: "npm"
