@@ -1,18 +1,37 @@
-import React from 'react';
-import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line } from 'recharts';
+import React from "react";
+import {
+  ResponsiveContainer,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  LineChart,
+  Line,
+} from "recharts";
 
 interface AgentResponseVisualizationProps {
   data: {
     agent: string;
     value: number;
   }[];
-  chartType: 'radar' | 'bar' | 'line';
+  chartType: "radar" | "bar" | "line";
 }
 
-export const AgentResponseVisualization: React.FC<AgentResponseVisualizationProps> = ({ data, chartType }) => {
+export const AgentResponseVisualization: React.FC<AgentResponseVisualizationProps> = ({
+  data,
+  chartType,
+}) => {
   const renderChart = () => {
     switch (chartType) {
-      case 'radar':
+      case "radar":
         return (
           <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
             <PolarGrid />
@@ -21,7 +40,7 @@ export const AgentResponseVisualization: React.FC<AgentResponseVisualizationProp
             <Radar name="Agent" dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
           </RadarChart>
         );
-      case 'bar':
+      case "bar":
         return (
           <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -32,7 +51,7 @@ export const AgentResponseVisualization: React.FC<AgentResponseVisualizationProp
             <Bar dataKey="value" fill="#8884d8" />
           </BarChart>
         );
-      case 'line':
+      case "line":
         return (
           <LineChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />

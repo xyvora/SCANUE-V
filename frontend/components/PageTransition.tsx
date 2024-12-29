@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
-import React from 'react'
+import { motion } from "framer-motion";
+import React from "react";
 
 const pageVariants = {
   initial: {
@@ -14,13 +14,13 @@ const pageVariants = {
     opacity: 0,
     y: -20,
   },
-}
+};
 
 const pageTransition = {
-  type: 'tween',
-  ease: 'anticipate',
+  type: "tween",
+  ease: "anticipate",
   duration: 0.5,
-}
+};
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   return (
@@ -33,5 +33,5 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     >
       {children}
     </motion.div>
-  )
+  );
 }

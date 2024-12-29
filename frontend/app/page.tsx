@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 // import Link from 'next/link'
 // import { motion } from 'framer-motion'
 // import { Bot, ArrowRight } from 'lucide-react'
@@ -28,7 +28,7 @@ const itemVariants = {
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 bg-black">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-black p-4 sm:p-8">
       {/*<WavyBackground className="max-w-4xl mx-auto pb-40">
         <motion.div
           variants={containerVariants}
@@ -63,5 +63,5 @@ export default function Home() {
         </motion.div>
       </WavyBackground>*/}
     </main>
-  )
+  );
 }

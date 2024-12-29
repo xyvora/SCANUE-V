@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 /* import { AgentRadarChart } from './AgentRadarChart';
 import { AgentBarChart } from './AgentBarChart';
 import { AgentPolarChart } from './AgentPolarChart';*/
@@ -12,7 +12,7 @@ interface AgentVisualizationProps {
 
 // export const AgentVisualization: React.FC<AgentVisualizationProps> = ({ data }) => {
 export const AgentVisualization: React.FC<AgentVisualizationProps> = () => {
-  const [visualizationType, setVisualizationType] = useState<'radar' | 'bar' | 'polar'>('radar');
+  const [visualizationType, setVisualizationType] = useState<"radar" | "bar" | "polar">("radar");
 
   /* const renderVisualization = () => {
     switch (visualizationType) {
@@ -31,31 +31,25 @@ export const AgentVisualization: React.FC<AgentVisualizationProps> = () => {
     <div className="space-y-4">
       <div className="flex justify-center space-x-4">
         <button
-          onClick={() => setVisualizationType('radar')}
-          className={`px-4 py-2 rounded-full ${
-            visualizationType === 'radar'
-              ? 'bg-blue-500 text-white'
-              : 'bg-gray-200 text-gray-800'
+          onClick={() => setVisualizationType("radar")}
+          className={`rounded-full px-4 py-2 ${
+            visualizationType === "radar" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
           }`}
         >
           Radar
         </button>
         <button
-          onClick={() => setVisualizationType('bar')}
-          className={`px-4 py-2 rounded-full ${
-            visualizationType === 'bar'
-              ? 'bg-blue-500 text-white'
-              : 'bg-gray-200 text-gray-800'
+          onClick={() => setVisualizationType("bar")}
+          className={`rounded-full px-4 py-2 ${
+            visualizationType === "bar" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
           }`}
         >
           Bar
         </button>
         <button
-          onClick={() => setVisualizationType('polar')}
-          className={`px-4 py-2 rounded-full ${
-            visualizationType === 'polar'
-              ? 'bg-blue-500 text-white'
-              : 'bg-gray-200 text-gray-800'
+          onClick={() => setVisualizationType("polar")}
+          className={`rounded-full px-4 py-2 ${
+            visualizationType === "polar" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
           }`}
         >
           Polar
