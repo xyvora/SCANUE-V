@@ -1,6 +1,4 @@
-'use client'
-
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 // import { User, Lock, ArrowRight } from 'lucide-react'
 import { User, Lock } from 'lucide-react'

@@ -2,6 +2,7 @@
 import { Inter } from 'next/font/google'
 import { Navigation } from '../components/Navigation'
 import { PageTransition } from '../components/PageTransition'
+import React from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 

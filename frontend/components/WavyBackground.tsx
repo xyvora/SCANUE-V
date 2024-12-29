@@ -1,8 +1,6 @@
 // TODO: Need real types for any types
 
-'use client'
-
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 export const WavyBackground = ({
   children,

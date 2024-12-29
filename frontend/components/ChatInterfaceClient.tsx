@@ -1,6 +1,4 @@
-'use client'
-
-import { useState, useRef, useEffect, useCallback } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 // import { Send, Bot, User, Upload, ChevronDown, ArrowDown, Heart, Star, AlertTriangle, BarChart } from 'lucide-react'
 import { Send, Bot, User, Upload, ArrowDown, Heart, Star, AlertTriangle, BarChart } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'

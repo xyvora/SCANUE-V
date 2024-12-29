@@ -1,6 +1,4 @@
-'use client'
-
-import { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Send, Bot, User, Moon, Sun, Smile } from 'lucide-react'
 import data from '@emoji-mart/data'
 // import Picker from '@emoji-mart/react'
