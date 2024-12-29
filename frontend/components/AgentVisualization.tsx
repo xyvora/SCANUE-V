@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { AgentRadarChart } from './AgentRadarChart';
+/* import { AgentRadarChart } from './AgentRadarChart';
 import { AgentBarChart } from './AgentBarChart';
-import { AgentPolarChart } from './AgentPolarChart';
+import { AgentPolarChart } from './AgentPolarChart';*/
 
 interface AgentVisualizationProps {
   data: {
@@ -10,10 +10,11 @@ interface AgentVisualizationProps {
   }[];
 }
 
-export const AgentVisualization: React.FC<AgentVisualizationProps> = ({ data }) => {
+// export const AgentVisualization: React.FC<AgentVisualizationProps> = ({ data }) => {
+export const AgentVisualization: React.FC<AgentVisualizationProps> = () => {
   const [visualizationType, setVisualizationType] = useState<'radar' | 'bar' | 'polar'>('radar');
 
-  const renderVisualization = () => {
+  /* const renderVisualization = () => {
     switch (visualizationType) {
       case 'radar':
         return <AgentRadarChart data={data} />;
@@ -24,7 +25,7 @@ export const AgentVisualization: React.FC<AgentVisualizationProps> = ({ data }) 
       default:
         return null;
     }
-  };
+  };*/
 
   return (
     <div className="space-y-4">
@@ -60,7 +61,7 @@ export const AgentVisualization: React.FC<AgentVisualizationProps> = ({ data }) 
           Polar
         </button>
       </div>
-      {renderVisualization()}
+      {/*{renderVisualization()}*/}
     </div>
   );
 };

@@ -1,7 +1,7 @@
-import './globals.css'
+// import './globals.css'
 import { Inter } from 'next/font/google'
-import { Navigation } from '@/components/Navigation'
-import { PageTransition } from '@/components/PageTransition'
+import { Navigation } from '../components/Navigation'
+import { PageTransition } from '../components/PageTransition'
 
 const inter = Inter({ subsets: ['latin'] })
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+/*import React, { useState, useEffect } from 'react';
 import { Mic, MicOff } from 'lucide-react';
 
 interface VoiceInputProps {
@@ -54,4 +54,4 @@ const VoiceInput: React.FC<VoiceInputProps> = ({ onTranscript }) => {
   );
 };
 
-export default VoiceInput;
+export default VoiceInput;*/

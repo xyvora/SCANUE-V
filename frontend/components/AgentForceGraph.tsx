@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { ResponsiveNetwork } from '@nivo/network';
 
 interface AgentForceGraphProps {
@@ -44,4 +44,4 @@ export const AgentForceGraph: React.FC<AgentForceGraphProps> = ({ data }) => {
       />
     </div>
   );
-};
+}; */

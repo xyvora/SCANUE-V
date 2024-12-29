@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Send, Bot, User, Moon, Sun, Smile } from 'lucide-react'
 import data from '@emoji-mart/data'
-import Picker from '@emoji-mart/react'
+// import Picker from '@emoji-mart/react'
 
 interface Message {
   content: string
@@ -131,7 +131,7 @@ export default function ChatInterface() {
           </button>
           {showEmojiPicker && (
             <div className="absolute bottom-full right-0 mb-2">
-              <Picker data={data} onEmojiSelect={handleEmojiSelect} theme={darkMode ? 'dark' : 'light'} />
+              {/*<Picker data={data} onEmojiSelect={handleEmojiSelect} theme={darkMode ? 'dark' : 'light'} />*/}
             </div>
           )}
         </div>

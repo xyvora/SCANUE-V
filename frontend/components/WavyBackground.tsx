@@ -1,3 +1,5 @@
+// TODO: Need real types for any types
+
 'use client'
 
 import { useEffect, useRef } from 'react'
@@ -23,6 +25,7 @@ export const WavyBackground = ({
   blur?: number
   speed?: "slow" | "fast"
   waveOpacity?: number
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   [key: string]: any
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
