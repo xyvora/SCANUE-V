@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { RefreshCw } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { RefreshCw } from "lucide-react";
 
 interface RefreshButtonProps {
   onRefresh: () => void;
@@ -12,10 +12,10 @@ export const RefreshButton: React.FC<RefreshButtonProps> = ({ onRefresh }) => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       onClick={onRefresh}
-      className="fixed top-20 right-4 p-2 bg-purple-600 text-white rounded-full shadow-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 z-20"
+      className="fixed right-4 top-20 z-20 rounded-full bg-purple-600 p-2 text-white shadow-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
       aria-label="Refresh chat"
     >
-      <RefreshCw className="w-6 h-6" />
+      <RefreshCw className="h-6 w-6" />
     </motion.button>
   );
 };
