@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 // import { Send, Bot, User, Upload, ChevronDown, ArrowDown, Heart, Star, AlertTriangle, BarChart } from 'lucide-react'
 import {
   Send,

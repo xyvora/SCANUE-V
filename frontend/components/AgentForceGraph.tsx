@@ -1,5 +1,4 @@
-/* import React from 'react';
-import { ResponsiveNetwork } from '@nivo/network';
+/* import { ResponsiveNetwork } from '@nivo/network';
 
 interface AgentForceGraphProps {
   data: {

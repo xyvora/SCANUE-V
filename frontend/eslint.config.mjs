@@ -17,6 +17,12 @@ const eslintConfig = [
     "plugin:react/recommended",
     "prettier",
   ),
+  {
+    rules: {
+      "react/jsx-uses-react": "off",
+      "react/react-in-jsx-scope": "off",
+    },
+  },
 ];
 
 export default eslintConfig;
