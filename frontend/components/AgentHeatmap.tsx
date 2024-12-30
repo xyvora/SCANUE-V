@@ -1,5 +1,4 @@
-/* import React from 'react';
-import { ResponsiveHeatMap } from '@nivo/heatmap';
+/*import { ResponsiveHeatMap } from '@nivo/heatmap';
 
 interface AgentHeatmapProps {
   data: {

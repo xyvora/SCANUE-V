@@ -1,5 +1,4 @@
-/* import React from 'react';
-import { ResponsiveRadar } from '@nivo/radar';
+/* import { ResponsiveRadar } from '@nivo/radar';
 
 interface AgentRadarChartProps {
   data: {
