@@ -36,4 +36,4 @@ export class ChatErrorBoundary extends React.Component<Props, State> {
 
     return this.props.children
   }
-} 
+}

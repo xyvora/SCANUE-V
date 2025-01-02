@@ -20,4 +20,4 @@ export default function Loading() {
       <div className="sr-only">Loading page content...</div>
     </output>
   )
-} 
+}

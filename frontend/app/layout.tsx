@@ -6,7 +6,7 @@ import { PageTransition } from '@/components/PageTransition'
 import { Suspense } from 'react'
 import Loading from './loading'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   preload: true,
@@ -41,4 +41,3 @@ export default function RootLayout({
     </html>
   )
 }
-

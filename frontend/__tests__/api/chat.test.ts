@@ -96,4 +96,4 @@ describe('Chat API', () => {
     const data = await response.json()
     expect(data.error).toBe('Missing required fields')
   })
-}) 
+})

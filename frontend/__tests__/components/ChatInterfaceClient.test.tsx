@@ -118,4 +118,3 @@ describe('ChatInterfaceClient', () => {
     expect(screen.getByPlaceholderText(/Message General agent/i)).toBeInTheDocument();
   });
 })
-

@@ -15,4 +15,4 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size = 24 }) => 
   >
     {/* Spinner SVG or CSS animation */}
   </div>
-); 
+);

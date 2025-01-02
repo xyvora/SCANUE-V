@@ -14,4 +14,4 @@ describe('LoadingSpinner', () => {
     const spinner = screen.getByRole('status');
     expect(spinner).toHaveStyle({ width: '40px', height: '40px' });
   });
-}); 
+});

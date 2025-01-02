@@ -9,4 +9,4 @@ declare module 'react' {
     props: P;
     key: React.Key | null;
   }
-} 
+}

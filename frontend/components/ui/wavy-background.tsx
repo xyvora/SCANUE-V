@@ -33,7 +33,7 @@ export const WavyBackground: FC<WavyBackgroundProps> = ({
   const noise = useRef<NoiseFunction3D>(createNoise3D());
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isSafari, setIsSafari] = useState(false);
-  
+
   // Move these to useRef to maintain values between renders
   const wRef = useRef<number>(0);
   const hRef = useRef<number>(0);

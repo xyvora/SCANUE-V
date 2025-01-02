@@ -28,4 +28,4 @@ export function LoadingDots({ className, color = 'currentColor' }: LoadingDotsPr
       ))}
     </span>
   )
-} 
+}

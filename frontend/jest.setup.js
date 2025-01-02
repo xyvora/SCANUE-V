@@ -14,4 +14,3 @@ Object.defineProperty(window, 'matchMedia', {
     toString: jest.fn().mockReturnValue(query),
   })),
 })
-

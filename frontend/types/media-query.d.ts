@@ -7,4 +7,4 @@ export interface MediaQueryListEvent extends globalThis.MediaQueryListEvent {
   matches: boolean;
   media: string;
   type: 'change';
-} 
+}

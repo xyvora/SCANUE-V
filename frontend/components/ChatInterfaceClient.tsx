@@ -48,7 +48,7 @@ export function ChatInterfaceClient() {
 
   useEffect(() => {
     setMessages([
-      { 
+      {
         id: Date.now().toString(),
         content: 'Hi there! I am your AI assistant. How can I help you today?',
         isUser: false,
@@ -116,7 +116,7 @@ export function ChatInterfaceClient() {
       }
 
       const data = await response.json()
-      
+
       const botMessage: Message = {
         id: Date.now().toString(),
         content: data.message,
@@ -142,15 +142,15 @@ export function ChatInterfaceClient() {
 
   const handleFeedback = useCallback((messageId: string, feedbackType: 'positive' | 'negative') => {
     setActiveFeedback(messageId)
-    setMessages(prev => prev.map(message => 
+    setMessages(prev => prev.map(message =>
       message.id === messageId ? { ...message, feedback: { type: feedbackType, comment: '' } } : message
     ))
   }, [])
 
   const handleFeedbackComment = (messageId: string) => {
-    setMessages(prev => prev.map(message => 
-      message.id === messageId && message.feedback 
-        ? { ...message, feedback: { ...message.feedback, comment: feedbackComment } } 
+    setMessages(prev => prev.map(message =>
+      message.id === messageId && message.feedback
+        ? { ...message, feedback: { ...message.feedback, comment: feedbackComment } }
         : message
     ))
     setActiveFeedback(null)
@@ -163,7 +163,7 @@ export function ChatInterfaceClient() {
 
   return (
     <TooltipProvider>
-      <div 
+      <div
         className="flex flex-col h-screen overflow-hidden text-gray-800 transition-colors duration-300 bg-gradient-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900 dark:text-gray-100"
         data-testid="chat-interface"
       >
@@ -227,7 +227,7 @@ export function ChatInterfaceClient() {
           </div>
         </header>
         <main className="flex-1 overflow-y-auto">
-          <ChatContainer 
+          <ChatContainer
             messages={messages}
             onDelete={handleDeleteMessage}
           />
@@ -285,4 +285,3 @@ export function ChatInterfaceClient() {
     </TooltipProvider>
   )
 }
-

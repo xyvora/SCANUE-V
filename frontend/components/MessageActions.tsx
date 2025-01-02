@@ -74,4 +74,4 @@ function MessageActionsComponent({ message, onDelete }: MessageActionsProps) {
   )
 }
 
-export const MessageActions = memo(MessageActionsComponent) 
+export const MessageActions = memo(MessageActionsComponent)

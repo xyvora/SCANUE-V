@@ -23,11 +23,11 @@ export function useScrollDirection() {
       setScrollState(prev => {
         const currentScrollY = window.scrollY
         const isScrollingDownNow = currentScrollY > prev.lastScrollY && currentScrollY > SCROLL_THRESHOLD
-        
+
         if (isScrollingDownNow === prev.isScrollingDown) {
           return prev
         }
-        
+
         return {
           isScrollingDown: isScrollingDownNow,
           lastScrollY: currentScrollY
@@ -52,4 +52,4 @@ export function useScrollDirection() {
   }, [handleScroll])
 
   return scrollState.isScrollingDown
-} 
+}

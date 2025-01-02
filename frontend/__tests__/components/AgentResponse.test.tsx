@@ -28,14 +28,14 @@ describe('AgentResponse', () => {
   it('toggles response visibility on click', () => {
     render(<AgentResponse agent="PFC" response="Test PFC response" />)
     const button = screen.getByRole('button')
-    
+
     // Response starts visible
     expect(screen.getByText('Test PFC response')).toBeInTheDocument()
-    
+
     // First click hides it
     fireEvent.click(button)
     expect(screen.queryByText('Test PFC response')).not.toBeInTheDocument()
-    
+
     // Second click shows it
     fireEvent.click(button)
     expect(screen.getByText('Test PFC response')).toBeInTheDocument()
@@ -55,4 +55,3 @@ describe('AgentResponse', () => {
     expect(responseContainer).toHaveClass('glass-effect', 'rounded-b-lg')
   })
 })
-

@@ -38,4 +38,4 @@ const ContextMenuItem = React.forwardRef<
 ))
 ContextMenuItem.displayName = ContextMenuPrimitive.Item.displayName
 
-export { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem } 
+export { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem }

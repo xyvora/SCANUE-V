@@ -7,10 +7,10 @@ interface UseChatScrollOptions {
   threshold?: number
 }
 
-export function useChatScroll({ 
-  messages, 
-  shouldAutoScroll = true, 
-  threshold = 100 
+export function useChatScroll({
+  messages,
+  shouldAutoScroll = true,
+  threshold = 100
 }: UseChatScrollOptions) {
   const scrollRef = useRef<HTMLDivElement>(null)
 
@@ -19,7 +19,7 @@ export function useChatScroll({
     const scrollElement = scrollRef.current
     if (!scrollElement || !shouldAutoScroll) return
 
-    const shouldScroll = 
+    const shouldScroll =
       scrollElement.scrollHeight - scrollElement.scrollTop - scrollElement.clientHeight < threshold
 
     if (shouldScroll) {
@@ -39,4 +39,4 @@ export function useChatScroll({
   }, [shouldAutoScroll]);
 
   return { scrollRef }
-} 
+}

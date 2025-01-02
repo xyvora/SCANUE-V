@@ -86,7 +86,7 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString()
     }
 
-    return NextResponse.json(mockResponse, { 
+    return NextResponse.json(mockResponse, {
       headers: {
         ...headers,
         'Cache-Control': 'no-store',
@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
         'X-Content-Type-Options': 'nosniff',
         'X-Frame-Options': 'DENY',
         'Referrer-Policy': 'no-referrer'
-      } 
+      }
     })
   } catch (error) {
     console.error('Error processing chat request:', error)
@@ -104,4 +104,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     )
   }
-} 
+}

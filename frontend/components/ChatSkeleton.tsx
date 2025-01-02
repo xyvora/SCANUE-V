@@ -11,4 +11,4 @@ export function ChatSkeleton() {
       {/* Add more skeleton items */}
     </div>
   )
-} 
+}

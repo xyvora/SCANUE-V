@@ -47,4 +47,4 @@ export function ChatContainer({ messages, onDelete, className }: ChatContainerPr
       </div>
     </div>
   )
-} 
+}

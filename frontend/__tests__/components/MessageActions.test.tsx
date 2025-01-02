@@ -39,4 +39,4 @@ describe('MessageActions', () => {
     render(<MessageActions message={message} />);
     expect(screen.queryByLabelText('Delete message')).not.toBeInTheDocument();
   });
-}); 
+});

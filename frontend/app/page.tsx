@@ -5,7 +5,7 @@ import { WavyBackground } from "@/components/ui/wavy-background"
 
 export default function Home() {
   return (
-    <WavyBackground 
+    <WavyBackground
       className="relative"
       colors={['#38bdf8', '#818cf8', '#c084fc']}
       waveOpacity={0.3}
@@ -37,4 +37,3 @@ export default function Home() {
     </WavyBackground>
   )
 }
-

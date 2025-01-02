@@ -26,4 +26,3 @@ describe('Chat Interface', () => {
     cy.get('button[aria-label="Submit feedback"]').click()
   })
 })
-

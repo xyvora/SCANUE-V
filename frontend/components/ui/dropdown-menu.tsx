@@ -36,4 +36,4 @@ const DropdownMenuItem = React.forwardRef<
 ))
 DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName
 
-export { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } 
+export { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem }

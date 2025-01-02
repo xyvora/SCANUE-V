@@ -24,4 +24,4 @@ export function BotAvatar() {
       <circle cx="15" cy="9" r="1" fill="currentColor" />
     </svg>
   )
-} 
+}

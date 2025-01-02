@@ -10,4 +10,4 @@ export interface Message {
   };
 }
 
-export type AgentType = 'General' | 'PFC'; 
+export type AgentType = 'General' | 'PFC';

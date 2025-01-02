@@ -29,7 +29,7 @@ interface NavItemProps {
 
 function NavItem({ href, icon: Icon, label, isActive }: NavItemProps) {
   return (
-    <Link 
+    <Link
       href={href}
       className={cn(
         "flex flex-col items-center gap-1 p-2 rounded-lg transition-colors",
@@ -69,4 +69,3 @@ export function Navigation() {
     </nav>
   )
 }
-

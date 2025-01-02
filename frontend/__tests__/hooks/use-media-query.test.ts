@@ -56,7 +56,7 @@ describe('useMediaQuery', () => {
     const event = new Event('change') as MediaQueryListEvent
     Object.defineProperty(event, 'matches', { value: true })
     Object.defineProperty(event, 'media', { value: '(min-width: 768px)' })
-    
+
     changeListener(event)
     expect(result.current).toBe(true)
   })
@@ -70,4 +70,4 @@ describe('useMediaQuery', () => {
 
     windowSpy.mockRestore()
   })
-}) 
+})

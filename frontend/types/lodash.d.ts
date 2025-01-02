@@ -22,4 +22,4 @@ declare module 'lodash/debounce' {
       maxWait?: number;
     }
   ): DebouncedFunc<T>;
-} 
+}

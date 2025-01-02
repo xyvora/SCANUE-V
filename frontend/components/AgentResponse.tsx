@@ -12,14 +12,14 @@ interface AgentResponseProps {
 }
 
 const agentConfig = {
-  PFC: { 
-    icon: Brain, 
+  PFC: {
+    icon: Brain,
     label: 'PFC Agent',
     gradientClass: 'from-violet-500 to-purple-600',
     loadingColor: 'bg-violet-500'
   },
-  General: { 
-    icon: Globe, 
+  General: {
+    icon: Globe,
     label: 'General Agent',
     gradientClass: 'from-blue-500 to-cyan-600',
     loadingColor: 'bg-blue-500'
@@ -76,4 +76,3 @@ export function AgentResponse({ agent, response, isLoading = false }: AgentRespo
     </div>
   )
 }
-

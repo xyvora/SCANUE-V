@@ -11,4 +11,4 @@ declare module '@radix-ui/react-context-menu' {
   interface ContextMenuPortalProps {
     children: React.ReactNode;
   }
-} 
+}

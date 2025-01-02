@@ -16,21 +16,21 @@ interface ChatMessageProps {
   className?: string
 }
 
-function ChatMessageComponent({ 
-  message, 
-  isPartOfGroup, 
-  showTimestamp, 
-  onDelete, 
-  className 
+function ChatMessageComponent({
+  message,
+  isPartOfGroup,
+  showTimestamp,
+  onDelete,
+  className
 }: ChatMessageProps) {
   const isUser = message.isUser
   const alignmentClass = isUser ? 'justify-end' : 'justify-start'
-  const messageBgClass = isUser 
-    ? 'bg-blue-500 text-white' 
+  const messageBgClass = isUser
+    ? 'bg-blue-500 text-white'
     : 'bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200'
 
   return (
-    <li 
+    <li
       className={cn(
         'flex items-end gap-2',
         alignmentClass,
@@ -56,7 +56,7 @@ function ChatMessageComponent({
       )}>
         <p className="text-sm sm:text-base whitespace-pre-wrap">{message.content}</p>
         {showTimestamp && (
-          <time 
+          <time
             dateTime={message.timestamp}
             className="absolute bottom-0 right-0 -mb-5 text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity"
           >
@@ -78,4 +78,4 @@ function ChatMessageComponent({
   )
 }
 
-export const ChatMessage = memo(ChatMessageComponent) 
+export const ChatMessage = memo(ChatMessageComponent)

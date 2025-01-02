@@ -36,4 +36,4 @@ describe('useChatScroll', () => {
 
     expect(scrollRef.current?.scrollTop).toBe(0);
   });
-}); 
+});

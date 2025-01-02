@@ -23,15 +23,15 @@ export function MessageContextMenu({ children, message, onFeedback, onCopy }: Me
         {children}
       </ContextMenuTrigger>
       <ContextMenuContent className="glass-card text-white/80">
-        <ContextMenuItem 
-          className="hover:text-white focus:text-white" 
+        <ContextMenuItem
+          className="hover:text-white focus:text-white"
           onClick={() => onCopy(message.content)}
         >
           <Copy className="w-4 h-4 mr-2" />
           Copy Message
         </ContextMenuItem>
         {!message.isUser && (
-          <ContextMenuItem 
+          <ContextMenuItem
             className="hover:text-white focus:text-white"
             onClick={() => onFeedback(message.id, 'positive')}
           >
@@ -42,4 +42,4 @@ export function MessageContextMenu({ children, message, onFeedback, onCopy }: Me
       </ContextMenuContent>
     </ContextMenu>
   )
-} 
+}

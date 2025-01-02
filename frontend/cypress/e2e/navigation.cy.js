@@ -12,7 +12,7 @@ describe('Navigation', () => {
       .should('be.visible')
       .and('have.css', 'position', 'fixed')
       .and('have.css', 'top', '0px')
-    
+
     // Test scroll behavior
     cy.window().then(($window) => {
       // Ensure smooth scrolling
@@ -22,12 +22,12 @@ describe('Navigation', () => {
       .should('have.class', 'transform')
       .and('have.css', 'transform')
       .and('include', 'translateY(-100%)')
-    
+
     cy.window().then(($window) => {
       $window.scrollTo({ top: 0, behavior: 'smooth' })
     })
     cy.get('nav').should('not.have.class', 'transform')
-    
+
     cy.contains('SCANUEV Chat').should('be.visible')
 
     cy.get('a[href="/about"]').click()
@@ -47,4 +47,3 @@ describe('Navigation', () => {
     cy.get('[data-testid="404-page"]').should('be.visible')
   })
 })
-

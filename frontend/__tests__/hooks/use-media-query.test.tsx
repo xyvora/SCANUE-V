@@ -66,4 +66,4 @@ describe('useMediaQuery', () => {
     const { result: result2 } = renderHook(() => useMediaQuery('(min-width: 1200px)'))
     expect(result2.current).toBe(false)
   })
-}) 
+})

@@ -18,7 +18,7 @@ export default function LoginPage() {
   }
 
   return (
-    <WavyBackground 
+    <WavyBackground
       className="relative"
       colors={['#818cf8', '#c084fc', '#38bdf8']}
       waveOpacity={0.2}
@@ -33,7 +33,7 @@ export default function LoginPage() {
           <p className="text-xl text-gray-700 dark:text-gray-300">
             Sign in to access your SCANUEV account
           </p>
-          
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="relative">
               <Input
@@ -65,8 +65,8 @@ export default function LoginPage() {
             </GradientButton>
           </form>
           <div className="mt-6 text-center">
-            <Link 
-              href="/signup" 
+            <Link
+              href="/signup"
               className="text-transparent bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text hover:from-blue-600 hover:to-purple-700"
             >
               Don't have an account? Sign up
@@ -77,4 +77,3 @@ export default function LoginPage() {
     </WavyBackground>
   )
 }
-

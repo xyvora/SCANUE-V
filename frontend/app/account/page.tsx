@@ -6,7 +6,7 @@ import { WavyBackground } from "@/components/ui/wavy-background"
 
 export default function AccountPage() {
   return (
-    <WavyBackground 
+    <WavyBackground
       className="relative"
       colors={['#c084fc', '#38bdf8', '#818cf8']}
       waveOpacity={0.25}
@@ -25,7 +25,7 @@ export default function AccountPage() {
           <p className="text-xl text-gray-700 dark:text-gray-300">
             Manage your SCANUEV account settings and preferences
           </p>
-          
+
           <div className="flex justify-center gap-4">
             <GradientButton>
               Update Profile
@@ -39,4 +39,3 @@ export default function AccountPage() {
     </WavyBackground>
   )
 }
-

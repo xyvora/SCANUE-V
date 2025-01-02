@@ -17,4 +17,4 @@ export function GlassCard({ children, className, ...props }: GlassCardProps) {
       {children}
     </div>
   )
-} 
+}

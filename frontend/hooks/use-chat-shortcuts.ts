@@ -26,4 +26,4 @@ export function useChatShortcuts(handlers: ShortcutHandlers = {}) {
     window.addEventListener('keydown', handleKeyPress)
     return () => window.removeEventListener('keydown', handleKeyPress)
   }, [handleKeyPress])
-} 
+}

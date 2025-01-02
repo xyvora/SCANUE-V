@@ -19,4 +19,4 @@ describe('useMediaQuery', () => {
   });
 
   // ... more tests
-}); 
+});
