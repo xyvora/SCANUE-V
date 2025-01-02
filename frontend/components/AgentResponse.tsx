@@ -1,46 +1,79 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronUp, ChevronDown } from "lucide-react";
-import { agentConfig } from "./ChatInterfaceClient";
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronDown, ChevronUp, Brain, Globe } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { LoadingDots } from '@/components/ui/loading-dots'
+import { cn } from '@/lib/utils'
 
 interface AgentResponseProps {
-  agent: string;
-  response: string;
+  agent: 'PFC' | 'General'
+  response: string
+  isLoading?: boolean
 }
 
-export function AgentResponse({ agent, response }: AgentResponseProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const { gradient, icon: Icon, label } = agentConfig[agent];
+const agentConfig = {
+  PFC: { 
+    icon: Brain, 
+    label: 'PFC Agent',
+    gradientClass: 'from-violet-500 to-purple-600',
+    loadingColor: 'bg-violet-500'
+  },
+  General: { 
+    icon: Globe, 
+    label: 'General Agent',
+    gradientClass: 'from-blue-500 to-cyan-600',
+    loadingColor: 'bg-blue-500'
+  },
+}
+
+export function AgentResponse({ agent, response, isLoading = false }: AgentResponseProps) {
+  const [isOpen, setIsOpen] = useState(true)
+  const { icon: Icon, label, gradientClass, loadingColor } = agentConfig[agent]
 
   return (
-    <div className="mb-2">
-      <motion.button
+    <div className="mb-2 w-full">
+      <Button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex w-full items-center justify-between rounded-lg bg-gradient-to-r p-2 ${gradient} text-white shadow-md transition-all duration-200 hover:shadow-lg`}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+        className={cn(
+          "w-full flex items-center justify-between p-2 rounded-lg bg-gradient-to-r",
+          gradientClass,
+          "text-white hover:opacity-90 transition-all duration-200",
+          "shadow-lg hover:shadow-xl"
+        )}
+        variant="ghost"
       >
         <div className="flex items-center space-x-2">
-          <Icon className="h-5 w-5" />
-          <span>
-            {agent} - {label}
-          </span>
+          <Icon className="w-5 h-5" />
+          <span className="text-sm font-medium">{label}</span>
         </div>
-        {isOpen ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
-      </motion.button>
+        {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+      </Button>
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="rounded-b-lg bg-gray-800 p-3 shadow-inner"
+            className={cn(
+              "p-3 rounded-b-lg mt-1",
+              "bg-white/80 dark:bg-gray-900/80",
+              "backdrop-blur-lg backdrop-saturate-150",
+              "border border-white/20 dark:border-gray-800/20",
+              "shadow-lg shadow-black/5 dark:shadow-white/5"
+            )}
           >
-            <p className="text-gray-200">{response}</p>
+            {isLoading ? (
+              <div className="flex items-center justify-center py-4">
+                <LoadingDots className={loadingColor} />
+              </div>
+            ) : (
+              <p className="text-gray-800 dark:text-gray-200 text-sm">{response}</p>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
     </div>
-  );
+  )
 }
+
