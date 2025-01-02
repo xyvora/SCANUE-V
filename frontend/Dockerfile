@@ -1,28 +1,24 @@
-FROM node:22-alpine AS base
+# Use an official Node runtime as the base image
+FROM node:18-alpine
 
+# Set the working directory in the container
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-RUN npm ci --production
+# Install dependencies
+RUN npm ci
 
+# Copy the rest of the application code
 COPY . .
 
+# Build the Next.js application
 RUN npm run build
 
-FROM node:22-alpine as prod
-
-WORKDIR /app
-
-# Disable Next.js telemetry
-ENV NEXT_TELEMETRY_DISABLED 1
-
-COPY --from=base /app .
-
-RUN useradd --create-home appuser
-
-USER nextjs
-
+# Expose the port the app runs on
 EXPOSE 3000
 
+# Start the application
 CMD ["npm", "start"]
+

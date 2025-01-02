@@ -1,10 +1,6 @@
-.gitignore
-.next
-Dockerfile
-.dockerignore
 node_modules
-.env
+.next
 .git
-logs
-*.log
-npm-debug.log*
+.gitignore
+README.md
+
