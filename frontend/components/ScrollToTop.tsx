@@ -7,6 +7,8 @@ import type { DebouncedFunc } from "lodash/debounce";
 export function ScrollToTop() {
   const [show, setShow] = useState(false);
 
+  // TODO: Need to fix this warning
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleScroll: DebouncedFunc<() => void> = useCallback(
     debounce(() => {
       setShow(window.scrollY > 300);

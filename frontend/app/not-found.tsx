@@ -7,7 +7,9 @@ export default function NotFound() {
       <h2 className="mb-4 bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-4xl font-bold text-transparent">
         404 - Page Not Found
       </h2>
-      <p className="mb-8 text-xl text-gray-600">The page you're looking for doesn't exist.</p>
+      <p className="mb-8 text-xl text-gray-600">
+        The page you&apos;re looking for doesn&apos;t exist.
+      </p>
       <Link href="/">
         <GradientButton>Return Home</GradientButton>
       </Link>

@@ -75,7 +75,7 @@ export default function LoginPage() {
               href="/signup"
               className="bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text text-transparent hover:from-blue-600 hover:to-purple-700"
             >
-              Don't have an account? Sign up
+              Don&apos;t have an account? Sign up
             </Link>
           </div>
         </div>

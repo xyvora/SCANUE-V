@@ -4,12 +4,9 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Menu, Brain, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChatContainer } from "./ChatContainer";
-import { ChatMessage } from "./ChatMessage";
 import { LoadingSpinner } from "./LoadingSpinner";
-import { AgentResponse } from "./AgentResponse";
 import { Button } from "@/components/ui/button";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 
 interface Feedback {
@@ -39,11 +36,8 @@ export function ChatInterfaceClient() {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [agentType, setAgentType] = useState<AgentType>("General");
-  const [activeFeedback, setActiveFeedback] = useState<string | null>(null);
-  const [feedbackComment, setFeedbackComment] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const isMobile = useMediaQuery("(max-width: 640px)");
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -142,29 +136,6 @@ export function ChatInterfaceClient() {
     setMessages([]);
     setIsMenuOpen(false);
   }, []);
-
-  const handleFeedback = useCallback((messageId: string, feedbackType: "positive" | "negative") => {
-    setActiveFeedback(messageId);
-    setMessages((prev) =>
-      prev.map((message) =>
-        message.id === messageId
-          ? { ...message, feedback: { type: feedbackType, comment: "" } }
-          : message,
-      ),
-    );
-  }, []);
-
-  const handleFeedbackComment = (messageId: string) => {
-    setMessages((prev) =>
-      prev.map((message) =>
-        message.id === messageId && message.feedback
-          ? { ...message, feedback: { ...message.feedback, comment: feedbackComment } }
-          : message,
-      ),
-    );
-    setActiveFeedback(null);
-    setFeedbackComment("");
-  };
 
   const handleDeleteMessage = useCallback((messageId: string) => {
     setMessages((prev) => prev.filter((message) => message.id !== messageId));

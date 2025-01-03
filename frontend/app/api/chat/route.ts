@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     let body: ChatRequestBody;
     try {
       body = await request.json();
-    } catch (e) {
+    } catch {
       return NextResponse.json({ error: "Invalid JSON payload" }, { status: 400 });
     }
     const { message, agent } = body;
