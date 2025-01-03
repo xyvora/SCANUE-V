@@ -1,33 +1,33 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { User, Lock, ArrowRight } from 'lucide-react'
-import Link from 'next/link'
-import { Input } from "@/components/ui/input"
-import { GradientButton } from "@/components/ui/gradient-button"
-import { WavyBackground } from "@/components/ui/wavy-background"
+import { useState } from "react";
+import { User, Lock, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { Input } from "@/components/ui/input";
+import { GradientButton } from "@/components/ui/gradient-button";
+import { WavyBackground } from "@/components/ui/wavy-background";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Here you would typically handle the login logic
-    console.log('Login attempt with:', { email, password })
-  }
+    console.log("Login attempt with:", { email, password });
+  };
 
   return (
     <WavyBackground
       className="relative"
-      colors={['#818cf8', '#c084fc', '#38bdf8']}
+      colors={["#818cf8", "#c084fc", "#38bdf8"]}
       waveOpacity={0.2}
       blur={8}
       speed="slow"
     >
-      <main className="flex-1 flex flex-col items-center justify-center p-4 sm:p-8">
-        <div className="w-full max-w-md p-8 space-y-8 text-center bg-white/80 shadow-xl backdrop-blur-sm rounded-3xl sm:p-12">
-          <h1 className="text-4xl font-bold text-transparent sm:text-5xl bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text">
+      <main className="flex flex-1 flex-col items-center justify-center p-4 sm:p-8">
+        <div className="w-full max-w-md space-y-8 rounded-3xl bg-white/80 p-8 text-center shadow-xl backdrop-blur-sm sm:p-12">
+          <h1 className="bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text text-4xl font-bold text-transparent sm:text-5xl">
             Login
           </h1>
           <p className="text-xl text-gray-700 dark:text-gray-300">
@@ -41,10 +41,13 @@ export default function LoginPage() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="pl-10 rounded-full"
+                className="rounded-full pl-10"
                 required
               />
-              <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-500" size={18} />
+              <User
+                className="absolute left-3 top-1/2 -translate-y-1/2 transform text-blue-500"
+                size={18}
+              />
             </div>
             <div className="relative">
               <Input
@@ -52,10 +55,13 @@ export default function LoginPage() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="pl-10 rounded-full"
+                className="rounded-full pl-10"
                 required
               />
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-500" size={18} />
+              <Lock
+                className="absolute left-3 top-1/2 -translate-y-1/2 transform text-blue-500"
+                size={18}
+              />
             </div>
             <GradientButton type="submit">
               <span className="flex items-center justify-center">
@@ -67,7 +73,7 @@ export default function LoginPage() {
           <div className="mt-6 text-center">
             <Link
               href="/signup"
-              className="text-transparent bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text hover:from-blue-600 hover:to-purple-700"
+              className="bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text text-transparent hover:from-blue-600 hover:to-purple-700"
             >
               Don't have an account? Sign up
             </Link>
@@ -75,5 +81,5 @@ export default function LoginPage() {
         </div>
       </main>
     </WavyBackground>
-  )
+  );
 }

@@ -53,23 +53,26 @@ export const WavyBackground: FC<WavyBackgroundProps> = ({
     }
   }, [speed]);
 
-  const drawWave = useCallback((n: number) => {
-    const ctx = ctxRef.current;
-    if (!ctx) return;
+  const drawWave = useCallback(
+    (n: number) => {
+      const ctx = ctxRef.current;
+      if (!ctx) return;
 
-    ntRef.current += getSpeed();
-    for (let i = 0; i < n; i++) {
-      ctx.beginPath();
-      ctx.lineWidth = waveWidth ?? 50;
-      ctx.strokeStyle = colors[i % colors.length];
-      for (let x = 0; x < wRef.current; x += 5) {
-        const y = noise.current(x / 800, 0.3 * i, ntRef.current) * 100;
-        ctx.lineTo(x, y + hRef.current * 0.5);
+      ntRef.current += getSpeed();
+      for (let i = 0; i < n; i++) {
+        ctx.beginPath();
+        ctx.lineWidth = waveWidth ?? 50;
+        ctx.strokeStyle = colors[i % colors.length];
+        for (let x = 0; x < wRef.current; x += 5) {
+          const y = noise.current(x / 800, 0.3 * i, ntRef.current) * 100;
+          ctx.lineTo(x, y + hRef.current * 0.5);
+        }
+        ctx.stroke();
+        ctx.closePath();
       }
-      ctx.stroke();
-      ctx.closePath();
-    }
-  }, [getSpeed, colors, waveWidth]);
+    },
+    [getSpeed, colors, waveWidth],
+  );
 
   const render = useCallback(() => {
     const ctx = ctxRef.current;
@@ -117,29 +120,27 @@ export const WavyBackground: FC<WavyBackgroundProps> = ({
     setIsSafari(
       typeof window !== "undefined" &&
         navigator.userAgent.includes("Safari") &&
-        !navigator.userAgent.includes("Chrome")
+        !navigator.userAgent.includes("Chrome"),
     );
   }, []);
 
   return (
     <div
       className={cn(
-        "min-h-screen w-full fixed inset-0 flex flex-col items-center justify-center overflow-hidden pt-16",
-        containerClassName
+        "fixed inset-0 flex min-h-screen w-full flex-col items-center justify-center overflow-hidden pt-16",
+        containerClassName,
       )}
       {...props}
     >
       <canvas
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 h-full w-full"
         ref={canvasRef}
         id="canvas"
         style={{
           ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
         }}
       />
-      <div className={cn("relative z-10 w-full h-full flex flex-col", className)}>
-        {children}
-      </div>
+      <div className={cn("relative z-10 flex h-full w-full flex-col", className)}>{children}</div>
     </div>
   );
 };

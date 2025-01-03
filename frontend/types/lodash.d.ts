@@ -1,4 +1,4 @@
-declare module 'lodash' {
+declare module "lodash" {
   export interface DebouncedFunc<T extends (...args: unknown[]) => unknown> {
     (...args: Parameters<T>): ReturnType<T>;
     cancel(): void;
@@ -6,7 +6,7 @@ declare module 'lodash' {
   }
 }
 
-declare module 'lodash/debounce' {
+declare module "lodash/debounce" {
   export interface DebouncedFunc<T extends (...args: unknown[]) => unknown> {
     (...args: Parameters<T>): ReturnType<T>;
     cancel(): void;
@@ -20,6 +20,6 @@ declare module 'lodash/debounce' {
       leading?: boolean;
       trailing?: boolean;
       maxWait?: number;
-    }
+    },
   ): DebouncedFunc<T>;
 }

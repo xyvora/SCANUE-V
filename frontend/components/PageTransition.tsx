@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { motion, AnimatePresence } from 'framer-motion'
-import { usePathname } from 'next/navigation'
-import { useMediaQuery } from '@/hooks/use-media-query'
+import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 const pageVariants = {
   initial: {
     opacity: 0,
-    y: 20
+    y: 20,
   },
   animate: {
     opacity: 1,
@@ -15,22 +15,22 @@ const pageVariants = {
     transition: {
       duration: 0.3,
       ease: [0.25, 0.1, 0.25, 1.0],
-      staggerChildren: 0.1
-    }
+      staggerChildren: 0.1,
+    },
   },
   exit: {
     opacity: 0,
     y: -20,
     transition: {
       duration: 0.2,
-      ease: [0.25, 0.1, 0.25, 1.0]
-    }
-  }
-}
+      ease: [0.25, 0.1, 0.25, 1.0],
+    },
+  },
+};
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname()
-  const isReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
+  const pathname = usePathname();
+  const isReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
 
   return (
     <AnimatePresence mode="wait">
@@ -50,5 +50,5 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         {children}
       </motion.div>
     </AnimatePresence>
-  )
+  );
 }

@@ -5,7 +5,7 @@ export function BotAvatar() {
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
-      className="w-full h-full p-1"
+      className="h-full w-full p-1"
       role="img"
       aria-label="AI Assistant Avatar"
     >
@@ -15,13 +15,9 @@ export function BotAvatar() {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path
-        d="M8 14s1.5 2 4 2 4-2 4-2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M8 14s1.5 2 4 2 4-2 4-2" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx="9" cy="9" r="1" fill="currentColor" />
       <circle cx="15" cy="9" r="1" fill="currentColor" />
     </svg>
-  )
+  );
 }

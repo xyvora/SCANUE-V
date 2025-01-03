@@ -5,9 +5,9 @@ export interface Message {
   timestamp: string;
   agentResponse?: string;
   feedback?: {
-    type: 'positive' | 'negative';
+    type: "positive" | "negative";
     comment: string;
   };
 }
 
-export type AgentType = 'General' | 'PFC';
+export type AgentType = "General" | "PFC";
