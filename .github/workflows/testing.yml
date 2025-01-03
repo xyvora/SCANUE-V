@@ -86,5 +86,5 @@ jobs:
         run: just frontend-install
       - name: Lint
         run: just frontend-lint
-        # - name: Build
-        #   run: just frontend-build
+      - name: Build
+        run: just frontend-build
