@@ -1,6 +1,12 @@
-node_modules
-.next
-.git
 .gitignore
-README.md
-
+.next
+Dockerfile
+.dockerignore
+node_modules
+.env
+.git
+logs
+*.log
+npm-debug.log*
+.prettierrc
+tsconfig.json

@@ -1,33 +1,33 @@
-import { useEffect, useRef } from 'react'
-import type { Message } from '@/types/chat'
+import { useEffect, useRef } from "react";
+import type { Message } from "@/types/chat";
 
 interface UseChatScrollOptions {
-  messages: Message[]
-  shouldAutoScroll?: boolean
-  threshold?: number
+  messages: Message[];
+  shouldAutoScroll?: boolean;
+  threshold?: number;
 }
 
-export function useChatScroll({ 
-  messages, 
-  shouldAutoScroll = true, 
-  threshold = 100 
+export function useChatScroll({
+  messages,
+  shouldAutoScroll = true,
+  threshold = 100,
 }: UseChatScrollOptions) {
-  const scrollRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We need messages dependency to trigger scroll
   useEffect(() => {
-    const scrollElement = scrollRef.current
-    if (!scrollElement || !shouldAutoScroll) return
+    const scrollElement = scrollRef.current;
+    if (!scrollElement || !shouldAutoScroll) return;
 
-    const shouldScroll = 
-      scrollElement.scrollHeight - scrollElement.scrollTop - scrollElement.clientHeight < threshold
+    const shouldScroll =
+      scrollElement.scrollHeight - scrollElement.scrollTop - scrollElement.clientHeight < threshold;
 
     if (shouldScroll) {
       requestAnimationFrame(() => {
-        scrollElement.scrollTop = scrollElement.scrollHeight
-      })
+        scrollElement.scrollTop = scrollElement.scrollHeight;
+      });
     }
-  }, [messages, shouldAutoScroll, threshold])
+  }, [messages, shouldAutoScroll, threshold]);
 
   useEffect(() => {
     if (shouldAutoScroll) {
@@ -38,5 +38,5 @@ export function useChatScroll({
     }
   }, [shouldAutoScroll]);
 
-  return { scrollRef }
-} 
+  return { scrollRef };
+}

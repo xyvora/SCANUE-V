@@ -298,14 +298,14 @@ describe('AgentResponse', () => {
   it('toggles response visibility on click', () => {
     render(<AgentResponse agent="PFC" response="Test PFC response" />)
     const button = screen.getByRole('button')
-    
+
     // Response starts visible
     expect(screen.getByText('Test PFC response')).toBeInTheDocument()
-    
+
     // First click hides it
     fireEvent.click(button)
     expect(screen.queryByText('Test PFC response')).not.toBeInTheDocument()
-    
+
     // Second click shows it
     fireEvent.click(button)
     expect(screen.getByText('Test PFC response')).toBeInTheDocument()
@@ -621,7 +621,7 @@ describe('useMediaQuery', () => {
     const event = new Event('change') as MediaQueryListEvent
     Object.defineProperty(event, 'matches', { value: true })
     Object.defineProperty(event, 'media', { value: '(min-width: 768px)' })
-    
+
     changeListener(event)
     expect(result.current).toBe(true)
   })
@@ -745,7 +745,7 @@ import { WavyBackground } from "@/components/ui/wavy-background"
 
 export default function AccountPage() {
   return (
-    <WavyBackground 
+    <WavyBackground
       className="relative"
       colors={['#c084fc', '#38bdf8', '#818cf8']}
       waveOpacity={0.25}
@@ -764,7 +764,7 @@ export default function AccountPage() {
           <p className="text-xl text-gray-700 dark:text-gray-300">
             Manage your SCANUEV account settings and preferences
           </p>
-          
+
           <div className="flex justify-center gap-4">
             <GradientButton>
               Update Profile
@@ -870,7 +870,7 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString()
     }
 
-    return NextResponse.json(mockResponse, { 
+    return NextResponse.json(mockResponse, {
       headers: {
         ...headers,
         'Cache-Control': 'no-store',
@@ -878,7 +878,7 @@ export async function POST(request: NextRequest) {
         'X-Content-Type-Options': 'nosniff',
         'X-Frame-Options': 'DENY',
         'Referrer-Policy': 'no-referrer'
-      } 
+      }
     })
   } catch (error) {
     console.error('Error processing chat request:', error)
@@ -1006,7 +1006,7 @@ export default function LoginPage() {
   }
 
   return (
-    <WavyBackground 
+    <WavyBackground
       className="relative"
       colors={['#818cf8', '#c084fc', '#38bdf8']}
       waveOpacity={0.2}
@@ -1021,7 +1021,7 @@ export default function LoginPage() {
           <p className="text-xl text-gray-700 dark:text-gray-300">
             Sign in to access your SCANUEV account
           </p>
-          
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="relative">
               <Input
@@ -1053,8 +1053,8 @@ export default function LoginPage() {
             </GradientButton>
           </form>
           <div className="mt-6 text-center">
-            <Link 
-              href="/signup" 
+            <Link
+              href="/signup"
               className="text-transparent bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text hover:from-blue-600 hover:to-purple-700"
             >
               Don't have an account? Sign up
@@ -1244,7 +1244,7 @@ button, a, input {
   .nav-label {
     font-size: 0.75rem;
   }
-  
+
   .nav-icon {
     width: 1.25rem;
     height: 1.25rem;
@@ -1329,7 +1329,7 @@ import { PageTransition } from '@/components/PageTransition'
 import { Suspense } from 'react'
 import Loading from './loading'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   preload: true,
@@ -1426,7 +1426,7 @@ import { WavyBackground } from "@/components/ui/wavy-background"
 
 export default function Home() {
   return (
-    <WavyBackground 
+    <WavyBackground
       className="relative"
       colors={['#38bdf8', '#818cf8', '#c084fc']}
       waveOpacity={0.3}
@@ -1889,7 +1889,7 @@ export const WavyBackground: FC<WavyBackgroundProps> = ({
   const noise = useRef<NoiseFunction3D>(createNoise3D());
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isSafari, setIsSafari] = useState(false);
-  
+
   // Move these to useRef to maintain values between renders
   const wRef = useRef<number>(0);
   const hRef = useRef<number>(0);
@@ -2017,14 +2017,14 @@ interface AgentResponseProps {
 }
 
 const agentConfig = {
-  PFC: { 
-    icon: Brain, 
+  PFC: {
+    icon: Brain,
     label: 'PFC Agent',
     gradientClass: 'from-violet-500 to-purple-600',
     loadingColor: 'bg-violet-500'
   },
-  General: { 
-    icon: Globe, 
+  General: {
+    icon: Globe,
     label: 'General Agent',
     gradientClass: 'from-blue-500 to-cyan-600',
     loadingColor: 'bg-blue-500'
@@ -2220,7 +2220,7 @@ export function ChatInterfaceClient() {
 
   useEffect(() => {
     setMessages([
-      { 
+      {
         id: Date.now().toString(),
         content: 'Hi there! I am your AI assistant. How can I help you today?',
         isUser: false,
@@ -2288,7 +2288,7 @@ export function ChatInterfaceClient() {
       }
 
       const data = await response.json()
-      
+
       const botMessage: Message = {
         id: Date.now().toString(),
         content: data.message,
@@ -2314,15 +2314,15 @@ export function ChatInterfaceClient() {
 
   const handleFeedback = useCallback((messageId: string, feedbackType: 'positive' | 'negative') => {
     setActiveFeedback(messageId)
-    setMessages(prev => prev.map(message => 
+    setMessages(prev => prev.map(message =>
       message.id === messageId ? { ...message, feedback: { type: feedbackType, comment: '' } } : message
     ))
   }, [])
 
   const handleFeedbackComment = (messageId: string) => {
-    setMessages(prev => prev.map(message => 
-      message.id === messageId && message.feedback 
-        ? { ...message, feedback: { ...message.feedback, comment: feedbackComment } } 
+    setMessages(prev => prev.map(message =>
+      message.id === messageId && message.feedback
+        ? { ...message, feedback: { ...message.feedback, comment: feedbackComment } }
         : message
     ))
     setActiveFeedback(null)
@@ -2335,7 +2335,7 @@ export function ChatInterfaceClient() {
 
   return (
     <TooltipProvider>
-      <div 
+      <div
         className="flex flex-col h-screen overflow-hidden text-gray-800 transition-colors duration-300 bg-gradient-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900 dark:text-gray-100"
         data-testid="chat-interface"
       >
@@ -2399,7 +2399,7 @@ export function ChatInterfaceClient() {
           </div>
         </header>
         <main className="flex-1 overflow-y-auto">
-          <ChatContainer 
+          <ChatContainer
             messages={messages}
             onDelete={handleDeleteMessage}
           />
@@ -2479,21 +2479,21 @@ interface ChatMessageProps {
   className?: string
 }
 
-function ChatMessageComponent({ 
-  message, 
-  isPartOfGroup, 
-  showTimestamp, 
-  onDelete, 
-  className 
+function ChatMessageComponent({
+  message,
+  isPartOfGroup,
+  showTimestamp,
+  onDelete,
+  className
 }: ChatMessageProps) {
   const isUser = message.isUser
   const alignmentClass = isUser ? 'justify-end' : 'justify-start'
-  const messageBgClass = isUser 
-    ? 'bg-blue-500 text-white' 
+  const messageBgClass = isUser
+    ? 'bg-blue-500 text-white'
     : 'bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200'
 
   return (
-    <li 
+    <li
       className={cn(
         'flex items-end gap-2',
         alignmentClass,
@@ -2519,7 +2519,7 @@ function ChatMessageComponent({
       )}>
         <p className="text-sm sm:text-base whitespace-pre-wrap">{message.content}</p>
         {showTimestamp && (
-          <time 
+          <time
             dateTime={message.timestamp}
             className="absolute bottom-0 right-0 -mb-5 text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity"
           >
@@ -2735,15 +2735,15 @@ export function MessageContextMenu({ children, message, onFeedback, onCopy }: Me
         {children}
       </ContextMenuTrigger>
       <ContextMenuContent className="glass-card text-white/80">
-        <ContextMenuItem 
-          className="hover:text-white focus:text-white" 
+        <ContextMenuItem
+          className="hover:text-white focus:text-white"
           onClick={() => onCopy(message.content)}
         >
           <Copy className="w-4 h-4 mr-2" />
           Copy Message
         </ContextMenuItem>
         {!message.isUser && (
-          <ContextMenuItem 
+          <ContextMenuItem
             className="hover:text-white focus:text-white"
             onClick={() => onFeedback(message.id, 'positive')}
           >
@@ -2790,7 +2790,7 @@ interface NavItemProps {
 
 function NavItem({ href, icon: Icon, label, isActive }: NavItemProps) {
   return (
-    <Link 
+    <Link
       href={href}
       className={cn(
         "flex flex-col items-center gap-1 p-2 rounded-lg transition-colors",
@@ -2982,7 +2982,7 @@ describe('Navigation', () => {
       .should('be.visible')
       .and('have.css', 'position', 'fixed')
       .and('have.css', 'top', '0px')
-    
+
     // Test scroll behavior
     cy.window().then(($window) => {
       // Ensure smooth scrolling
@@ -2992,12 +2992,12 @@ describe('Navigation', () => {
       .should('have.class', 'transform')
       .and('have.css', 'transform')
       .and('include', 'translateY(-100%)')
-    
+
     cy.window().then(($window) => {
       $window.scrollTo({ top: 0, behavior: 'smooth' })
     })
     cy.get('nav').should('not.have.class', 'transform')
-    
+
     cy.contains('SCANUEV Chat').should('be.visible')
 
     cy.get('a[href="/about"]').click()
@@ -3052,10 +3052,10 @@ interface UseChatScrollOptions {
   threshold?: number
 }
 
-export function useChatScroll({ 
-  messages, 
-  shouldAutoScroll = true, 
-  threshold = 100 
+export function useChatScroll({
+  messages,
+  shouldAutoScroll = true,
+  threshold = 100
 }: UseChatScrollOptions) {
   const scrollRef = useRef<HTMLDivElement>(null)
 
@@ -3064,7 +3064,7 @@ export function useChatScroll({
     const scrollElement = scrollRef.current
     if (!scrollElement || !shouldAutoScroll) return
 
-    const shouldScroll = 
+    const shouldScroll =
       scrollElement.scrollHeight - scrollElement.scrollTop - scrollElement.clientHeight < threshold
 
     if (shouldScroll) {
@@ -3196,11 +3196,11 @@ export function useScrollDirection() {
       setScrollState(prev => {
         const currentScrollY = window.scrollY
         const isScrollingDownNow = currentScrollY > prev.lastScrollY && currentScrollY > SCROLL_THRESHOLD
-        
+
         if (isScrollingDownNow === prev.isScrollingDown) {
           return prev
         }
-        
+
         return {
           isScrollingDown: isScrollingDownNow,
           lastScrollY: currentScrollY
@@ -3244,7 +3244,7 @@ describe('rateLimit', () => {
 
   it('allows requests under the rate limit', async () => {
     const request = new NextRequest('https://example.com')
-    
+
     for (let i = 0; i < RATE_LIMIT; i++) {
       const result = await rateLimit(request)
       expect(result.success).toBe(true)
@@ -3254,7 +3254,7 @@ describe('rateLimit', () => {
 
   it('blocks requests over the rate limit', async () => {
     const request = new NextRequest('https://example.com')
-    
+
     for (let i = 0; i < RATE_LIMIT; i++) {
       await rateLimit(request)
     }

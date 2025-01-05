@@ -34,11 +34,11 @@
 
     --radius: 0.5rem;
 
-    --gradient-start: 221, 214, 254;  /* light purple */
-    --gradient-end: 191, 219, 254;    /* light blue */
-    --text-dark: 31, 41, 55;          /* dark gray for main text */
-    --text-light: 255, 255, 255;      /* white for text on dark backgrounds */
-    --text-muted: 107, 114, 128;      /* muted gray for secondary text */
+    --gradient-start: 221, 214, 254; /* light purple */
+    --gradient-end: 191, 219, 254; /* light blue */
+    --text-dark: 31, 41, 55; /* dark gray for main text */
+    --text-light: 255, 255, 255; /* white for text on dark backgrounds */
+    --text-muted: 107, 114, 128; /* muted gray for secondary text */
 
     --page-enter-duration: 300ms;
     --content-enter-duration: 500ms;
@@ -84,7 +84,7 @@
     @apply bg-background text-foreground;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     padding-top: 4rem; /* Default for desktop */
   }
 }
@@ -94,10 +94,10 @@
     @apply bg-gradient-to-br from-blue-500 to-purple-600;
   }
   .gradient-text {
-    @apply text-transparent bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text;
+    @apply bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text text-transparent;
   }
   .glass-effect {
-    @apply bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg;
+    @apply bg-white bg-opacity-80 backdrop-blur-lg backdrop-filter;
   }
   .interactive-transition {
     @apply transition-all duration-200 ease-in-out;
@@ -106,13 +106,13 @@
     @apply transition-all duration-300 ease-in-out;
   }
   .nav-hover-effect {
-    @apply hover:scale-110 hover:text-blue-500 dark:hover:text-blue-400 transform-gpu;
+    @apply transform-gpu hover:scale-110 hover:text-blue-500 dark:hover:text-blue-400;
   }
   .nav-active {
     @apply gradient-bg text-white shadow-md;
   }
   .nav-item-base {
-    @apply flex flex-col items-center justify-center p-2 rounded-lg;
+    @apply flex flex-col items-center justify-center rounded-lg p-2;
     @apply transition-all duration-300 ease-in-out;
   }
   .glass-morphism {
@@ -130,7 +130,7 @@
     @apply transition-all duration-200;
   }
   .chat-container-width {
-    @apply w-full max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto;
+    @apply mx-auto w-full max-w-3xl xl:max-w-4xl 2xl:max-w-5xl;
   }
   .chat-message-padding {
     @apply px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-5;
@@ -141,16 +141,18 @@
 }
 
 /* Global interactive elements */
-button, a, input {
+button,
+a,
+input {
   @apply transition-all duration-200 ease-in-out;
 }
 
 .gradient-border-hover {
-  @apply border-2 border-transparent hover:border-blue-500 transition-all duration-200;
+  @apply border-2 border-transparent transition-all duration-200 hover:border-blue-500;
 }
 
 .gradient-focus {
-  @apply focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none;
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
 }
 
 /* Add responsive nav styles */
@@ -162,7 +164,7 @@ button, a, input {
   .nav-label {
     font-size: 0.75rem;
   }
-  
+
   .nav-icon {
     width: 1.25rem;
     height: 1.25rem;
@@ -172,22 +174,22 @@ button, a, input {
 /* Navigation styles */
 @layer components {
   .nav-container {
-    @apply fixed top-0 left-0 right-0 z-50 bg-background border-b shadow-sm;
+    @apply fixed left-0 right-0 top-0 z-50 border-b bg-background shadow-sm;
     @apply transition-transform duration-300 ease-in-out;
   }
 
   .nav-item {
-    @apply flex flex-col items-center gap-1 p-2 rounded-lg transition-colors;
+    @apply flex flex-col items-center gap-1 rounded-lg p-2 transition-colors;
     @apply hover:bg-accent hover:shadow-md;
   }
 
   .page-enter {
-    animation: fadeIn var(--page-enter-duration) cubic-bezier(0.25, 0.1, 0.25, 1.0) forwards;
+    animation: fadeIn var(--page-enter-duration) cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
     will-change: opacity, transform;
   }
 
   .content-enter {
-    animation: slideUp var(--content-enter-duration) cubic-bezier(0.25, 0.1, 0.25, 1.0) forwards;
+    animation: slideUp var(--content-enter-duration) cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
     animation-delay: var(--content-enter-delay);
     opacity: 0;
     will-change: opacity, transform;
@@ -220,4 +222,3 @@ button, a, input {
     opacity: 1 !important;
   }
 }
-

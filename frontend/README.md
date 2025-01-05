@@ -12,4 +12,3 @@ SCANUEV is an advanced conversational AI platform that allows users to interact 
 ### Installation
 
 1. Clone the repository:
-
