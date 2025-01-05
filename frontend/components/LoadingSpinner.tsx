@@ -1,13 +1,20 @@
 "use client";
 
-import React from "react";
+import PropTypes from "prop-types";
 
-interface LoadingSpinnerProps {
+// Disable the prop-types rule for this file
+// /* eslint-disable react/prop-types */
+
+type LoadingSpinnerProps = {
   size?: number;
-}
+};
 
 export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size = 24 }) => (
-  <div className="spinner" style={{ width: size, height: size }} role="status" aria-label="Loading">
+  <progress className="spinner" style={{ width: size, height: size }} aria-label="Loading">
     {/* Spinner SVG or CSS animation */}
-  </div>
+  </progress>
 );
+
+LoadingSpinner.propTypes = {
+  size: PropTypes.number,
+};

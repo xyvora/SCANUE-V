@@ -1,4 +1,4 @@
-const path = require('node:path');
+const path = require("node:path");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -8,7 +8,7 @@ const nextConfig = {
       ...config.resolve,
       alias: {
         ...config.resolve.alias,
-        '@': path.resolve(__dirname),
+        "@": path.resolve(__dirname),
       },
     };
     return config;
