@@ -11,7 +11,7 @@ const SKELETON_ITEMS = [
 
 export default function ChatLoading() {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="flex flex-col h-screen p-4 space-y-4"
@@ -35,4 +35,4 @@ export default function ChatLoading() {
       </div>
     </motion.div>
   )
-} 
+}

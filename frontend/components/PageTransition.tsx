@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation'
 
 const pageVariants = {
   hidden: { opacity: 0, y: 10 },
-  enter: { 
-    opacity: 1, 
+  enter: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.4,
@@ -14,7 +14,7 @@ const pageVariants = {
       when: "beforeChildren",
     }
   },
-  exit: { 
+  exit: {
     opacity: 0,
     y: -10,
     transition: {
@@ -42,4 +42,3 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     </AnimatePresence>
   )
 }
-

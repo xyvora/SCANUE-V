@@ -6,7 +6,7 @@ import { Navigation } from '@/components/Navigation'
 import { PageTransition } from '@/components/PageTransition'
 import { Suspense } from 'react'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   preload: true,
@@ -43,4 +43,3 @@ export default function RootLayout({
     </html>
   )
 }
-

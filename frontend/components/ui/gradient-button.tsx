@@ -25,4 +25,4 @@ const GradientButton = forwardRef<HTMLButtonElement, GradientButtonProps>(
 )
 GradientButton.displayName = "GradientButton"
 
-export { GradientButton } 
+export { GradientButton }

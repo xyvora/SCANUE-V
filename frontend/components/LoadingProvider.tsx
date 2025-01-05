@@ -38,4 +38,4 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
   )
 }
 
-export const useLoading = () => useContext(LoadingContext) 
+export const useLoading = () => useContext(LoadingContext)
