@@ -11,17 +11,10 @@ export function BotAvatar() {
     >
       <title>AI Assistant Avatar</title>
       <path
-        d="M12 2a10 10 0 0 1 10 10c0 4.42-2.87 8.17-6.84 9.5-1.08.36-2.03.5-3.16.5-1.13 0-2.08-.14-3.16-.5C4.87 20.17 2 16.42 2 12 2 6.48 6.48 2 12 2z"
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path
-        d="M8 14s1.5 2 4 2 4-2 4-2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="9" cy="9" r="1" fill="currentColor" />
-      <circle cx="15" cy="9" r="1" fill="currentColor" />
     </svg>
-  )
+  );
 } 
