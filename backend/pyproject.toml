@@ -16,7 +16,7 @@ dependencies = [
     "fastapi==0.115.6",
     "httptools==0.6.4",
     "httpx==0.28.1",
-    "langchain==0.3.13",
+    "langchain==0.3.14",
     "langchain-openai==0.2.14",
     "langgraph==0.2.60",
     "loguru==0.7.3",
