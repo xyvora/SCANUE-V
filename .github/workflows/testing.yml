@@ -102,3 +102,37 @@ jobs:
         run: just frontend-install
       - name: Build
         run: just frontend-build
+  frontend-testing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install Just
+        uses: taiki-e/install-action@just
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: ./frontend/package-lock.json
+      - name: Install Dependencies
+        run: just frontend-install
+      - name: test
+        run: just frontend-test
+  end-to-end-testing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install Just
+        uses: taiki-e/install-action@just
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: ./frontend/package-lock.json
+      - name: Install Dependencies
+        run: just frontend-install
+      - name: Start containers
+        run: just docker-up-detached
+      - name: test
+        run: just e2e-test
