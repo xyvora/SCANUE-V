@@ -1,4 +1,5 @@
 import "@testing-library/jest-dom";
+import 'jest-canvas-mock';
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,
