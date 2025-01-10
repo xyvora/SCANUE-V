@@ -9,4 +9,4 @@ export const ERROR_MESSAGES = {
   EMPTY_INPUT: 'Please enter a message',
   SEND_FAILED: 'Failed to send message',
   HTTP_ERROR: (status: number) => `HTTP error! status: ${status}`,
-} as const; 
+} as const;

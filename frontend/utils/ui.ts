@@ -20,4 +20,4 @@ export const uiConfig = {
     light: "bg-white/80 backdrop-blur-md",
     dark: "bg-gray-900/80 backdrop-blur-md",
   },
-} as const; 
+} as const;

@@ -25,4 +25,4 @@ export const uiConfig = {
 export const uiService = {
   cn,
   config: uiConfig,
-} as const; 
+} as const;

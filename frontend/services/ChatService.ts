@@ -43,8 +43,8 @@ export class ChatService {
   }
 
   trimMessages(messages: Message[]): Message[] {
-    return messages.length > this.MAX_MESSAGES 
-      ? messages.slice(-this.MAX_MESSAGES) 
+    return messages.length > this.MAX_MESSAGES
+      ? messages.slice(-this.MAX_MESSAGES)
       : messages;
   }
-} 
+}

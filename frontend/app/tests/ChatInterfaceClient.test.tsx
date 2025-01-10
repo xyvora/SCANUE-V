@@ -24,4 +24,4 @@ test('shows error message when input is empty', async () => {
   fireEvent.click(submitButton);
 
   expect(await screen.findByText(/please enter a message/i)).toBeInTheDocument();
-}); 
+});

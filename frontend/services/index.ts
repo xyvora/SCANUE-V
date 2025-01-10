@@ -1,2 +1,2 @@
 export * from './ChatService';
-export * from './AgentConfigService'; 
+export * from './AgentConfigService';

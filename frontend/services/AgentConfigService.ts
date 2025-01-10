@@ -37,4 +37,4 @@ export function getTypes(): AgentType[] {
 export const agentConfig = {
   getConfig,
   getTypes,
-} as const; 
+} as const;

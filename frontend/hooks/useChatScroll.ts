@@ -26,4 +26,4 @@ export function useChatScroll({ messages, behavior = 'smooth' }: UseChatScrollPr
   }, [scrollToBottom, messages.length]);
 
   return { scrollRef } as const;
-} 
+}

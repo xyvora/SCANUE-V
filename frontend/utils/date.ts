@@ -11,4 +11,4 @@ export function isToday(timestamp: string): boolean {
   const date = new Date(timestamp);
   const today = new Date();
   return date.toDateString() === today.toDateString();
-} 
+}
