@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { cn } from "@/utils/ui";
 
 const pageVariants = {
   initial: {
@@ -44,7 +45,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           duration: isReducedMotion ? 0 : 0.3,
           ease: [0.25, 0.1, 0.25, 1.0],
         }}
-        className="min-h-screen"
+        className={cn("min-h-screen")}
         data-testid="page-transition"
       >
         {children}

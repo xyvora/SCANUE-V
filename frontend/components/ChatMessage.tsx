@@ -41,7 +41,7 @@ function ChatMessageComponent({
       aria-label={`Message from ${isUser ? "You" : "Assistant"}`}
     >
       {!isUser && (
-        <Avatar className="h-8 w-8 flex-shrink-0 sm:h-10 sm:w-10">
+        <Avatar className="flex-shrink-0 w-8 h-8 sm:h-10 sm:w-10">
           <AvatarFallback>
             <BotAvatar />
           </AvatarFallback>
@@ -57,23 +57,23 @@ function ChatMessageComponent({
           "transition-all duration-200",
         )}
       >
-        <p className="whitespace-pre-wrap text-sm sm:text-base">{message.content}</p>
+        <p className="text-sm whitespace-pre-wrap sm:text-base">{message.content}</p>
         {showTimestamp && (
           <time
             dateTime={message.timestamp}
-            className="absolute bottom-0 right-0 -mb-5 text-xs text-gray-500 opacity-0 transition-opacity group-hover:opacity-100"
+            className="absolute bottom-0 right-0 -mb-5 text-xs text-gray-500 transition-opacity opacity-0 group-hover:opacity-100"
           >
             {formatMessageTime(message.timestamp)}
           </time>
         )}
-        <div className="absolute right-2 top-2 opacity-0 transition-opacity group-hover:opacity-100">
+        <div className="absolute transition-opacity opacity-0 right-2 top-2 group-hover:opacity-100">
           <MessageActions message={message} onDelete={onDelete} />
         </div>
       </div>
       {isUser && (
-        <Avatar className="h-8 w-8 flex-shrink-0 sm:h-10 sm:w-10">
+        <Avatar className="flex-shrink-0 w-8 h-8 sm:h-10 sm:w-10">
           <AvatarFallback>
-            <User className="h-5 w-5 text-gray-600" />
+            <User className="w-5 h-5 text-gray-600" />
           </AvatarFallback>
         </Avatar>
       )}

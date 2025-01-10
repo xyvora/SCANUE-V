@@ -8,7 +8,11 @@ const customJestConfig = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   testEnvironment: "jest-environment-jsdom",
   moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/$1",
+    "^@/(.*)$": "<rootDir>/frontend/$1",
+    "^@/components/(.*)$": "<rootDir>/components/$1",
+    "^@/lib/(.*)$": "<rootDir>/lib/$1",
+    "^@/hooks/(.*)$": "<rootDir>/hooks/$1",
+    "^@/types/(.*)$": "<rootDir>/types/$1",
   },
   collectCoverage: true,
   collectCoverageFrom: [
@@ -30,6 +34,7 @@ const customJestConfig = {
       statements: 80,
     },
   },
+  moduleDirectories: ['node_modules', 'frontend'],
 };
 
 module.exports = createJestConfig(customJestConfig);
