@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import type { Message } from "@/types/chat";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/ui";
 
 interface MessageActionsProps {
   message: Message;

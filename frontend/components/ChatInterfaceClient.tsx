@@ -7,35 +7,21 @@ import { ChatContainer } from "./ChatContainer";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { Button } from "@/components/ui/button";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
-
-interface Feedback {
-  comment: string;
-  type: "positive" | "negative";
-}
-
-interface Message {
-  id: string;
-  content: string;
-  isUser: boolean;
-  feedback?: Feedback;
-  agentResponse?: string;
-  timestamp: string;
-}
-
-type AgentType = "PFC" | "General";
-
-type FormSubmitEvent = React.FormEvent<HTMLFormElement>;
-type KeyboardSubmitEvent = React.KeyboardEvent<HTMLInputElement>;
-type SubmitEvent = FormSubmitEvent | KeyboardSubmitEvent;
+import { cn } from "@/utils/ui";
+import { v4 as uuidv4 } from 'uuid';
+import { ChatService } from "@/services/ChatService";
+import { CHAT_CONSTANTS, ERROR_MESSAGES } from "@/constants/chat";
+import type { Message, AgentType, SubmitEvent } from "@/types/chat";
 
 export function ChatInterfaceClient() {
-  const MAX_MESSAGES = 50;
+  const chatService = new ChatService();
+
+  const chatServiceRef = useRef(chatService);
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [agentType, setAgentType] = useState<AgentType>("General");
+  const [agentType, setAgentType] = useState<AgentType>(CHAT_CONSTANTS.DEFAULT_AGENT as AgentType);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -63,8 +49,8 @@ export function ChatInterfaceClient() {
   }, []);
 
   useEffect(() => {
-    if (messages.length > MAX_MESSAGES) {
-      setMessages((prevMessages) => prevMessages.slice(-MAX_MESSAGES));
+    if (messages.length > chatServiceRef.current.MAX_MESSAGES) {
+      setMessages((prevMessages) => chatServiceRef.current.trimMessages(prevMessages));
     }
   }, [messages]);
 
@@ -82,7 +68,7 @@ export function ChatInterfaceClient() {
 
       try {
         const newMessage: Message = {
-          id: crypto.randomUUID(),
+          id: uuidv4(),
           content: input,
           isUser: true,
           timestamp: new Date().toISOString(),
@@ -91,39 +77,10 @@ export function ChatInterfaceClient() {
         setMessages((prev) => [...prev, newMessage]);
         setInput("");
 
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
-
-        const response = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: newMessage.content,
-            agent: agentType,
-          }),
-          signal: controller.signal,
-        });
-
-        clearTimeout(timeoutId);
-
-        if (!response.ok) {
-          throw new Error("Failed to send message");
-        }
-
-        const data = await response.json();
-
-        const botMessage: Message = {
-          id: Date.now().toString(),
-          content: data.message,
-          isUser: false,
-          agentResponse: data.agentResponse,
-          timestamp: new Date().toISOString(),
-        };
-
-        setMessages((prev) => [...prev, botMessage]);
+        const response = await chatServiceRef.current.sendMessage(newMessage.content, agentType);
+        setMessages((prev) => [...prev, response]);
       } catch (error) {
-        console.error("Error:", error);
-        setError("Failed to send message. Please try again.");
+        setError(error instanceof Error ? error.message : "Failed to send message");
       } finally {
         setIsTyping(false);
       }
@@ -144,11 +101,11 @@ export function ChatInterfaceClient() {
   return (
     <TooltipProvider>
       <div
-        className="flex h-screen flex-col overflow-hidden bg-gradient-to-br from-blue-100 to-purple-200 text-gray-800 transition-colors duration-300 dark:from-blue-900 dark:to-purple-900 dark:text-gray-100"
+        className="flex flex-col h-screen overflow-hidden text-gray-800 transition-colors duration-300 bg-gradient-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900 dark:text-gray-100"
         data-testid="chat-interface"
       >
-        <header className="sticky top-0 z-10 flex items-center justify-between rounded-b-2xl bg-white/70 p-3 shadow-md backdrop-blur-md transition-colors duration-300 dark:bg-gray-900/70 sm:p-4">
-          <h1 className="xs:text-xl gradient-text text-lg font-semibold sm:text-2xl">
+        <header className="sticky top-0 z-10 flex items-center justify-between p-3 transition-colors duration-300 shadow-md rounded-b-2xl bg-white/70 backdrop-blur-md dark:bg-gray-900/70 sm:p-4">
+          <h1 className="text-lg font-semibold xs:text-xl gradient-text sm:text-2xl">
             SCANUEV Chat
           </h1>
           <div className="flex items-center space-x-2 sm:space-x-4">
@@ -160,7 +117,7 @@ export function ChatInterfaceClient() {
               aria-label="Open menu"
               aria-expanded={isMenuOpen}
             >
-              <Menu className="h-5 w-5" />
+              <Menu className="w-5 h-5" />
             </Button>
             <AnimatePresence>
               {isMenuOpen && (
@@ -169,22 +126,22 @@ export function ChatInterfaceClient() {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, y: -10 }}
                   transition={{ duration: 0.2 }}
-                  className="xs:w-48 xs:p-4 xs:top-16 xs:right-4 absolute right-2 top-14 z-20 w-44 rounded-lg bg-white/90 p-3 shadow-lg backdrop-blur-md dark:bg-gray-900/90"
+                  className="absolute z-20 p-3 rounded-lg shadow-lg xs:w-48 xs:p-4 xs:top-16 xs:right-4 right-2 top-14 w-44 bg-white/90 backdrop-blur-md dark:bg-gray-900/90"
                 >
                   <div className="flex flex-col space-y-2">
                     <Button
                       variant={agentType === "PFC" ? "gradient" : "ghost"}
                       onClick={() => handleAgentChange("PFC")}
-                      className="xs:text-base justify-start text-sm"
+                      className="justify-start text-sm xs:text-base"
                     >
-                      <Brain className="mr-2 h-5 w-5" /> PFC
+                      <Brain className="w-5 h-5 mr-2" /> PFC
                     </Button>
                     <Button
                       variant={agentType === "General" ? "gradient" : "ghost"}
                       onClick={() => handleAgentChange("General")}
-                      className="xs:text-base justify-start text-sm"
+                      className="justify-start text-sm xs:text-base"
                     >
-                      <Globe className="mr-2 h-5 w-5" /> General
+                      <Globe className="w-5 h-5 mr-2" /> General
                     </Button>
                   </div>
                 </motion.div>
@@ -196,14 +153,14 @@ export function ChatInterfaceClient() {
                 onClick={() => handleAgentChange("PFC")}
                 className="rounded-r-none"
               >
-                <Brain className="mr-2 h-5 w-5" /> PFC
+                <Brain className="w-5 h-5 mr-2" /> PFC
               </Button>
               <Button
                 variant={agentType === "General" ? "gradient" : "secondary"}
                 onClick={() => handleAgentChange("General")}
                 className="rounded-l-none"
               >
-                <Globe className="mr-2 h-5 w-5" /> General
+                <Globe className="w-5 h-5 mr-2" /> General
               </Button>
             </div>
           </div>
@@ -211,9 +168,9 @@ export function ChatInterfaceClient() {
         <main className="flex-1 overflow-y-auto">
           <ChatContainer messages={messages} onDelete={handleDeleteMessage} />
         </main>
-        <div className="fixed bottom-0 left-0 right-0 border-t bg-background/95 p-2 backdrop-blur-sm sm:p-4">
+        <div className="fixed bottom-0 left-0 right-0 p-2 border-t bg-background/95 backdrop-blur-sm sm:p-4">
           <div className="w-full px-2 sm:px-4">
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4" data-testid="chat-form">
               <div className="flex items-end gap-2">
                 <div className="flex-1">
                   <div className="relative">
@@ -234,7 +191,7 @@ export function ChatInterfaceClient() {
                       aria-label={`Message ${agentType} agent`}
                     />
                     {isTyping && (
-                      <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                      <div className="absolute -translate-y-1/2 right-3 top-1/2">
                         <LoadingSpinner size={20} />
                       </div>
                     )}
@@ -242,17 +199,17 @@ export function ChatInterfaceClient() {
                 </div>
                 <Button
                   type="submit"
-                  disabled={isTyping || !input.trim()}
-                  variant="gradient"
-                  size="icon"
+                  data-testid="chat-submit"
                   className={cn(
+                    "inline-flex items-center justify-center",
                     "h-10 w-10 sm:h-12 sm:w-12",
                     "rounded-full",
                     "shadow-lg hover:shadow-xl",
                     "transition-all duration-200",
                   )}
+                  disabled={isTyping}
                 >
-                  <Send className="h-5 w-5 sm:h-6 sm:w-6" />
+                  <Send className="w-5 h-5 sm:h-6 sm:w-6" />
                 </Button>
               </div>
             </form>

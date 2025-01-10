@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, MessageSquare, User, LogIn } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/ui";
 import { useScrollDirection } from "@/hooks/use-scroll-direction";
 import type { LucideIcon } from "lucide-react";
 

@@ -8,6 +8,7 @@ import {
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 import type { Message } from "@/types/chat";
+import { cn } from "@/utils/ui";
 
 interface MessageContextMenuProps {
   children: React.ReactNode;
@@ -25,9 +26,9 @@ export function MessageContextMenu({
   return (
     <ContextMenu>
       <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
-      <ContextMenuContent className="glass-card text-white/80">
+      <ContextMenuContent className={cn("glass-card text-white/80")}>
         <ContextMenuItem
-          className="hover:text-white focus:text-white"
+          className={cn("hover:text-white focus:text-white")}
           onClick={() => onCopy(message.content)}
         >
           <Copy className="mr-2 h-4 w-4" />
@@ -35,7 +36,7 @@ export function MessageContextMenu({
         </ContextMenuItem>
         {!message.isUser && (
           <ContextMenuItem
-            className="hover:text-white focus:text-white"
+            className={cn("hover:text-white focus:text-white")}
             onClick={() => onFeedback(message.id, "positive")}
           >
             <ThumbsUp className="mr-2 h-4 w-4" />

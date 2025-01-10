@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import debounce from "lodash/debounce";
 import type { DebouncedFunc } from "lodash/debounce";
+import { cn } from "@/utils/ui";
 
 export function ScrollToTop() {
   const [show, setShow] = useState(false);
@@ -32,7 +33,7 @@ export function ScrollToTop() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-20 right-4 rounded-full bg-primary p-2 text-white shadow-lg"
+          className={cn("fixed bottom-20 right-4 rounded-full bg-primary p-2 text-white shadow-lg")}
         >
           <ArrowUp className="h-5 w-5" />
         </motion.button>
