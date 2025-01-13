@@ -10,7 +10,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/utils/ui";
 import { v4 as uuidv4 } from 'uuid';
 import { ChatService } from "@/services/ChatService";
-import { CHAT_CONSTANTS, ERROR_MESSAGES } from "@/constants/chat";
+import { CHAT_CONSTANTS } from "@/constants/chat";
 import type { Message, AgentType, SubmitEvent } from "@/types/chat";
 
 export function ChatInterfaceClient() {
