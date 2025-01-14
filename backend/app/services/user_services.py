@@ -184,7 +184,7 @@ async def update_user(
             user_data["hashed_password"] = get_password_hash(user_data.pop("password"))
         if "openai_api_key" in user_data:
             user_data["hashed_openai_api_key"] = get_password_hash(user_data.pop("openai_api_key"))
-        set_clause = ", ".join([f"{key} = ${i+2}" for i, key in enumerate(user_data.keys())])
+        set_clause = ", ".join([f"{key} = ${i + 2}" for i, key in enumerate(user_data.keys())])
         query = f"""
         UPDATE users
         SET {set_clause}
