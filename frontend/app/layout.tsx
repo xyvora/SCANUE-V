@@ -32,4 +32,4 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <body>{children}</body>
     </html>
   );
-} 
+}
