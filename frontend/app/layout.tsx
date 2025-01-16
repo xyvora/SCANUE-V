@@ -1,38 +1,35 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Navigation } from "@/components/Navigation";
-import { PageTransition } from "@/components/PageTransition";
-import { Suspense } from "react";
-import Loading from "./loading";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
 const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  preload: true,
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
 });
 
 export const metadata: Metadata = {
-  title: "SCANUEV - Advanced Conversational AI Platform",
-  description:
-    "SCANUEV is an advanced conversational AI platform that allows users to interact with different types of AI agents.",
+  title: 'SCANUEV Chat',
+  description: 'Chat with our AI agents',
+  icons: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '32x32',
+      url: '/favicon-32x32.png'
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '16x16',
+      url: '/favicon-16x16.png'
+    }
+  ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="light" suppressHydrationWarning>
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="theme-color" content="#ffffff" />
-      </head>
-      <body className={`${inter.className} min-h-screen bg-background text-foreground antialiased`}>
-        <Navigation />
-        <Suspense fallback={<Loading />}>
-          <PageTransition>{children}</PageTransition>
-        </Suspense>
-      </body>
+    <html lang="en" className={inter.variable}>
+      <body>{children}</body>
     </html>
   );
-}
+} 

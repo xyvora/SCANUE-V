@@ -5,7 +5,7 @@ export function BotAvatar() {
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
-      className="h-full w-full p-1"
+      className="w-full h-full p-1"
       role="img"
       aria-label="AI Assistant Avatar"
     >

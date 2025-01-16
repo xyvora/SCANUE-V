@@ -67,6 +67,9 @@ module.exports = {
         "scale-in": "scale-in 200ms ease-out",
         "slide-in": "slide-in 200ms ease-out",
       },
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+      },
     },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
