@@ -1,3 +1,4 @@
+import './globals.css'
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable}`}>
       <body>{children}</body>
     </html>
   );

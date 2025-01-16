@@ -127,7 +127,7 @@ export const WavyBackground: FC<WavyBackgroundProps> = ({
   return (
     <div
       className={cn(
-        "fixed inset-0 flex min-h-screen w-full flex-col items-center justify-center overflow-hidden pt-16",
+        "fixed inset-0 flex min-h-screen w-full flex-col items-center justify-center",
         containerClassName,
       )}
       {...props}
@@ -140,7 +140,9 @@ export const WavyBackground: FC<WavyBackgroundProps> = ({
           ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
         }}
       />
-      <div className={cn("relative z-10 flex h-full w-full flex-col", className)}>{children}</div>
+      <div className={cn("relative z-10 flex h-full w-full flex-col", className)}>
+        {children}
+      </div>
     </div>
   );
 };
