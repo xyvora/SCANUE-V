@@ -1,22 +1,35 @@
-// import './globals.css'
-import { Inter } from "next/font/google";
-import { Navigation } from "../components/Navigation";
-import { PageTransition } from "../components/PageTransition";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
-export const metadata = {
-  title: "AI Chat Interface",
-  description: "An advanced AI chat interface with multiple agent types",
+export const metadata: Metadata = {
+  title: 'SCANUEV Chat',
+  description: 'Chat with our AI agents',
+  icons: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '32x32',
+      url: '/favicon-32x32.png'
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '16x16',
+      url: '/favicon-16x16.png'
+    }
+  ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>
-        <Navigation />
-        <PageTransition>{children}</PageTransition>
-      </body>
+    <html lang="en" className={inter.variable}>
+      <body>{children}</body>
     </html>
   );
 }

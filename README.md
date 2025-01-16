@@ -1,2 +1,0 @@
-# SCANUE-V
-SCANUE V
