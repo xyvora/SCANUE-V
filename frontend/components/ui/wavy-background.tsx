@@ -40,7 +40,7 @@ export const WavyBackground: FC<WavyBackgroundProps> = ({
   const ntRef = useRef<number>(0);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
   const canvasInstanceRef = useRef<HTMLCanvasElement | null>(null);
-  const animationIdRef = useRef<number>();
+  const animationIdRef = useRef<number | null>(null);
 
   const getSpeed = useCallback(() => {
     switch (speed) {
@@ -110,7 +110,7 @@ export const WavyBackground: FC<WavyBackgroundProps> = ({
   useEffect(() => {
     init();
     return () => {
-      if (animationIdRef.current !== undefined) {
+      if (animationIdRef.current !== undefined && animationIdRef.current !== null) {
         window.cancelAnimationFrame(animationIdRef.current);
       }
     };
