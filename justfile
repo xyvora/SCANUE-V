@@ -72,6 +72,10 @@
   cd frontend && \
   npm run lint
 
+@frontend-lint-fix:
+  cd frontend && \
+  npm run lint-fix
+
 @frontend-test:
   cd frontend && \
   npm run test
