@@ -59,7 +59,12 @@ export function ChatInterfaceClient() {
       e.preventDefault();
 
       if (!input.trim()) {
-        setError("Please enter a message");
+        setError("Please enter a non-empty message");
+        return;
+      }
+
+      if (input.length > 1000) {
+        setError("Message is too long. Maximum 1000 characters.");
         return;
       }
 
