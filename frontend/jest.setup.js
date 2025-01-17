@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
 import 'jest-canvas-mock';
 
+// Mock matchMedia for browser APIs
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({
@@ -15,3 +16,22 @@ Object.defineProperty(window, "matchMedia", {
     toString: jest.fn().mockReturnValue(query),
   })),
 });
+
+// Enhanced mocking for localStorage
+Object.defineProperty(window, 'localStorage', {
+  value: {
+    getItem: jest.fn(),
+    setItem: jest.fn(),
+    removeItem: jest.fn(),
+    clear: jest.fn()
+  },
+  writable: true
+});
+
+// Global fetch mock
+global.fetch = jest.fn(() => 
+  Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve({}),
+  })
+);

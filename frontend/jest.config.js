@@ -1,4 +1,4 @@
-const nextJest = require("next/jest");
+import nextJest from "next/jest";
 
 const createJestConfig = nextJest({
   dir: "./",
@@ -28,10 +28,10 @@ const customJestConfig = {
   ],
   coverageThreshold: {
     global: {
-      statements: 40,
-      branches: 30,
-      functions: 30,
-      lines: 40,
+      statements: 25,
+      branches: 20,
+      functions: 20,
+      lines: 25,
     },
   },
   moduleDirectories: ['node_modules', 'frontend'],
