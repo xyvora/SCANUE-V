@@ -70,6 +70,35 @@ services:
       - traefik.http.routers.${STACK_NAME?Variable not set}-backend-https.tls.certresolver=
       - traefik.http.routers.${STACK_NAME?Variable not set}-backend-https.middlewares=
 
+  frontend:
+    restart: "no"
+    ports:
+      - "3000:3000"
+    build:
+      context: ./frontend
+      args:
+        - NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
+        - NODE_ENV=development
+    container_name: scanue-v-frontend
+    depends_on:
+      - backend
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+
+      # HTTP entry point and rule
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend-http.rule=Host(`api.${DOMAIN?Variable not set}`)
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend-http.entrypoints=http
+
+      # Remove reference to HTTPS and its middlewares
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend-http.middlewares=
+
+      # Clear HTTPS-specific labels
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend-https.rule=
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend-https.entrypoints=
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend-https.tls.certresolver=
+      - traefik.http.routers.${STACK_NAME?Variable not set}-frontend-https.middlewares=
+
   db:
     restart: "no"
     ports:
