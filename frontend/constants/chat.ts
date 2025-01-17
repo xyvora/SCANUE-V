@@ -1,9 +1,8 @@
 export const CHAT_CONSTANTS = {
-  MAX_MESSAGES: 50,
-  TIMEOUT_MS: 10000,
   DEFAULT_AGENT: 'General',
-  INITIAL_MESSAGE: 'Hi there! I am your AI assistant. How can I help you today?',
-} as const;
+  MAX_MESSAGE_LENGTH: 1000,
+  AGENTS: ['General', 'PFC'] as const,
+};
 
 export const ERROR_MESSAGES = {
   EMPTY_INPUT: 'Please enter a message',
