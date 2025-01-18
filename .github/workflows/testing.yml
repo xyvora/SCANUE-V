@@ -15,15 +15,51 @@ env:
   POSTGRES_PASSWORD: "test_password"
   POSTGRES_DB: "scan"
   OPENAI_API_KEY: "someKey"
+  STACK_NAME: "scanue-v"
+  DOMAIN: "127.0.0.1"
 jobs:
-  docker-build:
+  docker-backend-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: install Just
-        uses: taiki-e/install-action@just
-      - name: Build backend image
-        run: just docker-build-backend
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build backend container
+        uses: docker/build-push-action@v6
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          context: ./backend
+          outputs: type=docker,dest=/tmp/scanue-v-backend.tar
+          push: false
+          tags: scanue-v-backend:latest
+      - name: Upload backend container
+        uses: actions/upload-artifact@v4
+        with:
+          name: scanue-v-backend
+          path: /tmp/scanue-v-backend.tar
+          retention-days: 1
+  docker-frontend-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build frontend container
+        uses: docker/build-push-action@v6
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          context: ./frontend
+          outputs: type=docker,dest=/tmp/scanue-v-frontend.tar
+          push: false
+          tags: scanue-v-frontend:latest
+      - name: Upload frontend container
+        uses: actions/upload-artifact@v4
+        with:
+          name: scanue-v-frontend
+          path: /tmp/scanue-v-frontend.tar
+          retention-days: 1
   backend-linting:
     runs-on: ubuntu-latest
     steps:
@@ -102,3 +138,50 @@ jobs:
         run: just frontend-install
       - name: Build
         run: just frontend-build
+  e2e-tests:
+    runs-on: ubuntu-latest
+    needs: [docker-backend-build, docker-frontend-build]
+    steps:
+      - name: Download backend container
+        uses: actions/download-artifact@v4
+        with:
+          name: scanue-v-backend
+          path: /tmp/
+      - name: Load backend image
+        run: docker load --input /tmp/scanue-v-backend.tar
+      - name: Download frontend container
+        uses: actions/download-artifact@v4
+        with:
+          name: scanue-v-frontend
+          path: /tmp/
+      - name: Load frontend image
+        run: docker load --input /tmp/scanue-v-frontend.tar
+      - uses: actions/checkout@v4
+      - name: install Just
+        uses: taiki-e/install-action@just
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: ./frontend/package-lock.json
+      - name: Install Dependencies
+        run: just frontend-install
+      - name: Setup playwright
+        run: npx playwright install --with-deps chromium firefox
+      - name: Add .env file
+        run: |
+          echo SECRET_KEY=${{ env.SECRET_KEY }} > .env
+          echo FIRST_SUPERUSER_EMAIL=${{ env.FIRST_SUPERUSER_EMAIL }} >> .env
+          echo FIRST_SUPERUSER_PASSWORD=${{ env.FIRST_SUPERUSER_PASSWORD }} >> .env
+          echo POSTGRES_HOST=${{ env.POSTGRES_HOST }} >> .env
+          echo POSTGRES_USER=${{ env.POSTGRES_USER }} >> .env
+          echo POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }} >> .env
+          echo POSTGRES_DB=${{ env.POSTGRES_DB }} >> .env
+          echo OPENAI_API_KEY=${{ env.OPENAI_API_KEY }} >> .env
+          echo STACK_NAME=${{ env.STACK_NAME }} >> .env
+          echo DOMAIN=${{ env.DOMAIN }} >> .env
+      - name: Start docker containers
+        run: just docker-up-backend-ci
+      - name: e2e Tests
+        run: just e2e-test
