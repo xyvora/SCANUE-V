@@ -24,6 +24,8 @@ jobs:
         uses: taiki-e/install-action@just
       - name: Build backend image
         run: just docker-build-backend
+      - name: Build frontend image
+        run: just docker-build-frontend
   backend-linting:
     runs-on: ubuntu-latest
     steps:
@@ -102,3 +104,23 @@ jobs:
         run: just frontend-install
       - name: Build
         run: just frontend-build
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install Just
+        uses: taiki-e/install-action@just
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: ./frontend/package-lock.json
+      - name: Install Dependencies
+        run: just frontend-install
+      - name: Setup playwright
+        run: npx playwright install --with-deps chromium firefox
+      - name: Start docker containers
+        run: just docker-up
+      - name: e2e Tests
+        run: just e2e-test

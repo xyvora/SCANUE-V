@@ -82,7 +82,7 @@
 
 @e2e-test:
   cd frontend && \
-  npm run cypress:run
+  npx playwright test
 
 @docker-up:
   docker compose up --build
@@ -108,4 +108,4 @@
 
 @docker-build-frontend:
   cd frontend && \
-  docker build -t frontend-frontend .
+  docker build -t scanue-v-frontend .
