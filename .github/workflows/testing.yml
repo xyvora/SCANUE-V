@@ -30,7 +30,6 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: ./backend
-          target: scanue-v-backend
           outputs: type=docker,dest=/tmp/scanue-v-backend.tar
           push: false
           tags: scanue-v-backend:latest
@@ -46,7 +45,6 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: ./frontend
-          target: scanue-v-frontend
           outputs: type=docker,dest=/tmp/scanue-v-frontend.tar
           push: false
           tags: scanue-v-frontend:latest
