@@ -128,6 +128,18 @@ jobs:
         run: just frontend-install
       - name: Setup playwright
         run: npx playwright install --with-deps chromium firefox
+      - name: Add .env file
+        run: |
+          echo SECRET_KEY=${{ env.SECRET_KEY }} > .env
+          echo FIRST_SUPERUSER_EMAIL=${{ FIRST_SUPERUSER_EMAIL }} >> .env
+          echo FIRST_SUPERUSER_PASSWORD=${{ FIRST_SUPERUSER_PASSWORD }} >> .env
+          echo POSTGRES_HOST=${{ POSTGRES_HOST }} >> .env
+          echo POSTGRES_USER=${{ POSTGRES_USER }} >> .env
+          echo POSTGRES_PASSWORD=${{ POSTGRES_PASSWORD }} >> .env
+          echo POSTGRES_DB=${{ POSTGRES_DB }} >> .env
+          echo OPENAI_API_KEY=${{ OPENAI_API_KEY }} >> .env
+          echo STACK_NAME=${{ STACK_NAME }} >> .env
+          echo DOMAIN=${{ DOMAIN }} >> .env
       - name: Start docker containers
         run: just docker-up
       - name: e2e Tests
