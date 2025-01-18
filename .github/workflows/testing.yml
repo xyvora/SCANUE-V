@@ -15,6 +15,7 @@ env:
   POSTGRES_PASSWORD: "test_password"
   POSTGRES_DB: "scan"
   OPENAI_API_KEY: "someKey"
+  STACK_NAME: "scanue-v"
 jobs:
   docker-backend-build:
     runs-on: ubuntu-latest
