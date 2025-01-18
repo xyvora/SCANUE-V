@@ -29,7 +29,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           builder: ${{ steps.buildx.outputs.name }}
-          context: .
+          context: ./backend
           target: scanue-v-backend
           outputs: type=docker,dest=/tmp/scanue-v-backend.tar
           push: false
@@ -45,7 +45,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           builder: ${{ steps.buildx.outputs.name }}
-          context: .
+          context: ./frontend
           target: scanue-v-frontend
           outputs: type=docker,dest=/tmp/scanue-v-frontend.tar
           push: false
