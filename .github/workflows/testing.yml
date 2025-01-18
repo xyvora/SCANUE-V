@@ -16,6 +16,7 @@ env:
   POSTGRES_DB: "scan"
   OPENAI_API_KEY: "someKey"
   STACK_NAME: "scanue-v"
+  DOMAIN: "127.0.0.1"
 jobs:
   docker-backend-build:
     runs-on: ubuntu-latest
