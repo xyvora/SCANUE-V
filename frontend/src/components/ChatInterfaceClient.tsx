@@ -59,7 +59,7 @@ export function ChatInterfaceClient() {
       e.preventDefault();
 
       if (!input.trim()) {
-        setError("Please enter a message");
+        setError("Please enter a topic");
         return;
       }
 
@@ -77,10 +77,41 @@ export function ChatInterfaceClient() {
         setMessages((prev) => [...prev, newMessage]);
         setInput("");
 
-        const response = await chatServiceRef.current.sendMessage(newMessage.content, agentType);
-        setMessages((prev) => [...prev, response]);
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            topic: newMessage.content,
+            agent: agentType 
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          const botResponse: Message = {
+            id: uuidv4(),
+            content: data.response || 'No response received',
+            isUser: false,
+            timestamp: new Date().toISOString(),
+          };
+          setMessages((prev) => [...prev, botResponse]);
+        } else {
+          throw new Error(data.error || 'Failed to process topic');
+        }
       } catch (error) {
-        setError(error instanceof Error ? error.message : "Failed to send message");
+        const errorMessage = error instanceof Error ? error.message : "Failed to send topic";
+        setError(errorMessage);
+        
+        const errorResponse: Message = {
+          id: uuidv4(),
+          content: errorMessage,
+          isUser: false,
+          timestamp: new Date().toISOString(),
+        };
+        setMessages((prev) => [...prev, errorResponse]);
       } finally {
         setIsTyping(false);
       }
