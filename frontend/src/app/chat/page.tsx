@@ -16,7 +16,7 @@ export default function ChatPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!topic.trim()) return;
 
     setIsLoading(true);
@@ -28,9 +28,9 @@ export default function ChatPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          topic, 
-          agent: agentType 
+        body: JSON.stringify({
+          topic,
+          agent: agentType
         }),
       });
 
@@ -49,7 +49,7 @@ export default function ChatPage() {
   };
 
   return (
-    <div 
+    <div
       className="flex flex-col h-screen overflow-hidden text-gray-800 bg-gradient-to-br from-blue-100 to-purple-200"
       data-testid="chat-page"
     >
@@ -121,7 +121,7 @@ export default function ChatPage() {
           </form>
 
           {response && (
-            <div 
+            <div
               className="w-full p-4 rounded-lg shadow-md bg-white/70 backdrop-blur-md"
               data-testid="chat-response"
             >

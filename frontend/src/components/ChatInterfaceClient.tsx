@@ -82,9 +82,9 @@ export function ChatInterfaceClient() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ 
+          body: JSON.stringify({
             topic: newMessage.content,
-            agent: agentType 
+            agent: agentType
           }),
         });
 
@@ -104,7 +104,7 @@ export function ChatInterfaceClient() {
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : "Failed to send topic";
         setError(errorMessage);
-        
+
         const errorResponse: Message = {
           id: uuidv4(),
           content: errorMessage,

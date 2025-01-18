@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     if (!backendResponse.ok) {
       const errorData = await backendResponse.json();
       return NextResponse.json(
-        { 
+        {
           error: errorData.detail || 'Failed to process scan request',
           status: backendResponse.status
         },
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
 
     // Parse backend response
     const responseData = await backendResponse.json();
-    
+
     return NextResponse.json({
       // Map backend AgentState fields
       response: responseData.response || 'No response received',
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Scan API error:', error);
     return NextResponse.json(
-      { 
+      {
         error: error instanceof Error ? error.message : 'Internal server error',
         status: 500
       },

@@ -36,4 +36,4 @@ export function sanitizeObject<T extends Record<string, unknown>>(obj: T): T {
   }
 
   return sanitized as T;
-} 
+}
