@@ -54,11 +54,11 @@ jobs:
           outputs: type=docker,dest=/tmp/scanue-v-frontend.tar
           push: false
           tags: scanue-v-frontend:latest
-      - name: Upload backend container
+      - name: Upload frontend container
         uses: actions/upload-artifact@v4
         with:
-          name: scanue-v-backend
-          path: /tmp/scanue-v-backend.tar
+          name: scanue-v-frontend
+          path: /tmp/scanue-v-frontend.tar
           retention-days: 1
   backend-linting:
     runs-on: ubuntu-latest
