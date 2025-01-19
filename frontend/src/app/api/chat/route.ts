@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     if (!topicInput || typeof topicInput !== 'string') {
       logError('Invalid topic input', topicInput);
       return NextResponse.json(
-        { 
+        {
           error: 'A valid topic string is required',
           details: 'Topic must be a non-empty string'
         },
@@ -86,7 +86,7 @@ export async function POST(request: NextRequest) {
 
     } catch (fetchError) {
       logError('Backend fetch error', fetchError);
-      
+
       return NextResponse.json(
         {
           error: 'Failed to connect to backend service',
