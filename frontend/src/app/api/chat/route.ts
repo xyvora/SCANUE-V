@@ -92,9 +92,15 @@ export async function POST(request: NextRequest) {
           error: 'Failed to connect to backend service',
           details: fetchError instanceof Error ? fetchError.message : 'Unknown network error',
           originalTopic: topicInput,
-          status: 503 // Service Unavailable
+          status: fetchError instanceof Error && 'status' in fetchError && typeof fetchError.status === 'number' 
+            ? fetchError.status 
+            : 503 // Service Unavailable
         },
-        { status: 503 }
+        { 
+          status: fetchError instanceof Error && 'status' in fetchError && typeof fetchError.status === 'number'
+            ? fetchError.status 
+            : 503 
+        }
       );
     }
 
