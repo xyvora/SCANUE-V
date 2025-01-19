@@ -42,7 +42,6 @@
     "@types/react-dom": "^19",
     "@types/uuid": "^9.0.8",
     "@types/dompurify": "^3.0.5",
-    "@types/date-fns": "^2.6.0",
     "@types/lodash-es": "^4.17.12",
     "dotenv": "^16.4.7",
     "eslint": "^9",
