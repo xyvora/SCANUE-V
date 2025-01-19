@@ -77,7 +77,7 @@ services:
     build:
       context: ./frontend
       args:
-        - NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
+        - NEXT_PUBLIC_API_URL=http://127.0.0.1:8000/api/v1
         - NODE_ENV=development
     container_name: scanue-v-frontend
     depends_on:
