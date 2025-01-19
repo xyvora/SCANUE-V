@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     if (!backendResponse.ok) {
       const errorData = await backendResponse.json();
       return NextResponse.json(
-        { 
+        {
           error: errorData.detail || 'Failed to process scan request',
           status: backendResponse.status
         },
@@ -74,13 +74,13 @@ export async function POST(request: NextRequest) {
             ? (fetchError as { status: number }).status
             : 503 // Service Unavailable
       },
-      { 
+      {
         status:
           fetchError instanceof Error &&
           'status' in fetchError &&
           typeof (fetchError as { status?: number }).status === 'number'
             ? (fetchError as { status: number }).status
-            : 503 
+            : 503
       }
     );
   }
