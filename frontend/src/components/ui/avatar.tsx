@@ -23,7 +23,12 @@ interface AvatarFallbackProps {
 
 export function AvatarFallback({ children, className }: AvatarFallbackProps) {
   return (
-    <div className={cn("absolute inset-0 flex items-center justify-center", className)}>
+    <div
+      className={cn(
+        "absolute inset-0 flex items-center justify-center",
+        className,
+      )}
+    >
       {children}
     </div>
   );

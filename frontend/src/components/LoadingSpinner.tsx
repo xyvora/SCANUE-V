@@ -4,7 +4,9 @@ type LoadingSpinnerProps = {
   size?: number;
 };
 
-export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size = 24 }) => (
+export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
+  size = 24,
+}) => (
   <progress
     aria-label="Loading"
     className="spinner"

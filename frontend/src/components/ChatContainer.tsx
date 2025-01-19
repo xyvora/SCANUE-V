@@ -11,7 +11,11 @@ interface ChatContainerProps {
   className?: string;
 }
 
-export function ChatContainer({ messages, onDelete, className }: ChatContainerProps) {
+export function ChatContainer({
+  messages,
+  onDelete,
+  className,
+}: ChatContainerProps) {
   const { scrollRef } = useChatScroll({ messages });
 
   return (

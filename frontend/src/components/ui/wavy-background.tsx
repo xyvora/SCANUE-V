@@ -111,7 +111,10 @@ export const WavyBackground: FC<WavyBackgroundProps> = ({
   useEffect(() => {
     init();
     return () => {
-      if (animationIdRef.current !== undefined && animationIdRef.current !== null) {
+      if (
+        animationIdRef.current !== undefined &&
+        animationIdRef.current !== null
+      ) {
         window.cancelAnimationFrame(animationIdRef.current);
       }
     };
@@ -141,7 +144,9 @@ export const WavyBackground: FC<WavyBackgroundProps> = ({
           ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
         }}
       />
-      <div className={cn("relative z-10 flex h-full w-full flex-col", className)}>
+      <div
+        className={cn("relative z-10 flex h-full w-full flex-col", className)}
+      >
         {children}
       </div>
     </div>

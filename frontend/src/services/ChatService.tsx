@@ -25,7 +25,7 @@ export class ChatService {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const data = await response.json() as ChatResponse;
+      const data = (await response.json()) as ChatResponse;
       return this.formatResponse(data);
     } finally {
       clearTimeout(timeoutId);

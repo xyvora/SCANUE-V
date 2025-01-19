@@ -57,7 +57,9 @@ function ChatMessageComponent({
           "transition-all duration-200",
         )}
       >
-        <p className="text-sm whitespace-pre-wrap sm:text-base">{message.content}</p>
+        <p className="text-sm whitespace-pre-wrap sm:text-base">
+          {message.content}
+        </p>
         {showTimestamp && (
           <time
             dateTime={message.timestamp}

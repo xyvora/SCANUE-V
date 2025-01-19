@@ -22,8 +22,9 @@ export default function Home() {
             Welcome to SCANUE-V
           </h1>
           <p className="text-xl text-gray-700 dark:text-gray-300">
-            Experience the power of AI with SCANUE-V, our advanced chat interface. Choose between
-            different agent types and get the assistance you need.
+            Experience the power of AI with SCANUE-V, our advanced chat
+            interface. Choose between different agent types and get the
+            assistance you need.
           </p>
           <div className="flex w-full justify-center">
             <Link href="/chat" passHref>

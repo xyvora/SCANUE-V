@@ -3,7 +3,8 @@ import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 
-export interface GradientButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface GradientButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
   className?: string;
 }

@@ -8,7 +8,7 @@ import { LoadingSpinner } from "./LoadingSpinner";
 import { Button } from "@/components/ui/button";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/utils/ui";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { ChatService } from "@/services/ChatService";
 import { CHAT_CONSTANTS } from "@/constants/chat";
 import type { Message, AgentType, SubmitEvent } from "@/types/chat";
@@ -21,7 +21,9 @@ export function ChatInterfaceClient() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [agentType, setAgentType] = useState<AgentType>(CHAT_CONSTANTS.DEFAULT_AGENT as AgentType);
+  const [agentType, setAgentType] = useState<AgentType>(
+    CHAT_CONSTANTS.DEFAULT_AGENT as AgentType,
+  );
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -50,7 +52,9 @@ export function ChatInterfaceClient() {
 
   useEffect(() => {
     if (messages.length > chatServiceRef.current.MAX_MESSAGES) {
-      setMessages((prevMessages) => chatServiceRef.current.trimMessages(prevMessages));
+      setMessages((prevMessages) =>
+        chatServiceRef.current.trimMessages(prevMessages),
+      );
     }
   }, [messages]);
 
@@ -77,14 +81,14 @@ export function ChatInterfaceClient() {
         setMessages((prev) => [...prev, newMessage]);
         setInput("");
 
-        const response = await fetch('/api/chat', {
-          method: 'POST',
+        const response = await fetch("/api/chat", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             topic: newMessage.content,
-            agent: agentType
+            agent: agentType,
           }),
         });
 
@@ -93,16 +97,17 @@ export function ChatInterfaceClient() {
         if (response.ok) {
           const botResponse: Message = {
             id: uuidv4(),
-            content: data.response || 'No response received',
+            content: data.response || "No response received",
             isUser: false,
             timestamp: new Date().toISOString(),
           };
           setMessages((prev) => [...prev, botResponse]);
         } else {
-          throw new Error(data.error || 'Failed to process topic');
+          throw new Error(data.error || "Failed to process topic");
         }
       } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : "Failed to send topic";
+        const errorMessage =
+          error instanceof Error ? error.message : "Failed to send topic";
         setError(errorMessage);
 
         const errorResponse: Message = {
@@ -201,7 +206,11 @@ export function ChatInterfaceClient() {
         </main>
         <div className="fixed bottom-0 left-0 right-0 p-2 border-t bg-background/95 backdrop-blur-sm sm:p-4">
           <div className="w-full px-2 sm:px-4">
-            <form onSubmit={handleSubmit} className="space-y-4" data-testid="chat-form">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-4"
+              data-testid="chat-form"
+            >
               <div className="flex items-end gap-2">
                 <div className="flex-1">
                   <div className="relative">
@@ -246,7 +255,8 @@ export function ChatInterfaceClient() {
             </form>
           </div>
         </div>
-        <div className="h-[60px] sm:h-[72px]" /> {/* Spacer to prevent overlap */}
+        <div className="h-[60px] sm:h-[72px]" />{" "}
+        {/* Spacer to prevent overlap */}
         {error && <div className="text-red-500">{error}</div>}
       </div>
     </TooltipProvider>

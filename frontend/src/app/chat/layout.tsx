@@ -14,6 +14,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ChatLayout({ children }: { children: React.ReactNode }) {
+export default function ChatLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return <main className="h-screen overflow-hidden">{children}</main>;
-};
+}

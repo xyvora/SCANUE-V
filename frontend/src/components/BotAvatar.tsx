@@ -15,7 +15,11 @@ export function BotAvatar() {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <path d="M8 14s1.5 2 4 2 4-2 4-2" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M8 14s1.5 2 4 2 4-2 4-2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
       <circle cx="9" cy="9" r="1" fill="currentColor" />
       <circle cx="15" cy="9" r="1" fill="currentColor" />
     </svg>

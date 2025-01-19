@@ -12,7 +12,7 @@ export default function Loading() {
       <Skeleton className="h-8 w-[200px]" aria-hidden="true" />
       <Skeleton className="h-32 w-full" aria-hidden="true" />
       <div className="space-y-2">
-        {widths.map((width, _) => (
+        {widths.map((width) => (
           <Skeleton
             key={`skeleton-${width}`}
             style={{ width: `${width}%` }}
