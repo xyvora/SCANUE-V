@@ -8,6 +8,11 @@ interface BackendTopic {
   topic: string;
 }
 
+// Enhanced error logging
+const logError = (message: string, error?: unknown) => {
+  console.error(message, error instanceof Error ? error.message : error);
+};
+
 export async function POST(request: NextRequest) {
   try {
     // Parse request body
@@ -16,8 +21,12 @@ export async function POST(request: NextRequest) {
     // Validate topic input
     const topicInput = rawBody.topic;
     if (!topicInput || typeof topicInput !== 'string') {
+      logError('Invalid topic input', topicInput);
       return NextResponse.json(
-        { error: 'A valid topic string is required' },
+        { 
+          error: 'A valid topic string is required',
+          details: 'Topic must be a non-empty string'
+        },
         { status: 400 }
       );
     }
@@ -28,45 +37,73 @@ export async function POST(request: NextRequest) {
     };
 
     // Prepare backend request
-    const backendResponse = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'}/api/v1/scan`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // TODO: Implement proper authentication
-        // 'Authorization': `Bearer ${authToken}`,
-      },
-      body: JSON.stringify(sanitizedTopic)
-    });
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+    const backendEndpoint = `${backendUrl}/api/v1/scan`;
 
-    // Handle backend response
-    if (!backendResponse.ok) {
-      const errorData = await backendResponse.json();
+    try {
+      const backendResponse = await fetch(backendEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // TODO: Implement proper authentication
+          // 'Authorization': `Bearer ${authToken}`,
+        },
+        body: JSON.stringify(sanitizedTopic),
+        // Add timeout to prevent hanging requests
+        signal: AbortSignal.timeout(10000) // 10 seconds
+      });
+
+      // Handle backend response
+      if (!backendResponse.ok) {
+        const errorData = await backendResponse.json();
+        logError('Backend request failed', {
+          status: backendResponse.status,
+          details: errorData
+        });
+
+        return NextResponse.json(
+          {
+            error: errorData.detail || 'Failed to process scan request',
+            status: backendResponse.status,
+            originalTopic: topicInput
+          },
+          { status: backendResponse.status }
+        );
+      }
+
+      // Parse backend response
+      const responseData = await backendResponse.json();
+
+      return NextResponse.json({
+        // Map backend AgentState fields
+        response: responseData.response || 'No response received',
+        stage: responseData.stage,
+        subtasks: responseData.subtasks,
+        feedback: responseData.feedback,
+        timestamp: new Date().toISOString(),
+        originalTopic: topicInput
+      });
+
+    } catch (fetchError) {
+      logError('Backend fetch error', fetchError);
+      
       return NextResponse.json(
         {
-          error: errorData.detail || 'Failed to process scan request',
-          status: backendResponse.status
+          error: 'Failed to connect to backend service',
+          details: fetchError instanceof Error ? fetchError.message : 'Unknown network error',
+          originalTopic: topicInput,
+          status: 503 // Service Unavailable
         },
-        { status: backendResponse.status }
+        { status: 503 }
       );
     }
 
-    // Parse backend response
-    const responseData = await backendResponse.json();
-
-    return NextResponse.json({
-      // Map backend AgentState fields
-      response: responseData.response || 'No response received',
-      stage: responseData.stage,
-      subtasks: responseData.subtasks,
-      feedback: responseData.feedback,
-      timestamp: new Date().toISOString()
-    });
-
   } catch (error) {
-    console.error('Scan API error:', error);
+    logError('Scan API error', error);
     return NextResponse.json(
       {
-        error: error instanceof Error ? error.message : 'Internal server error',
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error',
         status: 500
       },
       { status: 500 }
