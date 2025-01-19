@@ -43,7 +43,7 @@ services:
     build:
       context: ./frontend
       args:
-        - NEXT_PUBLIC_API_URL=https://api.${DOMAIN?Variable not set}
+        - NEXT_PUBLIC_API_URL=https://api.${DOMAIN?Variable not set}/api/v1
         - NODE_ENV=production
     container_name: scanue-v-frontend
     labels:
