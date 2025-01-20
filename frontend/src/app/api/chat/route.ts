@@ -2,6 +2,7 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 // Exact match to backend Topic model
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface BackendTopic {
   topic: string;
 }
@@ -11,20 +12,6 @@ export async function POST(request: NextRequest) {
   try {
     // Parse request body
     const rawBody = await request.json();
-
-    // Validate topic input
-    topicInput = rawBody.topic;
-    if (!topicInput || typeof topicInput !== 'string') {
-      return NextResponse.json(
-        { error: 'A valid topic string is required' },
-        { status: 400 }
-      );
-    }
-
-    // Prepare topic payload without sanitization
-    const backendTopic: BackendTopic = {
-      topic: topicInput
-    };
 
     // Prepare backend request (ensure trailing slash matches FastAPI route)
     const backendResponse = await fetch(
@@ -36,7 +23,7 @@ export async function POST(request: NextRequest) {
           // TODO: Implement proper authentication as required
           // 'Authorization': `Bearer ${authToken}`,
         },
-        body: JSON.stringify(backendTopic)
+        body: JSON.stringify({ topic: rawBody.topic })
       }
     );
 
@@ -52,12 +39,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Validate topic input after checking response status
+    topicInput = rawBody.topic;
+    if (!topicInput || typeof topicInput !== 'string') {
+      return NextResponse.json(
+        { error: 'A valid topic string is required' },
+        { status: 422 } // Unprocessable Entity, more semantically correct
+      );
+    }
+
     // Parse dynamic backend response
     const responseData = await backendResponse.json();
-    return NextResponse.json({
-      ...responseData,
-      timestamp: new Date().toISOString()
-    });
+    return NextResponse.json(responseData); // Removed manual timestamp addition
 
   } catch (fetchError) {
     console.error('Scan API error:', fetchError);
