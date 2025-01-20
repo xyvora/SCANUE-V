@@ -8,10 +8,21 @@ interface BackendTopic {
 }
 
 export async function POST(request: NextRequest) {
-  let topicInput: unknown;
+  // Declare topicInput outside the try block to ensure it's accessible in the catch block
+  let topicInput: string | undefined;
+
   try {
     // Parse request body
     const rawBody = await request.json();
+
+    // Validate topic input before making the backend request
+    topicInput = rawBody.topic;
+    if (!topicInput || typeof topicInput !== 'string') {
+      return NextResponse.json(
+        { error: 'A valid topic string is required' },
+        { status: 422 } // Unprocessable Entity, more semantically correct
+      );
+    }
 
     // Prepare backend request (ensure trailing slash matches FastAPI route)
     const backendResponse = await fetch(
@@ -23,7 +34,7 @@ export async function POST(request: NextRequest) {
           // TODO: Implement proper authentication as required
           // 'Authorization': `Bearer ${authToken}`,
         },
-        body: JSON.stringify({ topic: rawBody.topic })
+        body: JSON.stringify({ topic: topicInput })
       }
     );
 
@@ -39,18 +50,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate topic input after checking response status
-    topicInput = rawBody.topic;
-    if (!topicInput || typeof topicInput !== 'string') {
-      return NextResponse.json(
-        { error: 'A valid topic string is required' },
-        { status: 422 } // Unprocessable Entity, more semantically correct
-      );
-    }
-
     // Parse dynamic backend response
     const responseData = await backendResponse.json();
-    return NextResponse.json(responseData); // Removed manual timestamp addition
+    return NextResponse.json(responseData);
 
   } catch (fetchError) {
     console.error('Scan API error:', fetchError);
@@ -58,22 +60,10 @@ export async function POST(request: NextRequest) {
       {
         error: 'Failed to connect to backend service',
         details: fetchError instanceof Error ? fetchError.message : 'Unknown network error',
-        originalTopic: typeof topicInput === 'string' ? topicInput : null,
-        status:
-          fetchError instanceof Error &&
-          'status' in fetchError &&
-          typeof (fetchError as { status?: number }).status === 'number'
-            ? (fetchError as { status: number }).status
-            : 503 // Service Unavailable
+        originalTopic: topicInput, // Use the declared topicInput
+        status: 503
       },
-      {
-        status:
-          fetchError instanceof Error &&
-          'status' in fetchError &&
-          typeof (fetchError as { status?: number }).status === 'number'
-            ? (fetchError as { status: number }).status
-            : 503
-      }
+      { status: 503 }
     );
   }
 }
