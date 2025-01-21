@@ -17,4 +17,4 @@ const GradientInput = React.forwardRef<
 ));
 GradientInput.displayName = "GradientInput";
 
-export { GradientInput }; 
+export { GradientInput };
