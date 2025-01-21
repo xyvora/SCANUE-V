@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     if (!topicInput || typeof topicInput !== 'string') {
       return NextResponse.json(
         { error: 'A valid topic string is required' },
-        { status: 422 } // Unprocessable Entity, more semantically correct
+        { status: 422 }, // Unprocessable Entity, more semantically correct
       );
     }
 
@@ -30,12 +30,12 @@ export async function POST(request: NextRequest) {
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
           // TODO: Implement proper authentication as required
           // 'Authorization': `Bearer ${authToken}`,
         },
-        body: JSON.stringify({ topic: topicInput })
-      }
+        body: JSON.stringify({ topic: topicInput }),
+      },
     );
 
     // Handle backend response dynamically
@@ -44,9 +44,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: errorData.detail || 'Failed to process scan request',
-          status: backendResponse.status
+          status: backendResponse.status,
         },
-        { status: backendResponse.status }
+        { status: backendResponse.status },
       );
     }
 
@@ -61,9 +61,9 @@ export async function POST(request: NextRequest) {
         error: 'Failed to connect to backend service',
         details: fetchError instanceof Error ? fetchError.message : 'Unknown network error',
         originalTopic: topicInput, // Use the declared topicInput
-        status: 503
+        status: 503,
       },
-      { status: 503 }
+      { status: 503 },
     );
   }
 }
