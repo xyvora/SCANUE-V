@@ -14,6 +14,17 @@ const eslintConfig = [
   {
     rules: {
       semi: ["error", "always"],
+      "max-len": [
+        "error",
+        {
+          code: 100,
+          tabWidth: 2,
+          ignoreUrls: true,
+          ignoreStrings: true,
+          ignoreTemplateLiterals: true,
+        },
+      ],
+      "comma-dangle": ["error", "always-multiline"],
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
