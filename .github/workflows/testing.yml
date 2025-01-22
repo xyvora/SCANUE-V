@@ -17,6 +17,8 @@ env:
   OPENAI_API_KEY: "someKey"
   STACK_NAME: "scanue-v"
   DOMAIN: "127.0.0.1"
+  NEXT_PUBLIC_BACKEND_URL: http://127.0.0.1:3000
+  NEXT_PUBLIC_API_URL: http://backend:8000/api/v1
 jobs:
   docker-backend-build:
     runs-on: ubuntu-latest
@@ -181,6 +183,8 @@ jobs:
           echo OPENAI_API_KEY=${{ env.OPENAI_API_KEY }} >> .env
           echo STACK_NAME=${{ env.STACK_NAME }} >> .env
           echo DOMAIN=${{ env.DOMAIN }} >> .env
+          echo NEXT_PUBLIC_BACKEND_URL=${{ env.NEXT_PUBLIC_BACKEND_URL }} >> .env
+          echo NEXT_PUBLIC_API_URL=${{ env.NEXT_PUBLIC_API_URL }} >> .env
       - name: Start docker containers
         run: just docker-up-backend-ci
       - name: e2e Tests
