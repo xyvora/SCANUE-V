@@ -136,7 +136,7 @@ export function ChatInterfaceClient() {
         <div className="fixed bottom-0 left-0 right-0 p-2 border-t bg-background/95 backdrop-blur-sm sm:p-4">
           <div className="w-full px-2 sm:px-4">
             <form onSubmit={handleSubmit} className="space-y-4" data-testid="chat-form">
-              <div className="flex items-end gap-2">
+              <div className="flex items-center gap-2">
                 <div className="flex-1">
                   <div className="relative">
                     <input

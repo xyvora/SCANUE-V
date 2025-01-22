@@ -10,7 +10,7 @@ export function LoginForm({
 }: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card className="rounded-lg border bg-card/50 backdrop-blur-md text-card-foreground shadow-sm">
+      <Card className="rounded-3xl bg-white/80 shadow-xl backdrop-blur-sm">
         <div className="flex flex-col space-y-1.5 p-6">
           <h1 className="bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text text-4xl font-bold text-transparent sm:text-5xl">
             Welcome to SCANUE-V
