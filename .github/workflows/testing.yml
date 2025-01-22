@@ -17,6 +17,8 @@ env:
   OPENAI_API_KEY: "someKey"
   STACK_NAME: "scanue-v"
   DOMAIN: "127.0.0.1"
+  NEXT_PUBLIC_BACKEND_URL: http://127.0.0.1:3000
+  NEXT_PUBLIC_API_URL: http://127.0.0.1:8000/api/v1
 jobs:
   docker-backend-build:
     runs-on: ubuntu-latest
