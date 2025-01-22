@@ -32,7 +32,7 @@ export default defineConfig({
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        // storageState: "playwright/.auth/user.json",
+        storageState: "playwright/.auth/user.json",
       },
       dependencies: ["setup"],
     },
@@ -41,7 +41,7 @@ export default defineConfig({
       name: "firefox",
       use: {
         ...devices["Desktop Firefox"],
-        // storageState: 'playwright/.auth/user.json',
+        storageState: "playwright/.auth/user.json",
       },
       dependencies: ["setup"],
     },

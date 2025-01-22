@@ -1,0 +1,15 @@
+{
+  "cookies": [
+    {
+      "name": "access_token",
+      "value": "\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzgyNTEwNDgsInN1YiI6IjU1YTI3YThiLTE3NzQtNDI3Ny04MzI0LWMxMzE3NWZmMWFiOCJ9.d1YsMacMUdVkmauMW7TRpfV50geDoxHRta69H7Iurco\"",
+      "domain": "127.0.0.1",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}
