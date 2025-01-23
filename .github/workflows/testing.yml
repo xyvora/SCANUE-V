@@ -10,7 +10,7 @@ env:
   SECRET_KEY: "someKey"
   FIRST_SUPERUSER_EMAIL: "some@email.com"
   FIRST_SUPERUSER_PASSWORD: "somePassword!"
-  POSTGRES_HOST: "db"
+  POSTGRES_HOST: "127.0.0.1"
   POSTGRES_USER: "postgres"
   POSTGRES_PASSWORD: "test_password"
   POSTGRES_DB: "scan"
