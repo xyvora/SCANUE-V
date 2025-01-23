@@ -35,7 +35,7 @@ services:
       - default
 
   backend:
-    image: backend:dev
+    image: scanue-v-backend:dev
     restart: no
     ports:
       - "8000:8000"

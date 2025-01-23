@@ -34,7 +34,7 @@ jobs:
           context: ./backend
           outputs: type=docker,dest=/tmp/scanue-v-backend.tar
           push: false
-          tags: scanue-v-backend:latest
+          tags: scanue-v-backend:dev
       - name: Upload backend container
         uses: actions/upload-artifact@v4
         with:
@@ -55,7 +55,7 @@ jobs:
           context: ./frontend
           outputs: type=docker,dest=/tmp/scanue-v-frontend.tar
           push: false
-          tags: scanue-v-frontend:latest
+          tags: scanue-v-frontend:dev
           build-args: NEXT_PUBLIC_BACKEND_URL=http://frontend:3000, NEXT_PUBLIC_API_URL=http://backend:8000/api/v1
       - name: Upload frontend container
         uses: actions/upload-artifact@v4
