@@ -10,10 +10,12 @@ env:
   SECRET_KEY: "someKey"
   FIRST_SUPERUSER_EMAIL: "some@email.com"
   FIRST_SUPERUSER_PASSWORD: "somePassword!"
-  POSTGRES_HOST: "db"
+  POSTGRES_HOST: "127.0.0.1"
   POSTGRES_USER: "postgres"
   POSTGRES_PASSWORD: "test_password"
   POSTGRES_DB: "scan"
+  VALKEY_HOST: "127.0.0.1"
+  VALKEY_PASSWORD: "test_password"
   OPENAI_API_KEY: "someKey"
   STACK_NAME: "scanue-v"
   DOMAIN: "127.0.0.1"
@@ -181,6 +183,8 @@ jobs:
           echo POSTGRES_USER=${{ env.POSTGRES_USER }} >> .env
           echo POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }} >> .env
           echo POSTGRES_DB=${{ env.POSTGRES_DB }} >> .env
+          echo VALKEY_HOST=${{ env.VALKEY_HOST }} >> .env
+          echo VALKEY_PASSWORD=${{ env.VALKEY_PASSWORD }} >> .env
           echo OPENAI_API_KEY=${{ env.OPENAI_API_KEY }} >> .env
           echo STACK_NAME=${{ env.STACK_NAME }} >> .env
           echo DOMAIN=${{ env.DOMAIN }} >> .env
