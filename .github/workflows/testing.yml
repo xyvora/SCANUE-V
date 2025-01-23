@@ -186,5 +186,7 @@ jobs:
           echo DOMAIN=${{ env.DOMAIN }} >> .env
       - name: Start docker containers
         run: just docker-up-detached
+      - name: Wait for docker startup to complete
+        run: sleep 10s
       - name: e2e Tests
         run: just e2e-test
