@@ -71,6 +71,7 @@ services:
       - traefik.http.routers.${STACK_NAME?Variable not set}-backend-https.middlewares=
 
   frontend:
+    image: scanue-v-frontend:dev
     restart: "no"
     ports:
       - "3000:3000"
