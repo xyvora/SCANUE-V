@@ -172,10 +172,14 @@ jobs:
           cache-dependency-path: ./frontend/package-lock.json
       - name: Install Dependencies
         run: just frontend-install
+      - name: Cache Playwright Browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/frontend/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-playwright-
       - name: Setup playwright
-        run: |
-          npx playwright install
-          npx playwright install chromium firefox --with-deps
+        run: just playwright-install
       - name: Add .env file
         run: |
           echo SECRET_KEY=${{ env.SECRET_KEY }} > .env
