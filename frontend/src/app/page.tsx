@@ -1,7 +1,8 @@
-import Link from "next/link";
-import { Bot, ArrowRight } from "lucide-react";
-import { GradientButton } from "@/components/ui/gradient-button";
 import { WavyBackground } from "@/components/ui/wavy-background";
+import { Bot } from "lucide-react";
+import Link from "next/link";
+import { GradientButton } from "@/components/ui/gradient-button";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (

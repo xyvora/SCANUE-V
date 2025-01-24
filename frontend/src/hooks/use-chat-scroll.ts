@@ -14,9 +14,8 @@ export function useChatScroll({
 }: UseChatScrollOptions) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We need messages dependency to
-  // trigger scroll
-  useEffect(() => {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+      useEffect(() => {
     const scrollElement = scrollRef.current;
     if (!scrollElement || !shouldAutoScroll) return;
 
