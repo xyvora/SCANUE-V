@@ -16,9 +16,10 @@ export const config = {
     /*
      * Apply middleware to all pages except:
      * 1. /api/* (exclude all API routes)
-     * 2. /login (exclude the login page)
-     * 3. /_next/* (exclude Next.js assets, e.g., /_next/static/*)
+     * 2. /_next/* (exclude Next.js assets, e.g., /_next/static/*)
+     * 3. /login (exclude the login page)
+     * 4. /signup (exclude the signup page)
      */
-    "/((?!api|login|_next/static|_next/image).*)",
+    "/((?!api|_next/static|_next/image|login|signup).*)",
   ],
 };
