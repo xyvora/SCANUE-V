@@ -198,3 +198,11 @@ jobs:
         run: just docker-up-detached
       - name: e2e Tests
         run: just e2e-test
+      - name: Upload blob report to GitHub Actions Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: blob-report
+          path: frontend/blob-report
+          include-hidden-files: true
+          retention-days: 1
