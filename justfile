@@ -109,3 +109,7 @@
 @docker-build-frontend:
   cd frontend && \
   docker build -t scanue-v-frontend .
+
+@playwright-install:
+  cd frontend && \
+  npx playwright install chromium firefox --with-deps

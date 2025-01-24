@@ -10,13 +10,16 @@ env:
   SECRET_KEY: "someKey"
   FIRST_SUPERUSER_EMAIL: "some@email.com"
   FIRST_SUPERUSER_PASSWORD: "somePassword!"
-  POSTGRES_HOST: "127.0.0.1"
+  POSTGRES_HOST: "http://db"
   POSTGRES_USER: "postgres"
   POSTGRES_PASSWORD: "test_password"
   POSTGRES_DB: "scan"
+  VALKEY_HOST: "http://valkey"
+  VALKEY_PASSWORD: "test_password"
   OPENAI_API_KEY: "someKey"
   STACK_NAME: "scanue-v"
   DOMAIN: "127.0.0.1"
+  NEXT_PUBLIC_API_URL: http://backend:8000/api/v1
 jobs:
   docker-backend-build:
     runs-on: ubuntu-latest
@@ -32,7 +35,7 @@ jobs:
           context: ./backend
           outputs: type=docker,dest=/tmp/scanue-v-backend.tar
           push: false
-          tags: scanue-v-backend:latest
+          tags: scanue-v-backend:dev
       - name: Upload backend container
         uses: actions/upload-artifact@v4
         with:
@@ -53,7 +56,8 @@ jobs:
           context: ./frontend
           outputs: type=docker,dest=/tmp/scanue-v-frontend.tar
           push: false
-          tags: scanue-v-frontend:latest
+          tags: scanue-v-frontend:dev
+          build-args: NEXT_PUBLIC_API_URL=http://backend:8000/api/v1
       - name: Upload frontend container
         uses: actions/upload-artifact@v4
         with:
@@ -167,8 +171,14 @@ jobs:
           cache-dependency-path: ./frontend/package-lock.json
       - name: Install Dependencies
         run: just frontend-install
+      - name: Cache Playwright Browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/frontend/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-playwright-
       - name: Setup playwright
-        run: npx playwright install --with-deps chromium firefox
+        run: just playwright-install
       - name: Add .env file
         run: |
           echo SECRET_KEY=${{ env.SECRET_KEY }} > .env
@@ -178,10 +188,20 @@ jobs:
           echo POSTGRES_USER=${{ env.POSTGRES_USER }} >> .env
           echo POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }} >> .env
           echo POSTGRES_DB=${{ env.POSTGRES_DB }} >> .env
+          echo VALKEY_HOST=${{ env.VALKEY_HOST }} >> .env
+          echo VALKEY_PASSWORD=${{ env.VALKEY_PASSWORD }} >> .env
           echo OPENAI_API_KEY=${{ env.OPENAI_API_KEY }} >> .env
           echo STACK_NAME=${{ env.STACK_NAME }} >> .env
           echo DOMAIN=${{ env.DOMAIN }} >> .env
       - name: Start docker containers
-        run: just docker-up-backend-ci
+        run: just docker-up-detached
       - name: e2e Tests
         run: just e2e-test
+      - name: Upload blob report to GitHub Actions Artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: blob-report
+          path: frontend/blob-report
+          include-hidden-files: true
+          retention-days: 1
