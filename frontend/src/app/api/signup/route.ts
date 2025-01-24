@@ -1,0 +1,33 @@
+import { NextResponse, NextRequest } from "next/server";
+import { apiUrl } from "@/config/api";
+import type { UserCreate } from "@/app/interfaces/users";
+
+export async function POST(request: NextRequest) {
+  const body = (await request.json()) as UserCreate;
+  console.log(JSON.stringify(body));
+
+  const backendResponse = await fetch(`${apiUrl}/users/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  const responseJson = await backendResponse.json();
+  if (!backendResponse.ok) {
+    return new NextResponse(responseJson.message, {
+      status: backendResponse.status,
+    });
+  }
+
+  const response = new NextResponse(
+    JSON.stringify({ message: "Signup successful" }),
+    {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    },
+  );
+
+  return response;
+}
