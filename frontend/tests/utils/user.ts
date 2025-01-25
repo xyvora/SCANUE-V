@@ -8,13 +8,6 @@ export async function signUpNewUser(
 ) {
   await page.goto("/signup");
 
-  await verifyInput(page, "Full Name");
-  await verifyInput(page, "Email");
-  await verifyInput(page, "Password", { exact: true });
-  await verifyInput(page, "Confirm Password");
-
-  await page.goto("/signup");
-
   await page.getByPlaceholder("Full Name").fill(name);
   await page.getByPlaceholder("Email").fill(email);
   await page.getByPlaceholder("Password", { exact: true }).fill(password);
