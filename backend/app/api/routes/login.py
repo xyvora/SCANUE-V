@@ -38,8 +38,11 @@ async def login_access_token(
     access_token = security.create_access_token(str(user.id), expires_delta=access_token_expires)
 
     response.set_cookie(
-        key="access_token", value=f"Bearer {access_token}", httponly=True
-    )  # set HttpOnly cookie in response
+        key="access_token",
+        value=f"Bearer {access_token}",
+        httponly=True,
+        secure=settings.PRODUCTION_MODE,
+    )
 
     return Token(access_token=access_token)
 
