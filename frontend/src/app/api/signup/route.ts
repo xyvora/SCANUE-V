@@ -4,7 +4,6 @@ import type { UserCreate } from "@/app/interfaces/users";
 
 export async function POST(request: NextRequest) {
   const body = (await request.json()) as UserCreate;
-  console.log(JSON.stringify(body));
 
   const backendResponse = await fetch(`${apiUrl}/users/signup`, {
     method: "POST",

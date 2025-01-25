@@ -51,6 +51,7 @@ class Settings(BaseSettings):
     VALKEY_HOST: str
     VALKEY_PASSWORD: SecretStr
     VALKEY_PORT: int = 6379
+    FRONTEND_HOST: str = "http:/127.0.0.1:3000"
     OPENAI_API_KEY: SecretStr
     DLPFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
     VMPFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
@@ -59,6 +60,13 @@ class Settings(BaseSettings):
     MPFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
     MAX_TOKENS: int = 500
     TEMPERATURE: float = 0.7
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def all_cors_origins(self) -> list[str]:
+        return [str(origin).rstrip("/") for origin in self.BACKEND_CORS_ORIGINS] + [
+            self.FRONTEND_HOST
+        ]
 
     @computed_field  # type: ignore[prop-decorator]
     @property

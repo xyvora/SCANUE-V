@@ -3,3 +3,8 @@ export interface UserCreate {
   fullName: string;
   password: string;
 }
+
+export interface UserUpdateMe {
+  email?: string;
+  fullName?: string;
+}
