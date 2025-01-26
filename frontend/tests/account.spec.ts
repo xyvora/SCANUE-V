@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { firstSuperuser, firstSuperuserPassword } from "./config.ts";
 import { randomEmail, randomPassword } from "./utils/random";
-import { createUser, logInUser, logOutUser } from "./utils/user";
+import { createUser, logInUser } from "./utils/user";
 
 test.describe("Edit user full name and email successfully", () => {
   test.use({ storageState: { cookies: [], origins: [] } });

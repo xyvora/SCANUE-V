@@ -1,6 +1,7 @@
 import { type Page, expect, test } from "@playwright/test";
 import { firstSuperuserEmail, firstSuperuserPassword } from "./config";
-import { randomPassword } from "./utils/random";
+import { randomEmail, randomPassword } from "./utils/random";
+import { createUser, logInUser } from "./utils/user";
 
 test.use({ storageState: { cookies: [], origins: [] } });
 
@@ -39,11 +40,31 @@ test("Log In button is visible", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Log In" })).toBeVisible();
 });
 
-test("Log in with valid email and password ", async ({ page }) => {
+test("Log in with valid email and password", async ({ page }) => {
   await page.goto("/login");
   await fillForm(page, firstSuperuserEmail, firstSuperuserPassword);
   await page.getByRole("button", { name: "Log In" }).click();
   await page.waitForURL("/");
 
   await expect(page.getByText("Welcome to SCANUE-V")).toBeVisible();
+});
+
+test("Log out removes cookie", async ({ page, context }) => {
+  const email = randomEmail();
+  const name = "Test User";
+  const password = randomPassword();
+
+  await createUser(page, email, name, password);
+  await logInUser(page, email, password);
+
+  const cookies = await context.cookies();
+  expect(cookies.some((cookie) => cookie.name === "access_token")).toBe(true);
+
+  await page.goto("/logout");
+  await page.waitForURL("/login");
+
+  const cookiesAfterLogout = await context.cookies();
+  expect(
+    cookiesAfterLogout.some((cookie) => cookie.name === "access_token"),
+  ).toBe(false);
 });

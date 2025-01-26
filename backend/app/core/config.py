@@ -51,7 +51,7 @@ class Settings(BaseSettings):
     VALKEY_HOST: str
     VALKEY_PASSWORD: SecretStr
     VALKEY_PORT: int = 6379
-    FRONTEND_HOST: str = "http:/127.0.0.1:3000"
+    FRONTEND_HOST: str = "http:/localhost:3000"  # next makes you use localhost instead of 127.0.0.1
     OPENAI_API_KEY: SecretStr
     DLPFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
     VMPFC_MODEL: SecretStr = SecretStr("gpt-3.5-turbo")
