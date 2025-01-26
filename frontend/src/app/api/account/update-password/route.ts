@@ -12,7 +12,6 @@ export async function PATCH(request: NextRequest) {
       cookie: cookies || "",
     },
     body: JSON.stringify(body),
-    credentials: "include",
   });
 
   const responseJson = await backendResponse.json();
