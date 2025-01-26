@@ -5,16 +5,18 @@ import { Slot } from "@radix-ui/react-slot";
 
 export interface GradientButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
-  className?: string;
+  variant?: "default" | "outline";
 }
 
 const GradientButton = forwardRef<HTMLButtonElement, GradientButtonProps>(
-  ({ className, asChild = false, ...props }, ref) => {
+  ({ className, variant = "default", asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
         className={cn(
-          "inline-flex items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 px-6 py-3 text-base font-medium text-white shadow-md transition-all duration-200 hover:from-blue-600 hover:to-purple-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+          "inline-flex items-center justify-center rounded-lg px-6 py-3 text-base font-medium shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+          variant === "default" && "bg-gradient-to-br from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 hover:shadow-lg",
+          variant === "outline" && "border border-blue-500 bg-transparent text-blue-500 hover:bg-blue-50",
           className,
         )}
         ref={ref}
