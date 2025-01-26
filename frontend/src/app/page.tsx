@@ -3,8 +3,33 @@ import { Bot } from "lucide-react";
 import Link from "next/link";
 import { GradientButton } from "@/components/ui/gradient-button";
 import { ArrowRight } from "lucide-react";
+import { isLoggedIn } from "@/utils/auth";
 
-export default function Home() {
+export default async function Home() {
+  const loggedIn = await isLoggedIn();
+
+  let button;
+
+  if (loggedIn) {
+    button = (
+      <Link href="/chat" passHref>
+        <GradientButton className="flex items-center justify-center">
+          Start Chatting
+          <ArrowRight className="ml-2" />
+        </GradientButton>
+      </Link>
+    );
+  } else {
+    button = (
+      <Link href="/login" passHref>
+        <GradientButton className="flex items-center justify-center">
+          Log In
+          <ArrowRight className="ml-2" />
+        </GradientButton>
+      </Link>
+    );
+  }
+
   return (
     <WavyBackground
       className="relative"
@@ -27,12 +52,7 @@ export default function Home() {
             different agent types and get the assistance you need.
           </p>
           <div className="flex w-full justify-center">
-            <Link href="/chat" passHref>
-              <GradientButton className="flex items-center justify-center">
-                Start Chatting
-                <ArrowRight className="ml-2" />
-              </GradientButton>
-            </Link>
+            { button }
           </div>
         </div>
       </main>

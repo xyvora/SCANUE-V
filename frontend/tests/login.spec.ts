@@ -21,10 +21,10 @@ const verifyInput = async (
   await expect(input).toBeEditable();
 };
 
-test("Page redirects to /login if not logged in", async ({ page }) => {
+test("Page redirects to / if not logged in", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page).toHaveURL(/.*login/);
+  await expect(page).toHaveURL("/");
 });
 
 test("Inputs are visible, empty and editable", async ({ page }) => {
@@ -61,7 +61,7 @@ test("Log out removes cookie", async ({ page, context }) => {
   expect(cookies.some((cookie) => cookie.name === "access_token")).toBe(true);
 
   await page.goto("/logout");
-  await page.waitForURL("/login");
+  await page.waitForURL("/");
 
   const cookiesAfterLogout = await context.cookies();
   expect(

@@ -23,7 +23,7 @@ export async function createUser(
   await page.getByPlaceholder("Confirm Password").fill(password);
   await page.getByRole("button", { name: "Sign Up" }).click();
 
-  await page.waitForURL("/login");
+  await page.waitForURL("/");
   await expect(page.getByRole("button", { name: "Log In" })).toBeVisible();
 }
 
