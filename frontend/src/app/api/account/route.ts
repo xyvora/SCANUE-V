@@ -40,7 +40,7 @@ export async function PATCH(request: NextRequest) {
 
   const responseJson = await backendResponse.json();
   if (!backendResponse.ok) {
-    return new NextResponse(responseJson.detail, {
+    return new NextResponse(responseJson.message, {
       status: backendResponse.status,
     });
   }

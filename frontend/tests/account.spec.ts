@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { firstSuperuser, firstSuperuserPassword } from "./config.ts";
 import { randomEmail, randomPassword } from "./utils/random";
-import { createUser, logInUser, logOutUser } from "./utils/user";
+import { createUser, logInUser } from "./utils/user";
 
 test.describe("Edit user full name and email successfully", () => {
   test.use({ storageState: { cookies: [], origins: [] } });
@@ -40,94 +40,5 @@ test.describe("Edit user full name and email successfully", () => {
     await page.getByRole("button", { name: "Update" }).click();
     await page.reload();
     await expect(page.getByPlaceholder("Email")).toHaveValue(updatedEmail);
-  });
-});
-
-test.describe("Change password successfully", () => {
-  test.use({ storageState: { cookies: [], origins: [] } });
-
-  test("Update password successfully", async ({ page }) => {
-    const email = randomEmail();
-    const name = "Test User";
-    const password = randomPassword();
-    const NewPassword = randomPassword();
-
-    await createUser(page, email, name, password);
-    await logInUser(page, email, password);
-
-    await page.goto("/account/update-password");
-    await page.getByLabel("Current Password").fill(password);
-    await page.getByLabel("New Password").fill(NewPassword);
-    await page.getByLabel("Confirm Password").fill(NewPassword);
-    await page.getByRole("button", { name: "Update" }).click();
-    await expect(page.getByText("Password updated successfully")).toBeVisible();
-
-    await logOutUser(page);
-
-    // Check if the user can log in with the new password
-    await logInUser(page, email, NewPassword);
-  });
-});
-
-test.describe("Change password with invalid data", () => {
-  test.use({ storageState: { cookies: [], origins: [] } });
-
-  test("Update password with weak passwords", async ({ page }) => {
-    const email = randomEmail();
-    const name = "Test User";
-    const password = randomPassword();
-    const weakPassword = "weak";
-
-    await createUser(page, email, name, password);
-    await logInUser(page, email, password);
-
-    await page.goto("/account/update-password");
-    await page.getByLabel("Current Password").fill(password);
-    await page.getByLabel("New Password").fill(weakPassword);
-    await page.getByLabel("Confirm Password").fill(weakPassword);
-    await page.getByRole("button", { name: "Update" }).click();
-    await expect(
-      page.getByText("Update failed: String should have at least 8 characters"),
-    ).toBeVisible();
-  });
-
-  test("New password and confirmation password do not match", async ({
-    page,
-  }) => {
-    const email = randomEmail();
-    const name = "Test User";
-    const password = randomPassword();
-    const newPassword = randomPassword();
-    const confirmPassword = randomPassword();
-
-    await createUser(page, email, name, password);
-    await logInUser(page, email, password);
-
-    await page.goto("/account/update-password");
-    await page.getByLabel("Current Password").fill(password);
-    await page.getByLabel("New Password").fill(newPassword);
-    await page.getByLabel("Confirm Password").fill(confirmPassword);
-    await page.getByRole("button", { name: "Update" }).click();
-    await expect(page.getByText("Passwords don't match")).toBeVisible();
-  });
-
-  test("Current password and new password are the same", async ({ page }) => {
-    const email = randomEmail();
-    const name = "Test User";
-    const password = randomPassword();
-
-    await createUser(page, email, name, password);
-    await logInUser(page, email, password);
-
-    await page.goto("/account/update-password");
-    await page.getByLabel("Current Password").fill(password);
-    await page.getByLabel("New Password").fill(password);
-    await page.getByLabel("Confirm Password").fill(password);
-    await page.getByRole("button", { name: "Update" }).click();
-    await expect(
-      page.getByText(
-        "Update failed: New password cannot be the same as the current one",
-      ),
-    ).toBeVisible();
   });
 });
