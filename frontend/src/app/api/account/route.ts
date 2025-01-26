@@ -6,7 +6,6 @@ export async function GET(request: NextRequest) {
   const cookies = request.headers.get("cookie");
   const backendResponse = await fetch(`${apiUrl}/users/me`, {
     method: "GET",
-    credentials: "include",
     headers: { cookie: cookies || "" },
   });
 
@@ -35,7 +34,6 @@ export async function PATCH(request: NextRequest) {
       cookie: cookies || "",
     },
     body: JSON.stringify(body),
-    credentials: "include",
   });
 
   const responseJson = await backendResponse.json();

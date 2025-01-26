@@ -15,7 +15,7 @@ const UpdateMe = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch("/api/account", { method: "GET", credentials: "include" });
+        const response = await fetch("/api/account", { method: "GET" });
         if (response.ok) {
           const data: UserUpdateMe = await response.json();
           setEmail(data.email || "");
