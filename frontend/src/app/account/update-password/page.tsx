@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import UpdatePasswordComponent from "@/components/UpdatePassword";
+import UpdatePasswordForm from "@/components/UpdatePassword";
 
 export const metadata: Metadata = {
   title: "SCANUE-V - Update Password",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 const UpdatePassword = () => {
   return (
     <div>
-      <UpdatePasswordComponent />
+      <UpdatePasswordForm />
     </div>
   );
 };
