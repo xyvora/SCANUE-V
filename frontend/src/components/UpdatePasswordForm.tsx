@@ -6,7 +6,7 @@ import { GradientButton } from "@/components/ui/gradient-button";
 import { cn } from "@/utils/ui";
 import type { UpdatePassword as IUpdatePassword } from "@/app/interfaces/users";
 
-export default function UpdatePassword() {
+export default function UpdatePasswordForm() {
   const [result, setResult] = useState<string>("");
 
   useEffect(() => setResult(""), []);
