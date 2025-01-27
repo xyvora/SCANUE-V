@@ -13,8 +13,6 @@ test.describe("Edit user full name and email successfully", () => {
     const password = randomPassword();
 
     await createUser(page, email, name, password);
-
-    // Log in the user
     await logInUser(page, email, password);
 
     await page.goto("/account");
@@ -31,8 +29,6 @@ test.describe("Edit user full name and email successfully", () => {
     const password = randomPassword();
 
     await createUser(page, email, name, password);
-
-    // Log in the user
     await logInUser(page, email, password);
 
     await page.goto("/account");

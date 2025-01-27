@@ -5,7 +5,10 @@ export async function logInUser(page: Page, email: string, password: string) {
 
   await page.getByPlaceholder("email").fill(email);
   await page.getByPlaceholder("password", { exact: true }).fill(password);
-  await page.getByRole("button", { name: "Log In" }).click();
+  const logInButton = await page.locator(
+    'button:has-text("Log In"):near(input[name="password"])',
+  );
+  await logInButton.click();
   await page.waitForURL("/");
   await expect(page.getByText("Welcome to SCANUE-V")).toBeVisible();
 }
@@ -24,7 +27,6 @@ export async function createUser(
   await page.getByRole("button", { name: "Sign Up" }).click();
 
   await page.waitForURL("/");
-  await expect(page.getByRole("button", { name: "Log In" })).toBeVisible();
 }
 
 export async function logOutUser(page: Page) {

@@ -37,13 +37,15 @@ test("Inputs are visible, empty and editable", async ({ page }) => {
 test("Log In button is visible", async ({ page }) => {
   await page.goto("/login");
 
-  await expect(page.getByRole("button", { name: "Log In" })).toBeVisible();
+  await expect(
+    page.locator('button:has-text("Log In"):near(input[name="password"])'),
+  ).toBeVisible();
 });
 
 test("Log in with valid email and password", async ({ page }) => {
   await page.goto("/login");
   await fillForm(page, firstSuperuserEmail, firstSuperuserPassword);
-  await page.getByRole("button", { name: "Log In" }).click();
+  await page.getByRole("button", { name: "Log In" }).nth(1).click();
   await page.waitForURL("/");
 
   await expect(page.getByText("Welcome to SCANUE-V")).toBeVisible();
