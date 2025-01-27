@@ -3,6 +3,74 @@ import { firstSuperuser, firstSuperuserPassword } from "./config.ts";
 import { randomEmail, randomPassword } from "./utils/random";
 import { createUser, logInUser, logOutUser } from "./utils/user";
 
+test("Correct buttons present when account page loads", async ({ page }) => {
+  await page.goto("/account");
+
+  await expect(
+    page.getByRole("button", { name: "Edit", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Edit Password" }),
+  ).toBeVisible();
+});
+
+test("Inputs are visible and correct buttons present when Edit is clicked", async ({
+  page,
+}) => {
+  await page.goto("/account");
+  const editButton = await page.getByRole("button", {
+    name: "Edit",
+    exact: true,
+  });
+  await expect(editButton).toBeVisible();
+  await editButton.click();
+
+  await expect(page.getByPlaceholder("Email")).toBeVisible();
+  await expect(page.getByPlaceholder("Full Name")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Update" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Cancel" })).toBeVisible();
+});
+
+test("Update password navigates to correct page", async ({ page }) => {
+  await page.goto("/account");
+
+  const editPasswordButton = await page.getByRole("button", {
+    name: "Edit Password",
+  });
+  await expect(editPasswordButton).toBeVisible();
+  await editPasswordButton.click();
+  await expect(page).toHaveURL("/account/update-password");
+});
+
+test("Cancel resets values", async ({ page }) => {
+  const email = randomEmail();
+  const updatedEmail = randomEmail();
+  const name = "Test User";
+  const updatedName = "Test User 2";
+  const password = randomPassword();
+
+  await createUser(page, email, name, password);
+  await logInUser(page, email, password);
+
+  await page.goto("/account");
+  const editButton = await page.getByRole("button", {
+    name: "Edit",
+    exact: true,
+  });
+  await expect(editButton).toBeVisible();
+  await editButton.click();
+
+  await page.getByPlaceholder("Email").fill(updatedEmail);
+  await page.getByPlaceholder("Full Name").fill(updatedName);
+  await page.getByRole("button", { name: "Cancel" }).click();
+
+  await expect(editButton).toBeVisible();
+  await editButton.click();
+
+  await expect(page.getByPlaceholder("Email")).toHaveValue(email);
+  await expect(page.getByPlaceholder("Full Name")).toHaveValue(name);
+});
+
 test.describe("Edit user full name and email successfully", () => {
   test.use({ storageState: { cookies: [], origins: [] } });
 
@@ -16,9 +84,19 @@ test.describe("Edit user full name and email successfully", () => {
     await logInUser(page, email, password);
 
     await page.goto("/account");
+    const editButton = await page.getByRole("button", {
+      name: "Edit",
+      exact: true,
+    });
+    await expect(editButton).toBeVisible();
+    await editButton.click();
+
     await page.getByPlaceholder("Full Name").fill(updatedName);
     await page.getByRole("button", { name: "Update" }).click();
-    await page.reload();
+
+    await expect(editButton).toBeVisible();
+    await editButton.click();
+
     await expect(page.getByPlaceholder("Full Name")).toHaveValue(updatedName);
   });
 
@@ -32,9 +110,18 @@ test.describe("Edit user full name and email successfully", () => {
     await logInUser(page, email, password);
 
     await page.goto("/account");
+    const editButton = await page.getByRole("button", {
+      name: "Edit",
+      exact: true,
+    });
+    await expect(editButton).toBeVisible();
+    await editButton.click();
+
     await page.getByPlaceholder("Email").fill(updatedEmail);
     await page.getByRole("button", { name: "Update" }).click();
-    await page.reload();
+
+    await expect(editButton).toBeVisible();
+    await editButton.click();
     await expect(page.getByPlaceholder("Email")).toHaveValue(updatedEmail);
   });
 });
