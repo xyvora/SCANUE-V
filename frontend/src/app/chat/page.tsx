@@ -1,7 +1,17 @@
+import { Metadata } from "next";
 export const dynamic = "force-dynamic";
-
 import { ChatInterfaceClient } from "@/components/ChatInterfaceClient";
 
+export const metadata: Metadata = {
+  title: "SCANUE-V - Chat",
+};
+
 export default function ChatPage() {
-  return <ChatInterfaceClient />;
+  return (
+    <div>
+      <main className="h-screen overflow-hidden">
+        <ChatInterfaceClient />
+      </main>
+    </div>
+  );
 };
