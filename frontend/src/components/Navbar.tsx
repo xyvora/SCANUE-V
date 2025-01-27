@@ -6,7 +6,7 @@ async function buildButtons() {
 
   if (loggedIn) {
     return (
-      <>
+      <div>
         <li>
           <Link href="/account" passHref>
             <button>Profile</button>
@@ -17,7 +17,7 @@ async function buildButtons() {
             <button type="submit">Log Out</button>
           </form>
         </li>
-      </>
+      </div>
     );
   }
 
