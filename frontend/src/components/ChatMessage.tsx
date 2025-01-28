@@ -41,7 +41,7 @@ function ChatMessageComponent({
       aria-label={`Message from ${isUser ? "You" : "Assistant"}`}
     >
       {!isUser && (
-        <Avatar className="flex-shrink-0 w-8 h-8 sm:h-10 sm:w-10">
+        <Avatar className="shrink-0 w-8 h-8 sm:h-10 sm:w-10">
           <AvatarFallback>
             <BotAvatar />
           </AvatarFallback>
@@ -53,7 +53,7 @@ function ChatMessageComponent({
           "max-w-[75%] break-words sm:max-w-[70%]",
           "rounded-2xl p-3",
           messageBgClass,
-          "shadow-sm",
+          "shadow-xs",
           "transition-all duration-200",
         )}
       >
@@ -71,7 +71,7 @@ function ChatMessageComponent({
         </div>
       </div>
       {isUser && (
-        <Avatar className="flex-shrink-0 w-8 h-8 sm:h-10 sm:w-10">
+        <Avatar className="shrink-0 w-8 h-8 sm:h-10 sm:w-10">
           <AvatarFallback>
             <User className="w-5 h-5 text-gray-600" />
           </AvatarFallback>

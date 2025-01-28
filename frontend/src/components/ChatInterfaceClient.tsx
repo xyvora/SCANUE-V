@@ -98,7 +98,7 @@ export function ChatInterfaceClient() {
   return (
     <TooltipProvider>
       <div
-        className="flex flex-col h-screen overflow-hidden text-gray-800 transition-colors duration-300 bg-gradient-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900 dark:text-gray-100"
+        className="flex flex-col h-screen overflow-hidden text-gray-800 transition-colors duration-300 bg-linear-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900 dark:text-gray-100"
         data-testid="chat-interface"
       >
         <header className="sticky top-0 z-10 flex items-center justify-between p-3 transition-colors duration-300 shadow-md rounded-b-2xl bg-white/70 backdrop-blur-md dark:bg-gray-900/70 sm:p-4">
@@ -133,7 +133,7 @@ export function ChatInterfaceClient() {
         <main className="flex-1 overflow-y-auto">
           <ChatContainer messages={messages} onDelete={handleDeleteMessage} />
         </main>
-        <div className="fixed bottom-0 left-0 right-0 p-2 border-t bg-background/95 backdrop-blur-sm sm:p-4">
+        <div className="fixed bottom-0 left-0 right-0 p-2 border-t bg-background/95 backdrop-blur-xs sm:p-4">
           <div className="w-full px-2 sm:px-4">
             <form onSubmit={handleSubmit} className="space-y-4" data-testid="chat-form">
               <div className="flex items-center gap-2">
@@ -148,7 +148,7 @@ export function ChatInterfaceClient() {
                         "w-full rounded-lg p-2 pr-10",
                         "border bg-muted/50 focus:border-primary",
                         "placeholder:text-muted-foreground/70",
-                        "focus:outline-none focus:ring-2 focus:ring-primary/20",
+                        "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
                         "text-base sm:text-lg",
                         "h-10 sm:h-12",
                       )}

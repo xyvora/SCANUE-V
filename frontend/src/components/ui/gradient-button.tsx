@@ -14,8 +14,8 @@ const GradientButton = forwardRef<HTMLButtonElement, GradientButtonProps>(
     return (
       <Comp
         className={cn(
-          "inline-flex items-center justify-center rounded-lg px-6 py-3 text-base font-medium shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
-          variant === "default" && "bg-gradient-to-br from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 hover:shadow-lg",
+          "inline-flex items-center justify-center rounded-lg px-6 py-3 text-base font-medium shadow-md transition-all duration-200 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+          variant === "default" && "bg-linear-to-br from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 hover:shadow-lg",
           variant === "outline" && "border border-blue-500 bg-transparent text-blue-500 hover:bg-blue-50",
           className,
         )}

@@ -1,6 +1,171 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility gradient-bg {
+  @reference bg-linear-to-br from-blue-500 to-purple-600;
+}
+
+@utility gradient-text {
+  @reference bg-linear-to-br from-blue-500 to-purple-600 bg-clip-text text-transparent;
+}
+
+@utility glass-effect {
+  @reference bg-white bg-opacity-80 backdrop-blur-lg backdrop-filter;
+}
+
+@utility interactive-transition {
+  @reference transition-all duration-200 ease-in-out;
+}
+
+@utility nav-icon-transition {
+  @reference transition-all duration-300 ease-in-out;
+}
+
+@utility nav-hover-effect {
+  @reference transform-gpu hover:scale-110 hover:text-blue-500 dark:hover:text-blue-400;
+}
+
+@utility nav-active {
+  @reference gradient-bg text-white shadow-md;
+}
+
+@utility nav-item-base {
+  @reference flex flex-col items-center justify-center rounded-lg p-2;
+  @reference transition-all duration-300 ease-in-out;
+}
+
+@utility glass-morphism {
+  @reference bg-white/70 dark:bg-gray-900/70;
+  @reference backdrop-blur-md backdrop-saturate-[1.5];
+  @reference border border-white/10 dark:border-gray-800/10;
+  @reference shadow-xs shadow-black/5 dark:shadow-white/5;
+  @reference transition-all duration-200;
+}
+
+@utility glass-morphism-heavy {
+  @reference bg-white/80 dark:bg-gray-900/80;
+  @reference backdrop-blur-xl backdrop-saturate-[1.8];
+  @reference border border-white/20 dark:border-gray-800/20;
+  @reference shadow-lg shadow-black/10 dark:shadow-white/10;
+  @reference transition-all duration-200;
+}
+
+@utility chat-container-width {
+  @reference mx-auto w-full max-w-3xl xl:max-w-4xl 2xl:max-w-5xl;
+}
+
+@utility chat-message-padding {
+  @reference px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-5;
+}
+
+@utility chat-text-size {
+  @reference text-sm sm:text-base md:text-base;
+}
+@utility nav-container {
+  @reference fixed left-0 right-0 top-0 z-50 border-b bg-background shadow-xs;
+  @reference transition-transform duration-300 ease-in-out;
+}
+@utility nav-item {
+  @reference flex flex-col items-center gap-1 rounded-lg p-2 transition-colors;
+  @reference hover:bg-accent hover:shadow-md;
+}
+@utility page-enter {
+  animation: fadeIn var(--page-enter-duration) cubic-bezier(0.25, 0.1, 0.25, 1)
+    forwards;
+  will-change: opacity, transform;
+}
+@utility content-enter {
+  animation: slideUp var(--content-enter-duration)
+    cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  animation-delay: var(--content-enter-delay);
+  opacity: 0;
+  will-change: opacity, transform;
+}
 
 @layer base {
   :root {
@@ -88,10 +253,10 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @reference border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @reference bg-background text-foreground;
     margin: 0;
     box-sizing: border-box;
     font-family: "Inter", sans-serif;
@@ -100,112 +265,38 @@
 }
 
 @layer utilities {
-  .gradient-bg {
-    @apply bg-gradient-to-br from-blue-500 to-purple-600;
-  }
-  .gradient-text {
-    @apply bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text text-transparent;
-  }
-  .glass-effect {
-    @apply bg-white bg-opacity-80 backdrop-blur-lg backdrop-filter;
-  }
-  .interactive-transition {
-    @apply transition-all duration-200 ease-in-out;
-  }
-  .nav-icon-transition {
-    @apply transition-all duration-300 ease-in-out;
-  }
-  .nav-hover-effect {
-    @apply transform-gpu hover:scale-110 hover:text-blue-500 dark:hover:text-blue-400;
-  }
-  .nav-active {
-    @apply gradient-bg text-white shadow-md;
-  }
-  .nav-item-base {
-    @apply flex flex-col items-center justify-center rounded-lg p-2;
-    @apply transition-all duration-300 ease-in-out;
-  }
-  .glass-morphism {
-    @apply bg-white/70 dark:bg-gray-900/70;
-    @apply backdrop-blur-md backdrop-saturate-[1.5];
-    @apply border border-white/10 dark:border-gray-800/10;
-    @apply shadow-sm shadow-black/5 dark:shadow-white/5;
-    @apply transition-all duration-200;
-  }
-  .glass-morphism-heavy {
-    @apply bg-white/80 dark:bg-gray-900/80;
-    @apply backdrop-blur-xl backdrop-saturate-[1.8];
-    @apply border border-white/20 dark:border-gray-800/20;
-    @apply shadow-lg shadow-black/10 dark:shadow-white/10;
-    @apply transition-all duration-200;
-  }
-  .chat-container-width {
-    @apply mx-auto w-full max-w-3xl xl:max-w-4xl 2xl:max-w-5xl;
-  }
-  .chat-message-padding {
-    @apply px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-5;
-  }
-  .chat-text-size {
-    @apply text-sm sm:text-base md:text-base;
-  }
-}
-
-/* Global interactive elements */
-button,
-a,
-input {
-  @apply transition-all duration-200 ease-in-out;
-}
-
-.gradient-border-hover {
-  @apply border-2 border-transparent transition-all duration-200 hover:border-blue-500;
-}
-
-.gradient-focus {
-  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
-}
-
-/* Add responsive nav styles */
-@media (max-width: 640px) {
-  body {
-    padding-top: 3.5rem; /* Smaller padding for mobile */
+  /* Global interactive elements */
+  button,
+  a,
+  input {
+    @reference transition-all duration-200 ease-in-out;
   }
 
-  .nav-label {
-    font-size: 0.75rem;
+  .gradient-border-hover {
+    @reference border-2 border-transparent transition-all duration-200 hover:border-blue-500;
   }
 
-  .nav-icon {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-}
-
-/* Navigation styles */
-@layer components {
-  .nav-container {
-    @apply fixed left-0 right-0 top-0 z-50 border-b bg-background shadow-sm;
-    @apply transition-transform duration-300 ease-in-out;
+  .gradient-focus {
+    @reference focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
   }
 
-  .nav-item {
-    @apply flex flex-col items-center gap-1 rounded-lg p-2 transition-colors;
-    @apply hover:bg-accent hover:shadow-md;
+  /* Add responsive nav styles */
+  @media (max-width: 640px) {
+    body {
+      padding-top: 3.5rem; /* Smaller padding for mobile */
+    }
+
+    .nav-label {
+      font-size: 0.75rem;
+    }
+
+    .nav-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
   }
 
-  .page-enter {
-    animation: fadeIn var(--page-enter-duration)
-      cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-    will-change: opacity, transform;
-  }
-
-  .content-enter {
-    animation: slideUp var(--content-enter-duration)
-      cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-    animation-delay: var(--content-enter-delay);
-    opacity: 0;
-    will-change: opacity, transform;
-  }
+  /* Navigation styles */
 }
 
 @keyframes fadeIn {
