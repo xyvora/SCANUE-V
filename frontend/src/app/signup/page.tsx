@@ -1,12 +1,11 @@
 "use client";
 
 import Form from "next/form";
-import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
-
 import { GradientButton } from "@/components/ui/gradient-button";
-import { cn } from "@/utils/ui";
 import { UserCreate } from "@/app/interfaces/users";
+import { cn } from "@/utils/ui";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
   const router = useRouter();

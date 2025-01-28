@@ -15,6 +15,7 @@ const eslintConfig = [
     rules: {
       semi: ["error", "always"],
       quotes: ["error", "double"],
+      "sort-imports": ["error"],
       "max-len": [
         "error",
         {

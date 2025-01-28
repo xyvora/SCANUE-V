@@ -1,10 +1,8 @@
 "use client";
 
+import { type FC, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { type NoiseFunction3D, createNoise3D } from "simplex-noise";
 import { cn } from "@/lib/utils";
-import { useEffect, useRef, useState, useCallback } from "react";
-import type { FC, ReactNode } from "react";
-import { createNoise3D } from "simplex-noise";
-import type { NoiseFunction3D } from "simplex-noise";
 
 interface WavyBackgroundProps {
   children?: ReactNode;

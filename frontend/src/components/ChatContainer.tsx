@@ -1,9 +1,9 @@
 "use client";
 
+import { ChatMessage } from "./ChatMessage";
+import type { Message } from "@/app/interfaces/chat";
 import { cn } from "@/lib/utils";
 import { useChatScroll } from "@/hooks/use-chat-scroll";
-import type { Message } from "@/app/interfaces/chat";
-import { ChatMessage } from "./ChatMessage";
 
 interface ChatContainerProps {
   messages: Message[];
