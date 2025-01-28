@@ -1,9 +1,9 @@
-import * as React from "react";
+import { InputHTMLAttributes, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
-const GradientInput = React.forwardRef<
+const GradientInput = forwardRef<
   HTMLInputElement,
-  React.InputHTMLAttributes<HTMLInputElement>
+  InputHTMLAttributes<HTMLInputElement>
 >(({ className, type, ...props }, ref) => (
   <input
     type={type}
