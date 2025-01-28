@@ -77,7 +77,7 @@ const Signup = () => {
 
   return (
     <div
-      className="flex flex-col h-screen overflow-hidden text-gray-800 transition-colors duration-300 bg-gradient-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900 dark:text-gray-100 items-center "
+      className="flex flex-col h-screen overflow-hidden text-gray-800 transition-colors duration-300 bg-linear-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900 dark:text-gray-100 items-center "
     >
       <main className="flex-1 overflow-y-auto mt-5">
         <h2 className="text-lg font-semibold xs:text-xl gradient-text sm:text-2xl">Sign Up</h2>
@@ -91,7 +91,7 @@ const Signup = () => {
               "w-full rounded-lg p-2 pr-10",
               "border bg-muted/50 focus:border-primary",
               "placeholder:text-muted-foreground/70",
-              "focus:outline-none focus:ring-2 focus:ring-primary/20",
+              "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
               "text-base sm:text-lg",
               "h-10 sm:h-12",
               "mt-5",
@@ -106,7 +106,7 @@ const Signup = () => {
               "w-full rounded-lg p-2 pr-10",
               "border bg-muted/50 focus:border-primary",
               "placeholder:text-muted-foreground/70",
-              "focus:outline-none focus:ring-2 focus:ring-primary/20",
+              "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
               "text-base sm:text-lg",
               "h-10 sm:h-12",
               "mt-5",
@@ -121,7 +121,7 @@ const Signup = () => {
               "w-full rounded-lg p-2 pr-10",
               "border bg-muted/50 focus:border-primary",
               "placeholder:text-muted-foreground/70",
-              "focus:outline-none focus:ring-2 focus:ring-primary/20",
+              "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
               "text-base sm:text-lg",
               "h-10 sm:h-12",
               "mt-5",
@@ -136,7 +136,7 @@ const Signup = () => {
               "w-full rounded-lg p-2 pr-10",
               "border bg-muted/50 focus:border-primary",
               "placeholder:text-muted-foreground/70",
-              "focus:outline-none focus:ring-2 focus:ring-primary/20",
+              "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
               "text-base sm:text-lg",
               "h-10 sm:h-12",
               "mt-5",

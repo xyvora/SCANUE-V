@@ -90,6 +90,9 @@
 @docker-up-backend-dev:
   docker compose up db valkey
 
+@docker-up-backend:
+  docker compose up db valkey backend
+
 @docker-up-detached:
   docker compose up -d
 
