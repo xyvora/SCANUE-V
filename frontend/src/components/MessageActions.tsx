@@ -1,16 +1,16 @@
 "use client";
 
-import { memo } from "react";
-import { MoreVertical, Trash } from "lucide-react";
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { MoreVertical, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Message } from "@/app/interfaces/chat";
 import { cn } from "@/utils/ui";
+import { memo } from "react";
 
 interface MessageActionsProps {
   message: Message;

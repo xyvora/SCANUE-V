@@ -1,6 +1,6 @@
-import { NextResponse, NextRequest } from "next/server";
-import { apiUrl } from "@/config/api";
+import { NextRequest, NextResponse } from "next/server";
 import type { UpdatePassword } from "@/app/interfaces/users";
+import { apiUrl } from "@/config/api";
 
 export async function PATCH(request: NextRequest) {
   const cookies = request.headers.get("cookie");

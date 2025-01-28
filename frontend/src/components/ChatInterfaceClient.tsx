@@ -1,16 +1,16 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
-import { Menu, Brain, Globe, Send } from "lucide-react";
+import type { AgentType, Message, SubmitEvent } from "@/app/interfaces/chat";
+import { Brain, Globe, Menu, Send } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { CHAT_CONSTANTS } from "@/constants/chat";
 import { ChatContainer } from "./ChatContainer";
+import { ChatService } from "@/services/ChatService";
+import { GradientButton } from "@/components/ui/gradient-button";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/utils/ui";
 import { v4 as uuidv4 } from "uuid";
-import { ChatService } from "@/services/ChatService";
-import { CHAT_CONSTANTS } from "@/constants/chat";
-import type { Message, AgentType, SubmitEvent } from "@/app/interfaces/chat";
-import { GradientButton } from "@/components/ui/gradient-button";
 
 export function ChatInterfaceClient() {
   const chatService = new ChatService();

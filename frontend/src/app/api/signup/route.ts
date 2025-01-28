@@ -1,6 +1,6 @@
-import { NextResponse, NextRequest } from "next/server";
-import { apiUrl } from "@/config/api";
+import { NextRequest, NextResponse } from "next/server";
 import type { UserCreate } from "@/app/interfaces/users";
+import { apiUrl } from "@/config/api";
 
 export async function POST(request: NextRequest) {
   const body = (await request.json()) as UserCreate;

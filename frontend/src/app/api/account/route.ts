@@ -1,6 +1,6 @@
-import { NextResponse, NextRequest } from "next/server";
-import { apiUrl } from "@/config/api";
+import { NextRequest, NextResponse } from "next/server";
 import type { UserUpdateMe } from "@/app/interfaces/users";
+import { apiUrl } from "@/config/api";
 
 export async function GET(request: NextRequest) {
   const cookies = request.headers.get("cookie");

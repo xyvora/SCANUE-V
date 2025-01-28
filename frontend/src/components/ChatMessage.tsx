@@ -1,13 +1,13 @@
 "use client";
 
-import { memo } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { BotAvatar } from "./BotAvatar";
+import type { Message } from "@/app/interfaces/chat";
+import { MessageActions } from "./MessageActions";
 import { User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatMessageTime } from "@/lib/date-utils";
-import type { Message } from "@/app/interfaces/chat";
-import { MessageActions } from "./MessageActions";
+import { memo } from "react";
 
 interface ChatMessageProps {
   message: Message;

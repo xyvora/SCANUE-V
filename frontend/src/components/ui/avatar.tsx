@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@/utils/ui";
 import type { ReactNode } from "react";
+import { cn } from "@/utils/ui";
 
 interface AvatarProps {
   children: ReactNode;

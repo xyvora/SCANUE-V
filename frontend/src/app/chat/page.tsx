@@ -1,6 +1,7 @@
-import { Metadata } from "next";
-export const dynamic = "force-dynamic";
 import { ChatInterfaceClient } from "@/components/ChatInterfaceClient";
+import { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "SCANUE-V - Chat",

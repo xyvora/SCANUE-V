@@ -1,10 +1,10 @@
 "use client";
 
-import Form from "next/form";
 import { FormEvent, useEffect, useState } from "react";
+import Form from "next/form";
 import { GradientButton } from "@/components/ui/gradient-button";
-import { cn } from "@/utils/ui";
 import type { UpdatePassword as IUpdatePassword } from "@/app/interfaces/users";
+import { cn } from "@/utils/ui";
 
 export default function UpdatePasswordForm() {
   const [result, setResult] = useState<string>("");
