@@ -9,7 +9,7 @@ import { cn } from "@/utils/ui";
 import { v4 as uuidv4 } from "uuid";
 import { ChatService } from "@/services/ChatService";
 import { CHAT_CONSTANTS } from "@/constants/chat";
-import type { Message, AgentType, SubmitEvent } from "@/types/chat";
+import type { Message, AgentType, SubmitEvent } from "@/app/interfaces/chat";
 import { GradientButton } from "@/components/ui/gradient-button";
 
 export function ChatInterfaceClient() {

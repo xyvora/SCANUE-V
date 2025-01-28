@@ -6,7 +6,7 @@ import { BotAvatar } from "./BotAvatar";
 import { User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatMessageTime } from "@/lib/date-utils";
-import type { Message } from "@/types/chat";
+import type { Message } from "@/app/interfaces/chat";
 import { MessageActions } from "./MessageActions";
 
 interface ChatMessageProps {

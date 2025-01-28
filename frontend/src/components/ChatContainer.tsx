@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { useChatScroll } from "@/hooks/use-chat-scroll";
-import type { Message } from "@/types/chat";
+import type { Message } from "@/app/interfaces/chat";
 import { ChatMessage } from "./ChatMessage";
 
 interface ChatContainerProps {

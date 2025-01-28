@@ -1,4 +1,4 @@
-import type { Message, AgentType } from "@/types/chat";
+import type { Message, AgentType } from "@/app/interfaces/chat";
 
 interface ChatResponse {
   message: string;

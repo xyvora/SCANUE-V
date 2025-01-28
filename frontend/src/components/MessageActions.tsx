@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import type { Message } from "@/types/chat";
+import type { Message } from "@/app/interfaces/chat";
 import { cn } from "@/utils/ui";
 
 interface MessageActionsProps {
