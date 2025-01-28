@@ -11,12 +11,12 @@ from app.core.config import settings
 from app.core.utils import APIRouter
 from app.models.agents import AgentState, Topic
 
-router = APIRouter(tags=["SCAN"], prefix=f"{settings.API_V1_PREFIX}/scan")
+router = APIRouter(tags=["Chat"], prefix=f"{settings.API_V1_PREFIX}/chat")
 
 
 @router.post("/")
 async def ask_question(*, topic: Topic, cache_client: CacheClient, user: CurrentUser) -> AgentState:
-    """Ask SCAN for help with a questions."""
+    """Ask for help with a questions."""
 
     cache = await cache_client.get(name=f"{user.id}-agent-state")  # type: ignore[misc]
     initial_state = (
