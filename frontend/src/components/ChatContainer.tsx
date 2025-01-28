@@ -1,6 +1,6 @@
 "use client";
 
-import { ChatMessage } from "./ChatMessage";
+import { ChatMessage } from "@/components/ChatMessage";
 import type { Message } from "@/app/interfaces/chat";
 import { cn } from "@/lib/utils";
 import { useChatScroll } from "@/hooks/use-chat-scroll";
