@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import type { Message } from "@/types/chat";
+import type { Message } from "@/app/interfaces/chat";
 
 interface UseChatScrollOptions {
   messages: Message[];
@@ -15,7 +15,7 @@ export function useChatScroll({
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-      useEffect(() => {
+  useEffect(() => {
     const scrollElement = scrollRef.current;
     if (!scrollElement || !shouldAutoScroll) return;
 
