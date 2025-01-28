@@ -8,6 +8,11 @@ async function buildButtons() {
     return (
       <div>
         <li>
+          <Link href="/chat" passHref>
+            <button>Chat</button>
+          </Link>
+        </li>
+        <li>
           <Link href="/account" passHref>
             <button>Profile</button>
           </Link>
