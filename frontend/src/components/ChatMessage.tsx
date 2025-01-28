@@ -1,9 +1,9 @@
 "use client";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { BotAvatar } from "./BotAvatar";
+import { BotAvatar } from "@/components/BotAvatar";
 import type { Message } from "@/app/interfaces/chat";
-import { MessageActions } from "./MessageActions";
+import { MessageActions } from "@/components/MessageActions";
 import { User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatMessageTime } from "@/lib/date-utils";
