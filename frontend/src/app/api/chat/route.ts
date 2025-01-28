@@ -1,9 +1,9 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { Topic } from "@/app/interfaces/chat";
 import { apiUrl } from "@/config/api";
 
 export async function POST(request: NextRequest) {
+  const cookies = request.headers.get("cookie");
   let topic: string | undefined;
 
   try {
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        headers: { cookie: cookies || "" },
+        cookie: cookies || "",
       },
       body: JSON.stringify({ topic }),
     });
