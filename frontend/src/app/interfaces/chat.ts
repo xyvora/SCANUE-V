@@ -12,8 +12,11 @@ export interface Message {
   timestamp: string;
 }
 
-export type AgentType = "PFC" | "General";
+export interface Topic {
+  topic: string;
+}
 
+export type AgentType = "PFC" | "General";
 export type FormSubmitEvent = React.FormEvent<HTMLFormElement>;
 export type KeyboardSubmitEvent = React.KeyboardEvent<HTMLInputElement>;
 export type SubmitEvent = FormSubmitEvent | KeyboardSubmitEvent;

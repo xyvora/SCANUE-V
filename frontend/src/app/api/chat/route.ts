@@ -2,57 +2,42 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { apiUrl } from "@/config/api";
 
-// Exact match to backend Topic model
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface BackendTopic {
-  topic: string;
-}
-
 export async function POST(request: NextRequest) {
-  // Declare topicInput outside the try block to ensure it's accessible in the catch block
-  let topicInput: string | undefined;
+  const cookies = request.headers.get("cookie");
+  let topic: string | undefined;
 
   try {
-    // Parse request body
     const rawBody = await request.json();
 
-    // Validate topic input before making the backend request
-    topicInput = rawBody.topic;
-    if (!topicInput || typeof topicInput !== "string") {
+    topic = rawBody.topic;
+    if (!topic || typeof topic !== "string") {
       return NextResponse.json(
         { error: "A valid topic string is required" },
-        { status: 422 }, // Unprocessable Entity, more semantically correct
+        { status: 422 },
       );
     }
 
-    // Prepare backend request (ensure trailing slash matches FastAPI route)
-    const backendResponse = await fetch(`${apiUrl}/scan/`, {
+    const backendResponse = await fetch(`${apiUrl}/chat/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // TODO: Implement proper authentication as required
-        // 'Authorization': `Bearer ${authToken}`,
+        cookie: cookies || "",
       },
-      body: JSON.stringify({ topic: topicInput }),
+      body: JSON.stringify({ topic }),
     });
 
-    // Handle backend response dynamically
+    const responseJson = await backendResponse.json();
     if (!backendResponse.ok) {
-      const errorData = await backendResponse.json();
-      return NextResponse.json(
-        {
-          error: errorData.detail || "Failed to process scan request",
-          status: backendResponse.status,
-        },
-        { status: backendResponse.status },
-      );
+      return new NextResponse(responseJson.message, {
+        status: backendResponse.status,
+      });
     }
 
-    // Parse dynamic backend response
-    const responseData = await backendResponse.json();
-    return NextResponse.json(responseData);
+    return new NextResponse(JSON.stringify(responseJson), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (fetchError) {
-    console.error("Scan API error:", fetchError);
     return NextResponse.json(
       {
         error: "Failed to connect to backend service",
@@ -60,8 +45,7 @@ export async function POST(request: NextRequest) {
           fetchError instanceof Error
             ? fetchError.message
             : "Unknown network error",
-        originalTopic: topicInput, // Use the declared topicInput
-        status: 503,
+        topic,
       },
       { status: 503 },
     );
