@@ -69,7 +69,6 @@ export function ChatInterfaceClient() {
         setMessages((prev) => [...prev, newMessage]);
         setInput("");
 
-        inputRef.current?.focus();
         const response = await chatServiceRef.current.sendMessage(newMessage.content, agentType);
         setMessages((prev) => [...prev, response]);
       } catch (error) {
