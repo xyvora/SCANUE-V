@@ -3,6 +3,8 @@ import { firstSuperuser, firstSuperuserPassword } from "./config.ts";
 import { randomEmail, randomPassword } from "./utils/random";
 import { createUser, logInUser, logOutUser } from "./utils/user";
 
+test.use({ storageState: { cookies: [], origins: [] } });
+
 test("Error message displayed when not chat message is entered", async ({
   page,
 }) => {
