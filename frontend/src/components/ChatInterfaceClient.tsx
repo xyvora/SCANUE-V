@@ -21,7 +21,6 @@ export function ChatInterfaceClient() {
   const [isTyping, setIsTyping] = useState(false);
   const [agentType, setAgentType] = useState<AgentType>("PFC");
   const [error, setError] = useState<string | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setMessages([
@@ -40,10 +39,6 @@ export function ChatInterfaceClient() {
       return () => clearTimeout(timeout);
     }
   }, [error]);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
 
   useEffect(() => {
     if (messages.length > chatServiceRef.current.MAX_MESSAGES) {
@@ -74,6 +69,7 @@ export function ChatInterfaceClient() {
         setMessages((prev) => [...prev, newMessage]);
         setInput("");
 
+        inputRef.current?.focus();
         const response = await chatServiceRef.current.sendMessage(newMessage.content, agentType);
         setMessages((prev) => [...prev, response]);
       } catch (error) {
@@ -81,6 +77,8 @@ export function ChatInterfaceClient() {
       } finally {
         setIsTyping(false);
       }
+
+      document.getElementById("txtChat")?.focus();
     },
     [input, agentType],
   );
@@ -140,8 +138,10 @@ export function ChatInterfaceClient() {
                   <div className="relative">
                     <input
                       type="text"
+                      autoFocus
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
+                      name="txtChat"
                       placeholder={`Message ${agentType} agent...`}
                       className={cn(
                         "w-full rounded-lg p-2 pr-10",
