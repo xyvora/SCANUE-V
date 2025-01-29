@@ -5,6 +5,7 @@ import { Brain, Globe, Menu, Send } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChatContainer } from "@/components/ChatContainer";
 import { ChatService } from "@/services/ChatService";
+import ErrorMessage from "@/components/ErrorMessage";
 import { GradientButton } from "@/components/ui/gradient-button";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -54,9 +55,7 @@ export function ChatInterfaceClient() {
       e.preventDefault();
 
       if (!input.trim()) {
-        console.log("here");
         setError("Please enter a message");
-        console.log(error);
         return;
       }
 
@@ -177,7 +176,7 @@ export function ChatInterfaceClient() {
               </div>
             </form>
           </div>
-          {error && <div className="text-red-500">{error}</div>}
+          <ErrorMessage error={error} />
         </div>
       </div>
     </TooltipProvider>
