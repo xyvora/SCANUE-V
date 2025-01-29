@@ -3,7 +3,6 @@
 import type { AgentType, Message, SubmitEvent } from "@/app/interfaces/chat";
 import { Brain, Globe, Menu, Send } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { CHAT_CONSTANTS } from "@/constants/chat";
 import { ChatContainer } from "@/components/ChatContainer";
 import { ChatService } from "@/services/ChatService";
 import { GradientButton } from "@/components/ui/gradient-button";
@@ -20,7 +19,7 @@ export function ChatInterfaceClient() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [agentType, setAgentType] = useState<AgentType>(CHAT_CONSTANTS.DEFAULT_AGENT as AgentType);
+  const [agentType, setAgentType] = useState<AgentType>("PFC");
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
