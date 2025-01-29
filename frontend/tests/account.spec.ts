@@ -3,7 +3,17 @@ import { firstSuperuser, firstSuperuserPassword } from "./config.ts";
 import { randomEmail, randomPassword } from "./utils/random";
 import { createUser, logInUser, logOutUser } from "./utils/user";
 
+test.use({ storageState: { cookies: [], origins: [] } });
+
 test("Correct buttons present when account page loads", async ({ page }) => {
+  const email = randomEmail();
+  const updatedEmail = randomEmail();
+  const name = "Test User";
+  const password = randomPassword();
+
+  await createUser(page, email, name, password);
+  await logInUser(page, email, password);
+
   await page.goto("/account");
 
   await expect(
@@ -17,6 +27,14 @@ test("Correct buttons present when account page loads", async ({ page }) => {
 test("Inputs are visible and correct buttons present when Edit is clicked", async ({
   page,
 }) => {
+  const email = randomEmail();
+  const updatedEmail = randomEmail();
+  const name = "Test User";
+  const password = randomPassword();
+
+  await createUser(page, email, name, password);
+  await logInUser(page, email, password);
+
   await page.goto("/account");
   const editButton = await page.getByRole("button", {
     name: "Edit",
@@ -32,6 +50,14 @@ test("Inputs are visible and correct buttons present when Edit is clicked", asyn
 });
 
 test("Update password navigates to correct page", async ({ page }) => {
+  const email = randomEmail();
+  const updatedEmail = randomEmail();
+  const name = "Test User";
+  const password = randomPassword();
+
+  await createUser(page, email, name, password);
+  await logInUser(page, email, password);
+
   await page.goto("/account");
 
   const editPasswordButton = await page.getByRole("button", {
