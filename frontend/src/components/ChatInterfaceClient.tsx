@@ -35,8 +35,11 @@ export function ChatInterfaceClient() {
 
   useEffect(() => {
     if (error) {
-      const timeout = setTimeout(() => setError(null), 5000);
-      return () => clearTimeout(timeout);
+      const timer = setTimeout(() => {
+        setError(null);
+      }, 5000);
+
+      return () => clearTimeout(timer);
     }
   }, [error]);
 
@@ -51,7 +54,9 @@ export function ChatInterfaceClient() {
       e.preventDefault();
 
       if (!input.trim()) {
+        console.log("here");
         setError("Please enter a message");
+        console.log(error);
         return;
       }
 
@@ -79,7 +84,7 @@ export function ChatInterfaceClient() {
 
       document.getElementById("txtChat")?.focus();
     },
-    [input, agentType],
+    [agentType, error, input],
   );
 
   const handleAgentChange = useCallback((type: AgentType) => {
@@ -164,7 +169,7 @@ export function ChatInterfaceClient() {
                   <GradientButton
                     className="w-12 h-12 sm:w-14 sm:h-14"
                     type="submit"
-                    data-testid="chat-submit"
+                    id="chatSubmit"
                   >
                     <Send className="w-5 h-5 sm:h-6 sm:w-6" />
                   </GradientButton>
@@ -172,9 +177,8 @@ export function ChatInterfaceClient() {
               </div>
             </form>
           </div>
+          {error && <div className="text-red-500">{error}</div>}
         </div>
-        <div className="h-[60px] sm:h-[72px]" /> {/* Spacer to prevent overlap */}
-        {error && <div className="text-red-500">{error}</div>}
       </div>
     </TooltipProvider>
   );
