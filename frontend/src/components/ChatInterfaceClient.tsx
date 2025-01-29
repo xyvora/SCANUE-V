@@ -83,7 +83,7 @@ export function ChatInterfaceClient() {
 
       document.getElementById("txtChat")?.focus();
     },
-    [agentType, error, input],
+    [agentType, input],
   );
 
   const handleAgentChange = useCallback((type: AgentType) => {
