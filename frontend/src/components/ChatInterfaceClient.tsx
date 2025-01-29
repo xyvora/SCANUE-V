@@ -169,7 +169,7 @@ export function ChatInterfaceClient() {
                   <GradientButton
                     className="w-12 h-12 sm:w-14 sm:h-14"
                     type="submit"
-                    data-testid="chat-submit"
+                    id="chatSubmit"
                   >
                     <Send className="w-5 h-5 sm:h-6 sm:w-6" />
                   </GradientButton>
