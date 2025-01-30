@@ -70,3 +70,10 @@ test("Log out removes cookie", async ({ page, context }) => {
     cookiesAfterLogout.some((cookie) => cookie.name === "access_token"),
   ).toBe(false);
 });
+
+test("Submitting no values shows error", async ({ page }) => {
+  await page.goto("/login");
+  await page.getByRole("button", { name: "Log In" }).nth(1).click();
+
+  await expect(page.getByText("Email and password are required")).toBeVisible();
+});
