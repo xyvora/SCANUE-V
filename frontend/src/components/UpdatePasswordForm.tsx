@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import ErrorMessage from "@/components/ErrorMessage";
 import Form from "next/form";
 import { GradientButton } from "@/components/ui/gradient-button";
 import type { UpdatePassword as IUpdatePassword } from "@/app/interfaces/users";
@@ -8,8 +9,18 @@ import { cn } from "@/utils/ui";
 
 export default function UpdatePasswordForm() {
   const [result, setResult] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => setResult(""), []);
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(null);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,24 +29,24 @@ export default function UpdatePasswordForm() {
 
     const currentPassword = formData.get("currentPassword") as string | null;
     if (currentPassword === null) {
-      setResult("Current password is required");
+      setError("Current password is required");
       return;
     }
 
     const newPassword = formData.get("newPassword") as string | null;
     if (newPassword === null) {
-      setResult("New password is required");
+      setError("New password is required");
       return;
     }
 
     const confirmPassword = formData.get("confirmPassword") as string | null;
     if (confirmPassword === null) {
-      setResult("confirm password is required");
+      setError("Confirm password is required");
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      setResult("Passwords don't match");
+      setError("Passwords don't match");
       return;
     }
 
@@ -55,14 +66,14 @@ export default function UpdatePasswordForm() {
 
       if (!response.ok) {
         const errorText = await response.text();
-        setResult(`Update failed: ${ errorText }`);
+        setError(`Update failed: ${ errorText }`);
         return;
       }
 
       const responseJson = await response.json();
       setResult(responseJson.message);
     } catch {
-      setResult("Error updating password");
+      setError("Error updating password");
       return;
     }
   };
@@ -122,6 +133,7 @@ export default function UpdatePasswordForm() {
           <GradientButton className="flex items-center justify-center mt-5">
             Update
           </GradientButton>
+          <ErrorMessage error={error} />
         </Form>
 
         { result && <div className="text-center mt-5">{result}</div> }
