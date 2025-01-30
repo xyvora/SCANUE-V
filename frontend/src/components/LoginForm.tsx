@@ -1,20 +1,41 @@
 "use client";
 
+import { FormEvent, useEffect, useState } from "react";
+import ErrorMessage from "@/components/ErrorMessage";
 import Form from "next/form";
-import { FormEvent } from "react";
 import { GradientButton } from "@/components/ui/gradient-button";
 import { cn } from "@/utils/ui";
 import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(null);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    if (!email || !password) {
+      setError("Email and password are required");
+      return;
+    }
+
     const body = new URLSearchParams();
-    body.append("username", formData.get("email") as string);
-    body.append("password", formData.get("password") as string);
+    body.append("username", email);
+    body.append("password", password);
 
     try {
       const response = await fetch("/api/login", {
@@ -28,10 +49,10 @@ export default function LoginForm() {
         router.push("/");
       } else {
         const errorText = await response.text();
-        console.error("Login failed:", errorText);
+        setError(`Login failed: ${ errorText }`);
       }
-    } catch (error) {
-      console.error("Error submitting login form:", error);
+    } catch (_) {
+      setError("Error submitting login form");
     }
   };
 
@@ -75,6 +96,7 @@ export default function LoginForm() {
           <GradientButton className="flex items-center justify-center mt-5">
             Log In
           </GradientButton>
+          <ErrorMessage error={error} />
         </Form>
       </main>
     </div>
