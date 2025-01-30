@@ -97,6 +97,31 @@ test("Cancel resets values", async ({ page }) => {
   await expect(page.getByPlaceholder("Full Name")).toHaveValue(name);
 });
 
+test("Submitting no values shows error", async ({ page }) => {
+  const email = randomEmail();
+  const updatedEmail = randomEmail();
+  const name = "Test User";
+  const password = randomPassword();
+
+  await createUser(page, email, name, password);
+  await logInUser(page, email, password);
+
+  await page.goto("/account");
+  const editButton = await page.getByRole("button", {
+    name: "Edit",
+    exact: true,
+  });
+  await expect(editButton).toBeVisible();
+  await editButton.click();
+
+  await page.getByPlaceholder("Email").fill("");
+  await page.getByPlaceholder("Full Name").fill("");
+  await page.getByRole("button", { name: "Update" }).click();
+  await expect(
+    page.getByText("Email and Full Name are both empty, nothing to update"),
+  ).toBeVisible();
+});
+
 test.describe("Edit user full name and email successfully", () => {
   test.use({ storageState: { cookies: [], origins: [] } });
 
