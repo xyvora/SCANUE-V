@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import ErrorMessage from "@/components/ErrorMessage";
 import Form from "next/form";
 import { GradientButton } from "@/components/ui/gradient-button";
 import { UserUpdateMe } from "@/app/interfaces/users";
@@ -14,6 +15,7 @@ export default function LoginForm() {
   const [originalData, setOriginalData] = useState<UserUpdateMe | null>(null);
   const [editing, setEditing] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -25,10 +27,11 @@ export default function LoginForm() {
           setFullName(data.fullName || "");
           setOriginalData(data);
         } else {
-          console.error("Failed to fetch user data:", await response.text());
+          const responseText = await response.text();
+          setError(`Failed to fetch user data:, ${ responseText }`);
         }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
+      } catch (_) {
+        setError("Error fetching user data");
       } finally {
         setLoading(false);
       }
@@ -37,15 +40,29 @@ export default function LoginForm() {
     fetchUserData();
   }, []);
 
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(null);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!email && !fullName) {
+      setError("Email and Full Name are both empty, nothing to update");
+      return;
+    }
 
     const user: UserUpdateMe = {
       email,
       fullName,
     };
 
-    // TODO: Replace console logs with error messages once those are setup.
     try {
       const response = await fetch("/api/account", {
         method: "PATCH",
@@ -58,11 +75,11 @@ export default function LoginForm() {
         setOriginalData(user);
         setEditing(false);
       } else {
-        const errorText = await response.text();
-        console.error("Update failed:", errorText);
+        const errorText = await response.statusText;
+        setError(`Update failed: ${ errorText }`);
       }
-    } catch (error) {
-      console.error("Error submitting user update form:", error);
+    } catch (_) {
+      setError("Error submitting user update form");
     }
   };
 
@@ -130,6 +147,7 @@ export default function LoginForm() {
             >
               Cancel
             </GradientButton>
+            <ErrorMessage error={error} />
           </Form>
         </main>
       </div>
