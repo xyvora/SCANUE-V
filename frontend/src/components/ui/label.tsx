@@ -1,3 +1,4 @@
+// biome-ignore lint/style/useImportType: <explanation>
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
 import { type VariantProps, cva } from "class-variance-authority";
 import { Root } from "@radix-ui/react-label";

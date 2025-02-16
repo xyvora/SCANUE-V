@@ -1,4 +1,5 @@
 import { ChatInterfaceClient } from "@/components/ChatInterfaceClient";
+// biome-ignore lint/style/useImportType: <explanation>
 import { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
