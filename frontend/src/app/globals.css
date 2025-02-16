@@ -324,3 +324,14 @@
     opacity: 1 !important;
   }
 }
+
+.gradient-text {
+  @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+}
+
+.glass-morphism-heavy {
+  @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl backdrop-saturate-[1.8];
+  @apply border border-white/20 dark:border-gray-800/20;
+  @apply shadow-lg shadow-black/10 dark:shadow-white/10;
+  @apply transition-all duration-200;
+}
