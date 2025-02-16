@@ -1,11 +1,12 @@
+/* eslint-disable sort-imports */
 "use client";
 
+// biome-ignore lint/style/useImportType: <explanation>
 import { FormEvent, useEffect, useState } from "react";
-import ErrorMessage from "@/components/ErrorMessage";
-import Form from "next/form";
-import { GradientButton } from "@/components/ui/gradient-button";
-import { cn } from "@/utils/ui";
 import { useRouter } from "next/navigation";
+import ErrorMessage from "@/components/ErrorMessage";
+import { GradientButton } from "@/components/ui/gradient-button";
+import { GradientInput } from "@/components/ui/gradient-input";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -49,7 +50,7 @@ export default function LoginForm() {
         router.push("/");
       } else {
         const errorText = await response.text();
-        setError(`Login failed: ${ errorText }`);
+        setError(`Login failed: ${errorText}`);
       }
     } catch (_) {
       setError("Error submitting login form");
@@ -57,48 +58,40 @@ export default function LoginForm() {
   };
 
   return (
-    <div
-      className="flex flex-col h-screen overflow-hidden text-gray-800 transition-colors duration-300 bg-linear-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900 dark:text-gray-100 items-center "
-    >
-      <main className="flex-1 overflow-y-auto mt-5">
-        <h2 className="text-lg font-semibold xs:text-xl gradient-text sm:text-2xl">login</h2>
-        <Form onSubmit={handleSubmit} action="/api/login" className="space-y-4">
-          <input
-            type="email"
-            placeholder={"email"}
-            name="email"
-            aria-label={"email"}
-            className={cn(
-              "w-full rounded-lg p-2 pr-10",
-              "border bg-muted/50 focus:border-primary",
-              "placeholder:text-muted-foreground/70",
-              "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
-              "text-base sm:text-lg",
-              "h-10 sm:h-12",
-              "mt-5",
-            )}
-          />
-          <input
-            type="password"
-            placeholder={"password"}
-            name="password"
-            aria-label={"password"}
-            className={cn(
-              "w-full rounded-lg p-2 pr-10",
-              "border bg-muted/50 focus:border-primary",
-              "placeholder:text-muted-foreground/70",
-              "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
-              "text-base sm:text-lg",
-              "h-10 sm:h-12",
-              "mt-5",
-            )}
-          />
-          <GradientButton className="flex items-center justify-center mt-5">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-100 dark:from-blue-900 dark:to-purple-900">
+      <div className="glass-morphism-heavy p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-center gradient-text">Login</h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            {/* biome-ignore lint/a11y/noLabelWithoutControl: <explanation> */}
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+              Email
+            </label>
+            <GradientInput
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div>
+            {/* biome-ignore lint/a11y/noLabelWithoutControl: <explanation> */}
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+              Password
+            </label>
+            <GradientInput
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          {error && <ErrorMessage error={error} />}
+          <GradientButton type="submit" className="w-full">
             Log In
           </GradientButton>
-          <ErrorMessage error={error} />
-        </Form>
-      </main>
+        </form>
+      </div>
     </div>
   );
-};
+}
