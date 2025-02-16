@@ -260,7 +260,6 @@
     margin: 0;
     box-sizing: border-box;
     font-family: "Inter", sans-serif;
-    padding-top: 4rem; /* Default for desktop */
   }
 }
 
