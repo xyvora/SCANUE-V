@@ -18,7 +18,7 @@ dependencies = [
     "httpx==0.28.1",
     "langchain==0.3.18",
     "langchain-openai==0.3.4",
-    "langgraph==0.2.70",
+    "langgraph==0.2.73",
     "loguru==0.7.3",
     "orjson==3.10.15",
     "pwdlib[argon2]==0.2.1",
