@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest, NextResponse } from "next/server";
 import type { UserUpdateMe } from "@/app/interfaces/users";
 import { apiUrl } from "@/config/api";
 
@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
 
   const responseJson = await backendResponse.json();
   if (!backendResponse.ok) {
-    return new NextResponse(responseJson.message, {
+    return new NextResponse(responseJson.message, { 
       status: backendResponse.status,
     });
   }
