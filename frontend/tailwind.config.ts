@@ -1,13 +1,10 @@
-/* eslint-disable sort-imports */
 import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
 import typography from "@tailwindcss/typography";
 import animate from "tailwindcss-animate";
 
 const config: Config = {
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       fontFamily: {
@@ -52,10 +49,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    typography,
-    animate,
-  ],
+  plugins: [typography, animate],
 };
 
 export default config;

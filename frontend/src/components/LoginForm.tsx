@@ -1,12 +1,10 @@
-/* eslint-disable sort-imports */
 "use client";
 
-// biome-ignore lint/style/useImportType: <explanation>
 import { FormEvent, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import ErrorMessage from "@/components/ErrorMessage";
 import { GradientButton } from "@/components/ui/gradient-button";
 import { GradientInput } from "@/components/ui/gradient-input";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -63,7 +61,6 @@ export default function LoginForm() {
         <h2 className="text-2xl font-bold mb-6 text-center gradient-text">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            {/* biome-ignore lint/a11y/noLabelWithoutControl: <explanation> */}
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
               Email
             </label>
@@ -75,7 +72,6 @@ export default function LoginForm() {
             />
           </div>
           <div>
-            {/* biome-ignore lint/a11y/noLabelWithoutControl: <explanation> */}
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
               Password
             </label>

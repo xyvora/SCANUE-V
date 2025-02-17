@@ -1,9 +1,9 @@
-/* eslint-disable sort-imports */
 "use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { isLoggedIn } from "@/utils/auth";
+
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { isLoggedIn } from "@/utils/auth";
+import { usePathname } from "next/navigation";
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -14,10 +14,9 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
       href={href}
       className={`
         px-4 py-2 rounded-md text-sm font-medium transition-all duration-300
-        ${
-          isActive
-            ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
-            : "text-gray-700 dark:text-gray-200 hover:bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:text-blue-600 dark:hover:text-blue-400"
+        ${isActive
+          ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+          : "text-gray-700 dark:text-gray-200 hover:bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:text-blue-600 dark:hover:text-blue-400"
         }
       `}
     >

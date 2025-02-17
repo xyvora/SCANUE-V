@@ -1,4 +1,3 @@
-// biome-ignore lint/style/useImportType: <explanation>
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
 import { type VariantProps, cva } from "class-variance-authority";
 import { Root } from "@radix-ui/react-label";
@@ -11,7 +10,7 @@ const labelVariants = cva(
 const Label = forwardRef<
   ElementRef<typeof Root>,
   ComponentPropsWithoutRef<typeof Root> &
-    VariantProps<typeof labelVariants>
+  VariantProps<typeof labelVariants>
 >(({ className, ...props }, ref) => (
   <Root
     ref={ref}
