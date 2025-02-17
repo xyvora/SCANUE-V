@@ -1,3 +1,4 @@
+import { ChatInterfaceClient } from "@/components/ChatInterfaceClient";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -14,4 +15,4 @@ export default function ChatPage() {
       </main>
     </div>
   );
-};
+}
