@@ -1,7 +1,6 @@
 import AccountInfo from "@/components/AccountInfo";
-import { Metadata } from "next";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "SCANUE-V Account Information",
 };
 

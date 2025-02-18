@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest, NextResponse } from "next/server";
 import type { UserUpdateMe } from "@/app/interfaces/users";
 import { apiUrl } from "@/config/api";
 

@@ -10,7 +10,7 @@ const labelVariants = cva(
 const Label = forwardRef<
   ElementRef<typeof Root>,
   ComponentPropsWithoutRef<typeof Root> &
-    VariantProps<typeof labelVariants>
+  VariantProps<typeof labelVariants>
 >(({ className, ...props }, ref) => (
   <Root
     ref={ref}
