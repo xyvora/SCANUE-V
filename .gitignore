@@ -140,6 +140,7 @@ dmypy.json
 # editors
 .idea
 .vscode
+.cursorrules
 
 # Logs
 logs
