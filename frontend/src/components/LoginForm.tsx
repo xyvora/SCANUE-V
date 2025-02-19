@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import ErrorMessage from "@/components/ErrorMessage";
 import { GradientButton } from "@/components/ui/gradient-button";
 import { GradientInput } from "@/components/ui/gradient-input";
@@ -61,10 +61,14 @@ export default function LoginForm() {
         <h2 className="text-2xl font-bold mb-6 text-center gradient-text">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+            <label 
+              htmlFor="email" 
+              className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
+            >
               Email
             </label>
             <GradientInput
+              id="email"
               name="email"
               type="email"
               placeholder="Enter your email"
@@ -72,10 +76,14 @@ export default function LoginForm() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+            <label 
+              htmlFor="password" 
+              className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
+            >
               Password
             </label>
             <GradientInput
+              id="password"
               name="password"
               type="password"
               placeholder="Enter your password"
