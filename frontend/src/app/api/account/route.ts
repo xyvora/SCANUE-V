@@ -1,4 +1,4 @@
-import type { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import type { UserUpdateMe } from "@/app/interfaces/users";
 import { apiUrl } from "@/config/api";
 
@@ -11,17 +11,15 @@ export async function GET(request: NextRequest) {
 
   const responseJson = await backendResponse.json();
   if (!backendResponse.ok) {
-    return new NextResponse(responseJson.message, {
+    return new Response(responseJson.message, {
       status: backendResponse.status,
     });
   }
 
-  const response = new NextResponse(JSON.stringify(responseJson), {
+  return new Response(JSON.stringify(responseJson), {
     status: 200,
     headers: { "Content-Type": "application/json" },
   });
-
-  return response;
 }
 
 export async function PATCH(request: NextRequest) {
@@ -38,15 +36,13 @@ export async function PATCH(request: NextRequest) {
 
   const responseJson = await backendResponse.json();
   if (!backendResponse.ok) {
-    return new NextResponse(responseJson.detail, {
+    return new Response(responseJson.detail, {
       status: backendResponse.status,
     });
   }
 
-  const response = new NextResponse(JSON.stringify(responseJson), {
+  return new Response(JSON.stringify(responseJson), {
     status: 200,
     headers: { "Content-Type": "application/json" },
   });
-
-  return response;
 }
