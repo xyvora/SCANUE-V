@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+"use client";
+
 import Link from "next/link";
-import { isLoggedIn } from "@/utils/auth";
 import { usePathname } from "next/navigation";
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
@@ -23,17 +23,7 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
   );
 };
 
-export default function Navbar() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      const isAuth = await isLoggedIn();
-      setLoggedIn(isAuth);
-    };
-    checkAuth();
-  }, []);
-
+export default function Navbar({ loggedIn }: { loggedIn: boolean }) {
   return (
     <nav className="bg-gradient-to-r from-blue-50 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50 backdrop-blur-md border-b border-blue-200/30 dark:border-blue-900/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
