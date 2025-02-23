@@ -1,51 +1,52 @@
 "use client";
-
-import Form from "next/form";
-import { FormEvent } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import ErrorMessage from "@/components/ErrorMessage";
+import type { FormEvent } from "react"; 
 import { GradientButton } from "@/components/ui/gradient-button";
-import { UserCreate } from "@/app/interfaces/users";
-import { cn } from "@/utils/ui";
+import { Input } from "@/components/ui/input";
+import type { UserCreate } from "@/app/interfaces/users";
+import { WavyBackground } from "@/components/ui/wavy-background";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const Signup = () => {
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string | null;
 
-    // TODO: Replace the console logs with propper error message displays in line with the project
-    // standard once that is decided. Also need to handle error responses from the backend and
-    // display those in appropriate messages to the user.
     if (email === null) {
-      console.log("email is required");
+      setError("Email is required");
       return;
     }
 
     const fullName = formData.get("fullName") as string | null;
 
     if (fullName === null) {
-      console.log("Full name is required");
+      setError("Full name is required");
       return;
     }
 
     const password = formData.get("password") as string | null;
 
     if (password === null) {
-      console.log("Password is required");
+      setError("Password is required");
       return;
     }
 
     const confirmPassword = formData.get("confirmPassword") as string | null;
 
     if (confirmPassword === null) {
-      console.log("Confirm password is required");
+      setError("Confirm password is required");
       return;
     }
 
     if (password !== confirmPassword) {
-      console.log("Passwords don't match");
+      setError("Passwords don't match");
       return;
     }
 
@@ -67,86 +68,85 @@ const Signup = () => {
         router.push("/");
       } else {
         const errorText = await response.text();
-        console.error("Signup failed:", errorText);
+        setError(`Signup failed: ${errorText}`);
       }
-    } catch (error) {
-      console.error("Error submitting signup form:", error);
+    } catch (_error) {
+      setError("Error submitting signup form");
     }
   };
 
   return (
-    <div
-      className="flex flex-col h-screen overflow-hidden text-gray-800 transition-colors duration-300 bg-linear-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900 dark:text-gray-100 items-center "
+    <WavyBackground
+      containerClassName="min-h-screen"
+      className="flex items-center justify-center p-4"
+      colors={["#38bdf8", "#818cf8", "#c084fc"]}
+      waveOpacity={0.3}
     >
-      <main className="flex-1 overflow-y-auto mt-5">
-        <h2 className="text-lg font-semibold xs:text-xl gradient-text sm:text-2xl">Sign Up</h2>
-        <Form onSubmit={handleSubmit} action="/api/signup" className="space-y-4">
-          <input
-            type="email"
-            placeholder={"Email"}
-            name="email"
-            aria-label={"Email"}
-            className={cn(
-              "w-full rounded-lg p-2 pr-10",
-              "border bg-muted/50 focus:border-primary",
-              "placeholder:text-muted-foreground/70",
-              "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
-              "text-base sm:text-lg",
-              "h-10 sm:h-12",
-              "mt-5",
-            )}
-          />
-          <input
-            type="text"
-            placeholder={"Full Name"}
-            name="fullName"
-            aria-label={"full name"}
-            className={cn(
-              "w-full rounded-lg p-2 pr-10",
-              "border bg-muted/50 focus:border-primary",
-              "placeholder:text-muted-foreground/70",
-              "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
-              "text-base sm:text-lg",
-              "h-10 sm:h-12",
-              "mt-5",
-            )}
-          />
-          <input
-            type="password"
-            placeholder={"Password"}
-            name="password"
-            aria-label={"password"}
-            className={cn(
-              "w-full rounded-lg p-2 pr-10",
-              "border bg-muted/50 focus:border-primary",
-              "placeholder:text-muted-foreground/70",
-              "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
-              "text-base sm:text-lg",
-              "h-10 sm:h-12",
-              "mt-5",
-            )}
-          />
-          <input
-            type="password"
-            placeholder={"Confirm Password"}
-            name="confirmPassword"
-            aria-label={"Confirm Password"}
-            className={cn(
-              "w-full rounded-lg p-2 pr-10",
-              "border bg-muted/50 focus:border-primary",
-              "placeholder:text-muted-foreground/70",
-              "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
-              "text-base sm:text-lg",
-              "h-10 sm:h-12",
-              "mt-5",
-            )}
-          />
-          <GradientButton className="flex items-center justify-center mt-5">
-            Sign Up
-          </GradientButton>
-        </Form>
-      </main>
-    </div>
+      <Card className="w-full max-w-md mx-auto bg-white/90 backdrop-blur-sm dark:bg-gray-900/90">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Create Your Account
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Input
+                type="email"
+                placeholder="Email"
+                name="email"
+                aria-label="Email"
+                className="w-full"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Input
+                type="text"
+                placeholder="Full Name"
+                name="fullName"
+                aria-label="Full Name"
+                className="w-full"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Input
+                type="password"
+                placeholder="Password"
+                name="password"
+                aria-label="Password"
+                className="w-full"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Input
+                type="password"
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                aria-label="Confirm Password"
+                className="w-full"
+                required
+              />
+            </div>
+            <GradientButton className="w-full" type="submit">
+              Sign Up
+            </GradientButton>
+            <ErrorMessage error={error} />
+            <p className="text-sm text-center text-gray-600 dark:text-gray-400">
+              Already have an account?{" "}
+              <a
+                href="/login"
+                className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
+              >
+                Log in
+              </a>
+            </p>
+          </form>
+        </CardContent>
+      </Card>
+    </WavyBackground>
   );
 };
 
