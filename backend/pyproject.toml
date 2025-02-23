@@ -23,7 +23,7 @@ dependencies = [
     "orjson==3.10.15",
     "pwdlib[argon2]==0.2.1",
     "pydantic[email]==2.10.6",
-    "pydantic-settings==2.7.1",
+    "pydantic-settings==2.8.0",
     "pyjwt==2.10.1",
     "python-multipart==0.0.20",
     "uvicorn==0.34.0",
