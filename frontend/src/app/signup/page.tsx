@@ -1,7 +1,7 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ErrorMessage from "@/components/ErrorMessage";
-import type { FormEvent } from "react"; 
+import type { FormEvent } from "react";
 import { GradientButton } from "@/components/ui/gradient-button";
 import { Input } from "@/components/ui/input";
 import type { UserCreate } from "@/app/interfaces/users";
