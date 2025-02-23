@@ -1,5 +1,4 @@
 import { expect, test } from "@playwright/test";
-import { firstSuperuser, firstSuperuserPassword } from "./config.ts";
 import { randomEmail, randomPassword } from "./utils/random";
 import { createUser, logInUser, logOutUser } from "./utils/user";
 
@@ -7,7 +6,6 @@ test.use({ storageState: { cookies: [], origins: [] } });
 
 test("Correct buttons present when account page loads", async ({ page }) => {
   const email = randomEmail();
-  const updatedEmail = randomEmail();
   const name = "Test User";
   const password = randomPassword();
 

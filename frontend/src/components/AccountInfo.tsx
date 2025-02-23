@@ -1,10 +1,10 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import ErrorMessage from "@/components/ErrorMessage";
 import Form from "next/form";
 import { GradientButton } from "@/components/ui/gradient-button";
-import { UserUpdateMe } from "@/app/interfaces/users";
+import type { UserUpdateMe } from "@/app/interfaces/users";
 import { cn } from "@/utils/ui";
 import { useRouter } from "next/navigation";
 

@@ -6,8 +6,10 @@ import { createUser, logInUser } from "./utils/user";
 test.use({ storageState: { cookies: [], origins: [] } });
 
 const fillForm = async (page: Page, email: string, password: string) => {
-  await page.getByPlaceholder("email").fill(email);
-  await page.getByPlaceholder("password", { exact: true }).fill(password);
+  await page.getByPlaceholder("Enter your email").fill(email);
+  await page
+    .getByPlaceholder("Enter your password", { exact: true })
+    .fill(password);
 };
 
 const verifyInput = async (
@@ -30,8 +32,8 @@ test("Page redirects to / if not logged in", async ({ page }) => {
 test("Inputs are visible, empty and editable", async ({ page }) => {
   await page.goto("/login");
 
-  await verifyInput(page, "email");
-  await verifyInput(page, "password", { exact: true });
+  await verifyInput(page, "Enter your email");
+  await verifyInput(page, "Enter your password", { exact: true });
 });
 
 test("Log In button is visible", async ({ page }) => {
@@ -45,7 +47,7 @@ test("Log In button is visible", async ({ page }) => {
 test("Log in with valid email and password", async ({ page }) => {
   await page.goto("/login");
   await fillForm(page, firstSuperuserEmail, firstSuperuserPassword);
-  await page.getByRole("button", { name: "Log In" }).nth(1).click();
+  await page.getByRole("button", { name: "Log In" }).click();
   await page.waitForURL("/");
 
   await expect(page.getByText("Welcome to SCANUE-V")).toBeVisible();
@@ -71,9 +73,18 @@ test("Log out removes cookie", async ({ page, context }) => {
   ).toBe(false);
 });
 
-test("Submitting no values shows error", async ({ page }) => {
+test("Email is required", async ({ page }) => {
   await page.goto("/login");
-  await page.getByRole("button", { name: "Log In" }).nth(1).click();
+  await expect(page.getByPlaceholder("Enter your email")).toHaveAttribute(
+    "required",
+    "",
+  );
+});
 
-  await expect(page.getByText("Email and password are required")).toBeVisible();
+test("Password is required", async ({ page }) => {
+  await page.goto("/login");
+  await expect(page.getByPlaceholder("Enter your password")).toHaveAttribute(
+    "required",
+    "",
+  );
 });

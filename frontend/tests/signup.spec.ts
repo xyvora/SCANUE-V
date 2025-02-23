@@ -57,9 +57,7 @@ test("Sign up with valid name, email, and password", async ({ page }) => {
   await page.getByRole("button", { name: "Sign Up" }).click();
 
   await page.waitForURL("/");
-  await expect(
-    page.getByRole("button", { name: "Log In" }).nth(1),
-  ).toBeVisible();
+  await expect(page.locator("a", { hasText: "Log In" }).nth(1)).toBeVisible();
 });
 
 test("Sign up with existing email", async ({ page }) => {

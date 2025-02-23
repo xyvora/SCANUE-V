@@ -1,4 +1,4 @@
-import { type Page, expect, test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { randomEmail, randomPassword } from "./utils/random";
 import { createUser, logInUser } from "./utils/user";
 
@@ -7,7 +7,7 @@ test.use({ storageState: { cookies: [], origins: [] } });
 test("Navbar contains correct buttons when not logged in", async ({ page }) => {
   await page.goto("/login");
 
-  const loginButton = page.getByRole("button", { name: "Log In" }).nth(0);
+  const loginButton = page.locator("a", { hasText: "Log In" }).nth(0);
   await expect(loginButton).toBeVisible();
   await loginButton.click();
 
@@ -16,7 +16,6 @@ test("Navbar contains correct buttons when not logged in", async ({ page }) => {
 
 test("Navbar contains correct buttons when logged in", async ({ page }) => {
   const email = randomEmail();
-  const updatedEmail = randomEmail();
   const name = "Test User";
   const password = randomPassword();
 
@@ -24,9 +23,9 @@ test("Navbar contains correct buttons when logged in", async ({ page }) => {
   await logInUser(page, email, password);
   await page.goto("/chat");
 
-  const chatButton = page.getByRole("button", { name: "Chat" });
+  const chatButton = page.locator("a", { hasText: "Chat" });
   await expect(chatButton).toBeVisible();
-  const profileButton = page.getByRole("button", { name: "Profile" });
+  const profileButton = page.locator("a", { hasText: "Account" });
   await expect(profileButton).toBeVisible();
   const logoutButton = page.getByRole("button", { name: "Log Out" });
   await expect(logoutButton).toBeVisible();
@@ -34,7 +33,6 @@ test("Navbar contains correct buttons when logged in", async ({ page }) => {
 
 test("Navbar chat button goes to correct page", async ({ page }) => {
   const email = randomEmail();
-  const updatedEmail = randomEmail();
   const name = "Test User";
   const password = randomPassword();
 
@@ -42,7 +40,7 @@ test("Navbar chat button goes to correct page", async ({ page }) => {
   await logInUser(page, email, password);
   await page.goto("/profile");
 
-  const chatButton = page.getByRole("button", { name: "Chat" });
+  const chatButton = page.locator("a", { hasText: "Chat" });
   await expect(chatButton).toBeVisible();
   await chatButton.click();
   await expect(page).toHaveURL("/chat");
@@ -50,7 +48,6 @@ test("Navbar chat button goes to correct page", async ({ page }) => {
 
 test("Navbar account button goes to correct page", async ({ page }) => {
   const email = randomEmail();
-  const updatedEmail = randomEmail();
   const name = "Test User";
   const password = randomPassword();
 
@@ -58,7 +55,7 @@ test("Navbar account button goes to correct page", async ({ page }) => {
   await logInUser(page, email, password);
   await page.goto("/chat");
 
-  const profileButton = page.getByRole("button", { name: "Profile" });
+  const profileButton = page.locator("a", { hasText: "Account" });
   await expect(profileButton).toBeVisible();
   await profileButton.click();
   await expect(page).toHaveURL("/account");
@@ -66,7 +63,6 @@ test("Navbar account button goes to correct page", async ({ page }) => {
 
 test("Navbar account button preforms log out", async ({ page, context }) => {
   const email = randomEmail();
-  const updatedEmail = randomEmail();
   const name = "Test User";
   const password = randomPassword();
 
