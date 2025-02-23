@@ -3,9 +3,11 @@ import { type Page, expect } from "@playwright/test";
 export async function logInUser(page: Page, email: string, password: string) {
   await page.goto("/login");
 
-  await page.getByPlaceholder("email").fill(email);
-  await page.getByPlaceholder("password", { exact: true }).fill(password);
-  const logInButton = await page.locator(
+  await page.getByPlaceholder("Enter your email").fill(email);
+  await page
+    .getByPlaceholder("Enter your password", { exact: true })
+    .fill(password);
+  const logInButton = page.locator(
     'button:has-text("Log In"):near(input[name="password"])',
   );
   await logInButton.click();

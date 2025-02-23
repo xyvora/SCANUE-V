@@ -3,7 +3,7 @@ import { Bot } from "lucide-react";
 import { GradientButton } from "@/components/ui/gradient-button";
 import Link from "next/link";
 import { WavyBackground } from "@/components/ui/wavy-background";
-import { isLoggedIn } from "@/utils/auth";
+import isLoggedIn from "@/utils/auth";
 
 export default async function Home() {
   const loggedIn = await isLoggedIn();
@@ -52,7 +52,7 @@ export default async function Home() {
             different agent types and get the assistance you need.
           </p>
           <div className="flex w-full justify-center">
-            { button }
+            {button}
           </div>
         </div>
       </main>

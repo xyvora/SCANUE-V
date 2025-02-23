@@ -3,7 +3,6 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
-import { isLoggedIn } from "@/utils/auth";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,12 +30,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
-  const loggedIn = await isLoggedIn();
-
   return (
     <html lang="en" className={`${inter.variable}`}>
       <body>
-        <Navbar loggedIn={loggedIn} />
+        <Navbar />
         {children}
       </body>
     </html>

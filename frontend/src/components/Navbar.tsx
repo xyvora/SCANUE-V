@@ -1,11 +1,11 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
-  const pathname = usePathname();
-  const isActive = pathname === href;
+  const isActive = usePathname() === href;
 
   return (
     <Link
@@ -23,7 +23,25 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
   );
 };
 
-export default function Navbar({ loggedIn }: { loggedIn: boolean }) {
+export default function Navbar() {
+  const pathName = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("/api/auth-status");
+        const data = await res.json();
+        setIsLoggedIn(data.loggedIn);
+      } catch (error) {
+        console.error("Failed to check auth status", error);
+        setIsLoggedIn(false);
+      }
+    };
+
+    checkAuth();
+  }, [pathName]);
+
   return (
     <nav className="bg-gradient-to-r from-blue-50 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50 backdrop-blur-md border-b border-blue-200/30 dark:border-blue-900/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,11 +52,10 @@ export default function Navbar({ loggedIn }: { loggedIn: boolean }) {
             <NavLink href="/pricing">Pricing</NavLink>
           </div>
           <div className="flex items-center space-x-4">
-            {loggedIn ? (
+            {isLoggedIn ? (
               <>
                 <NavLink href="/chat">Chat</NavLink>
                 <NavLink href="/account">Account</NavLink>
-                <NavLink href="/settings">Settings</NavLink>
                 <NavLink href="/help">Help</NavLink>
                 <form action="/api/logout" method="POST">
                   <button
