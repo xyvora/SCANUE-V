@@ -1,9 +1,9 @@
 "use client";
-
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { type FormEvent, useEffect, useState } from "react";
 import ErrorMessage from "@/components/ErrorMessage";
 import { GradientButton } from "@/components/ui/gradient-button";
-import { GradientInput } from "@/components/ui/gradient-input";
+import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
@@ -56,37 +56,31 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-100 dark:from-blue-900 dark:to-purple-900">
-      <div className="glass-morphism-heavy p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center gradient-text">Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
-            >
-              Email
-            </label>
-            <GradientInput
-              id="email"
-              name="email"
+    <Card className="w-full max-w-md mx-auto bg-white/90 backdrop-blur-sm dark:bg-gray-900/90">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold text-center gradient-text">
+          Welcome Back
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Input
               type="email"
-              placeholder="Enter your email"
+              placeholder="Email"
+              name="email"
+              aria-label="Email"
+              className="w-full"
               required
             />
           </div>
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
-            >
-              Password
-            </label>
-            <GradientInput
-              id="password"
-              name="password"
+          <div className="space-y-2">
+            <Input
               type="password"
-              placeholder="Enter your password"
+              placeholder="Password"
+              name="password"
+              aria-label="Password"
+              className="w-full"
               required
             />
           </div>
@@ -94,8 +88,17 @@ export default function LoginForm() {
           <GradientButton type="submit" className="w-full">
             Log In
           </GradientButton>
+          <p className="text-sm text-center text-gray-600 dark:text-gray-400">
+            No account?{" "}
+            <a
+              href="/signup"
+              className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
+            >
+              Sign up
+            </a>
+          </p>
         </form>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
