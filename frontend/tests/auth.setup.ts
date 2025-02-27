@@ -9,13 +9,13 @@ setup("authenticate", async ({ page }) => {
   await page.getByPlaceholder("Password").fill(firstSuperuserPassword);
 
   await page.getByRole("button", { name: "Log In" }).click();
-  
+
   try {
     await page.waitForURL("/", { timeout: 60000 });
   } catch (error) {
     console.error("Navigation to homepage timed out after login:", error);
     // Continue even if navigation times out
   }
-  
+
   await page.context().storageState({ path: authFile });
 });

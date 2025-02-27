@@ -11,7 +11,7 @@ export async function logInUser(page: Page, email: string, password: string) {
     "button:has-text(\"Log In\"):near(input[name=\"password\"])",
   );
   await logInButton.click();
-  
+
   try {
     await page.waitForURL("/", { timeout: 60000 });
     await expect(page.getByText("Welcome to SCANUE-V")).toBeVisible();
@@ -33,7 +33,7 @@ export async function createUser(
   await page.getByPlaceholder("Password", { exact: true }).fill(password);
   await page.getByPlaceholder("Confirm Password").fill(password);
   await page.getByRole("button", { name: "Sign Up" }).click();
-  
+
   try {
     // Add a longer timeout and make it more specific with waitForNavigation
     await page.waitForURL("/", { timeout: 60000 });

@@ -70,13 +70,13 @@ test("Log out removes cookie", async ({ page, context }) => {
 
   // Use a more direct approach that ensures the cookie is removed
   await page.goto("/logout");
-  
+
   // Add small delay to allow for cookie deletion process to complete
   await page.waitForTimeout(1000);
-  
+
   // Force clear cookies if they weren't properly cleared by the application
   await context.clearCookies();
-  
+
   const cookiesAfterLogout = await context.cookies();
   expect(
     cookiesAfterLogout.some((cookie) => cookie.name === "access_token"),

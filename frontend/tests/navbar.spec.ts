@@ -10,7 +10,7 @@ test("Navbar contains correct buttons when not logged in", async ({ page }) => {
   // Just check if the login button is visible without trying to click it
   const loginButton = page.locator("a", { hasText: "Log In" }).first();
   await expect(loginButton).toBeVisible();
-  
+
   // Verify we can navigate to login page by direct URL instead of clicking
   await page.goto("/login");
   await expect(page).toHaveURL("/login");
