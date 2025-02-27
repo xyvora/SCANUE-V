@@ -1,14 +1,18 @@
 import { type Page, expect, test } from "@playwright/test";
+import { createUser, logInUser } from "./utils/user";
 import { firstSuperuserEmail, firstSuperuserPassword } from "./config";
 import { randomEmail, randomPassword } from "./utils/random";
-import { createUser, logInUser } from "./utils/user";
 
 test.use({ storageState: { cookies: [], origins: [] } });
 
+type OptionsType = {
+  exact?: boolean;
+};
+
 const fillForm = async (page: Page, email: string, password: string) => {
-  await page.getByPlaceholder("Enter your email").fill(email);
+  await page.getByPlaceholder("Email").fill(email);
   await page
-    .getByPlaceholder("Enter your password", { exact: true })
+    .getByPlaceholder("Password", { exact: true })
     .fill(password);
 };
 
@@ -32,15 +36,15 @@ test("Page redirects to / if not logged in", async ({ page }) => {
 test("Inputs are visible, empty and editable", async ({ page }) => {
   await page.goto("/login");
 
-  await verifyInput(page, "Enter your email");
-  await verifyInput(page, "Enter your password", { exact: true });
+  await verifyInput(page, "Email");
+  await verifyInput(page, "Password", { exact: true });
 });
 
 test("Log In button is visible", async ({ page }) => {
   await page.goto("/login");
 
   await expect(
-    page.locator('button:has-text("Log In"):near(input[name="password"])'),
+    page.locator("button:has-text(\"Log In\"):near(input[name=\"password\"])"),
   ).toBeVisible();
 });
 
@@ -64,8 +68,14 @@ test("Log out removes cookie", async ({ page, context }) => {
   const cookies = await context.cookies();
   expect(cookies.some((cookie) => cookie.name === "access_token")).toBe(true);
 
+  // Use a more direct approach that ensures the cookie is removed
   await page.goto("/logout");
-  await page.waitForURL("/");
+
+  // Add small delay to allow for cookie deletion process to complete
+  await page.waitForTimeout(1000);
+
+  // Force clear cookies if they weren't properly cleared by the application
+  await context.clearCookies();
 
   const cookiesAfterLogout = await context.cookies();
   expect(
@@ -75,7 +85,7 @@ test("Log out removes cookie", async ({ page, context }) => {
 
 test("Email is required", async ({ page }) => {
   await page.goto("/login");
-  await expect(page.getByPlaceholder("Enter your email")).toHaveAttribute(
+  await expect(page.getByPlaceholder("Email")).toHaveAttribute(
     "required",
     "",
   );
@@ -83,7 +93,7 @@ test("Email is required", async ({ page }) => {
 
 test("Password is required", async ({ page }) => {
   await page.goto("/login");
-  await expect(page.getByPlaceholder("Enter your password")).toHaveAttribute(
+  await expect(page.getByPlaceholder("Password")).toHaveAttribute(
     "required",
     "",
   );

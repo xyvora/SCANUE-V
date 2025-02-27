@@ -22,6 +22,7 @@ export function ChatInterfaceClient() {
   const [isTyping, setIsTyping] = useState(false);
   const [agentType, setAgentType] = useState<AgentType>("PFC");
   const [error, setError] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setMessages([
@@ -49,6 +50,12 @@ export function ChatInterfaceClient() {
       setMessages((prevMessages) => chatServiceRef.current.trimMessages(prevMessages));
     }
   }, [messages]);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const handleSubmit = useCallback(
     async (e: SubmitEvent) => {
@@ -141,7 +148,7 @@ export function ChatInterfaceClient() {
                   <div className="relative">
                     <input
                       type="text"
-                      autoFocus
+                      ref={inputRef}
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       name="txtChat"

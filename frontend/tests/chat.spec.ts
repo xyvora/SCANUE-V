@@ -1,7 +1,6 @@
+import { createUser, logInUser } from "./utils/user";
 import { expect, test } from "@playwright/test";
-import { firstSuperuser, firstSuperuserPassword } from "./config.ts";
 import { randomEmail, randomPassword } from "./utils/random";
-import { createUser, logInUser, logOutUser } from "./utils/user";
 
 test.use({ storageState: { cookies: [], origins: [] } });
 
@@ -9,7 +8,6 @@ test("Error message displayed when not chat message is entered", async ({
   page,
 }) => {
   const email = randomEmail();
-  const updatedEmail = randomEmail();
   const name = "Test User";
   const password = randomPassword();
 
@@ -18,7 +16,7 @@ test("Error message displayed when not chat message is entered", async ({
 
   await page.goto("/chat");
 
-  const chatInput = await page.getByPlaceholder("Message PFC agent...");
+  const chatInput = await page.locator("input[name=\"txtChat\"]");
   await expect(chatInput).toBeVisible();
   await expect(chatInput).toHaveValue("");
 
