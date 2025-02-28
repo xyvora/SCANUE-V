@@ -28,14 +28,14 @@ export default function UpdatePasswordForm() {
       return () => clearTimeout(timer);
     }
   }, [error]);
-  
+
   useEffect(() => {
     if (result) {
       // Redirect to account page after successful update
       const timer = setTimeout(() => {
         router.push("/account");
       }, 3000);
-      
+
       return () => clearTimeout(timer);
     }
   }, [result, router]);
@@ -180,7 +180,7 @@ export default function UpdatePasswordForm() {
                 )}
               />
               <div className="flex gap-3 pt-2">
-                <GradientButton 
+                <GradientButton
                   className="flex-1 relative"
                   disabled={isLoading}
                 >
@@ -195,7 +195,7 @@ export default function UpdatePasswordForm() {
                 </GradientButton>
                 <GradientButton
                   className="flex-1"
-                  variant="outline" 
+                  variant="outline"
                   onClick={() => router.back()}
                   type="button"
                   disabled={isLoading}

@@ -152,7 +152,7 @@ export default function LoginForm() {
                 </GradientButton>
                 <GradientButton
                   className="flex-1"
-                  variant="outline" 
+                  variant="outline"
                   onClick={cancelEditing}
                   type="button"
                 >

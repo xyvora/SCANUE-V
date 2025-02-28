@@ -115,8 +115,8 @@ export function ChatInterfaceClient() {
           </h1>
           <div className="flex items-center space-x-2 sm:space-x-4">
             <div className="flex items-center lg:hidden">
-              {agentType === "PFC" ? 
-                <span className="flex items-center text-sm font-medium"><BrainCircuit className="w-4 h-4 mr-1 text-purple-600 dark:text-purple-400" /> PFC</span> : 
+              {agentType === "PFC" ?
+                <span className="flex items-center text-sm font-medium"><BrainCircuit className="w-4 h-4 mr-1 text-purple-600 dark:text-purple-400" /> PFC</span> :
                 <span className="flex items-center text-sm font-medium"><Globe2 className="w-4 h-4 mr-1 text-blue-600 dark:text-blue-400" /> General</span>
               }
             </div>

@@ -74,7 +74,7 @@ test("Log out removes cookie", async ({ page, context }) => {
 
   // Either navigate to a page with logout button or directly call the logout API
   await page.goto("/");
-  
+
   // Check if the logout form exists and submit it
   const logoutButton = page.locator("form[action='/api/logout'] button");
   if (await logoutButton.count() > 0) {
@@ -94,20 +94,20 @@ test("Log out removes cookie", async ({ page, context }) => {
 
   const cookiesAfterLogout = await context.cookies();
   console.log("Cookies after logout:", cookiesAfterLogout);
-  
+
   // Make a more flexible assertion - check if the cookie is really gone or has been invalidated
   const accessTokenAfterLogout = cookiesAfterLogout.find(cookie => cookie.name === "access_token");
-  
+
   if (accessTokenAfterLogout) {
     console.log("Access token still exists after logout:", accessTokenAfterLogout);
     // If cookie still exists, make sure it's either:
     // 1. Empty
     // 2. Expired (past date)
     const now = new Date().getTime() / 1000; // current time in seconds
-    const isInvalidated = 
-      accessTokenAfterLogout.value === "" || 
+    const isInvalidated =
+      accessTokenAfterLogout.value === "" ||
       (accessTokenAfterLogout.expires && accessTokenAfterLogout.expires < now);
-    
+
     expect(isInvalidated).toBe(true);
   } else {
     // Cookie is completely gone, which is the ideal case
