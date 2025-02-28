@@ -10,6 +10,7 @@ export interface Message {
   feedback?: Feedback;
   agentResponse?: string;
   timestamp: string;
+  agentType?: "PFC" | "General";
 }
 
 export interface Topic {
