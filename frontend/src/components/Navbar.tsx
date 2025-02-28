@@ -13,8 +13,8 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
       className={`
         px-4 py-2 rounded-md text-sm font-medium transition-all duration-300
         ${isActive
-          ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
-          : "text-gray-700 dark:text-gray-200 hover:bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:text-blue-600 dark:hover:text-blue-400"
+          ? "bg-gradient-to-r from-blue-600/70 to-purple-600/70 text-white shadow-lg backdrop-blur-md border border-white/10"
+          : "text-gray-700 dark:text-gray-200 hover:bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:text-blue-600 dark:hover:text-blue-400 hover:backdrop-blur-md"
         }
       `}
     >
@@ -24,7 +24,6 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
 };
 
 export default function Navbar() {
-  const pathName = usePathname();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -40,10 +39,10 @@ export default function Navbar() {
     };
 
     checkAuth();
-  }, [pathName]);
+  }, []);
 
   return (
-    <nav className="bg-gradient-to-r from-blue-50 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50 backdrop-blur-md border-b border-blue-200/30 dark:border-blue-900/30">
+    <nav className="bg-gradient-to-r from-blue-50/40 to-purple-100/40 dark:from-blue-900/20 dark:to-purple-900/20 backdrop-blur-xl border-b border-blue-200/10 dark:border-blue-900/10 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-4">
@@ -60,7 +59,7 @@ export default function Navbar() {
                 <form action="/api/logout" method="POST">
                   <button
                     type="submit"
-                    className="px-4 py-2 rounded-md text-sm font-medium text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 transition-all duration-300"
+                    className="px-4 py-2 rounded-md text-sm font-medium text-red-600 hover:bg-red-50/30 dark:text-red-400 dark:hover:bg-red-900/10 transition-all duration-300 backdrop-blur-sm hover:backdrop-blur-md border border-transparent hover:border-red-200/20 dark:hover:border-red-800/20"
                   >
                     Log Out
                   </button>

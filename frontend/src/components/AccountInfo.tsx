@@ -1,5 +1,6 @@
 "use client";
 
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { type FormEvent, useEffect, useState } from "react";
 import ErrorMessage from "@/components/ErrorMessage";
 import Form from "next/form";
@@ -93,92 +94,116 @@ export default function LoginForm() {
   }
 
   if (loading) {
-    return <div className="text-center mt-5">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-linear-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900">
+        <div className="text-center p-5">Loading...</div>
+      </div>
+    );
   }
 
   if (editing) {
     return (
-      <div
-        className="flex flex-col h-screen overflow-hidden text-gray-800 transition-colors duration-300 bg-linear-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900 dark:text-gray-100 items-center "
-      >
-        <main className="flex-1 overflow-y-auto mt-5">
-          <h2 className="text-lg font-semibold xs:text-xl gradient-text sm:text-2xl">Update</h2>
-          <Form onSubmit={handleSubmit} action="/api/account/update" className="space-y-4">
-            <input
-              type="email"
-              value={email}
-              placeholder={"Email"}
-              name="email"
-              aria-label={"Email"}
-              onChange={(e) => setEmail(e.target.value)}
-              className={cn(
-                "w-full rounded-lg p-2 pr-10",
-                "border bg-muted/50 focus:border-primary",
-                "placeholder:text-muted-foreground/70",
-                "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
-                "text-base sm:text-lg",
-                "h-10 sm:h-12",
-                "mt-5",
-              )}
-            />
-            <input
-              type="text"
-              value={fullName}
-              placeholder={"Full Name"}
-              name="fullName"
-              aria-label={"full name"}
-              onChange={(e) => setFullName(e.target.value)}
-              className={cn(
-                "w-full rounded-lg p-2 pr-10",
-                "border bg-muted/50 focus:border-primary",
-                "placeholder:text-muted-foreground/70",
-                "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
-                "text-base sm:text-lg",
-                "h-10 sm:h-12",
-                "mt-5",
-              )}
-            />
-            <GradientButton className="items-center justify-center mt-5 mr-2">
+      <div className="flex items-center justify-center min-h-screen bg-linear-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900">
+        <Card className="w-full max-w-md mx-auto bg-white/30 backdrop-blur-xl border border-white/20 shadow-xl dark:bg-gray-900/30 dark:border-white/10">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-center gradient-text">
               Update
-            </GradientButton>
-            <GradientButton
-              className="items-center justify-center mt-5 ml-2"
-              onClick={cancelEditing}
-            >
-              Cancel
-            </GradientButton>
-            <ErrorMessage error={error} />
-          </Form>
-        </main>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Form onSubmit={handleSubmit} action="/api/account/update" className="space-y-4">
+              <input
+                type="email"
+                value={email}
+                placeholder={"Email"}
+                name="email"
+                aria-label={"Email"}
+                onChange={(e) => setEmail(e.target.value)}
+                className={cn(
+                  "w-full rounded-lg p-2 pr-10",
+                  "border bg-muted/50 focus:border-primary",
+                  "placeholder:text-muted-foreground/70",
+                  "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
+                  "text-base sm:text-lg",
+                  "h-10 sm:h-12",
+                  "mt-5",
+                )}
+              />
+              <input
+                type="text"
+                value={fullName}
+                placeholder={"Full Name"}
+                name="fullName"
+                aria-label={"full name"}
+                onChange={(e) => setFullName(e.target.value)}
+                className={cn(
+                  "w-full rounded-lg p-2 pr-10",
+                  "border bg-muted/50 focus:border-primary",
+                  "placeholder:text-muted-foreground/70",
+                  "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
+                  "text-base sm:text-lg",
+                  "h-10 sm:h-12",
+                  "mt-5",
+                )}
+              />
+              <div className="flex gap-3 pt-2">
+                <GradientButton className="flex-1">
+                  Update
+                </GradientButton>
+                <GradientButton
+                  className="flex-1"
+                  variant="outline" 
+                  onClick={cancelEditing}
+                  type="button"
+                >
+                  Cancel
+                </GradientButton>
+              </div>
+              <ErrorMessage error={error} />
+            </Form>
+          </CardContent>
+        </Card>
       </div>
     );
   }
 
   return (
-    <div
-      className="flex flex-col h-screen overflow-hidden text-gray-800 transition-colors duration-300 bg-linear-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900 dark:text-gray-100 items-center "
-    >
-      <main className="flex-1 overflow-y-auto mt-5">
-        <h2 className="text-lg font-semibold xs:text-xl gradient-text sm:text-2xl">Profile</h2>
-        <p>
-          Email: { email }
-        </p>
-        <p>
-          Full Name: { fullName }
-        </p>
-        <GradientButton
-          className="items-center justify-center mt-5 mr-2"
-          onClick={() => setEditing(true)}
-        >
-          Edit
-        </GradientButton>
-        <GradientButton
-          className="items-center justify-center mt-5 ml-2"
-          onClick={() => router.push("/account/update-password")}
-        >
-          Edit Password
-        </GradientButton>
-      </main>
+    <div className="flex items-center justify-center min-h-screen bg-linear-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900">
+      <Card className="w-full max-w-md mx-auto bg-white/30 backdrop-blur-xl border border-white/20 shadow-xl dark:bg-gray-900/30 dark:border-white/10">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-center gradient-text">
+            Profile
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <div className="flex flex-col p-3 bg-gray-50/60 dark:bg-gray-800/60 rounded-lg backdrop-blur-sm">
+              <span className="text-sm text-gray-500 dark:text-gray-400">Email</span>
+              <span className="font-medium">{ email }</span>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <div className="flex flex-col p-3 bg-gray-50/60 dark:bg-gray-800/60 rounded-lg backdrop-blur-sm">
+              <span className="text-sm text-gray-500 dark:text-gray-400">Full Name</span>
+              <span className="font-medium">{ fullName }</span>
+            </div>
+          </div>
+          <div className="flex gap-3 pt-4">
+            <GradientButton
+              className="flex-1"
+              onClick={() => setEditing(true)}
+            >
+              Edit
+            </GradientButton>
+            <GradientButton
+              className="flex-1"
+              onClick={() => router.push("/account/update-password")}
+            >
+              Edit Password
+            </GradientButton>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
-};
+}

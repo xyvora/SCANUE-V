@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { BotAvatar } from "@/components/BotAvatar";
 import type { Message } from "@/app/interfaces/chat";
 import { MessageActions } from "@/components/MessageActions";
-import { User } from "lucide-react";
+import { UserCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatMessageTime } from "@/lib/date-utils";
 import { memo } from "react";
@@ -27,8 +27,8 @@ function ChatMessageComponent({
   const isUser = message.isUser;
   const alignmentClass = isUser ? "justify-end" : "justify-start";
   const messageBgClass = isUser
-    ? "bg-blue-500 text-white"
-    : "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200";
+    ? "bg-blue-500/80 backdrop-blur-sm text-white shadow-blue-500/20 shadow-md border border-blue-400/30"
+    : "bg-gray-200/70 backdrop-blur-sm dark:bg-gray-800/70 text-gray-800 dark:text-gray-200 shadow-gray-300/20 dark:shadow-gray-900/20 shadow-md border border-gray-300/30 dark:border-gray-700/30";
 
   return (
     <li
@@ -41,9 +41,9 @@ function ChatMessageComponent({
       aria-label={`Message from ${isUser ? "You" : "Assistant"}`}
     >
       {!isUser && (
-        <Avatar className="shrink-0 w-8 h-8 sm:h-10 sm:w-10">
+        <Avatar className="shrink-0 w-8 h-8 sm:h-10 sm:w-10 backdrop-blur-sm bg-white/30 dark:bg-gray-800/30 border border-white/20 dark:border-gray-700/30">
           <AvatarFallback>
-            <BotAvatar />
+            <BotAvatar agentType={message.agentType} />
           </AvatarFallback>
         </Avatar>
       )}
@@ -53,7 +53,6 @@ function ChatMessageComponent({
           "max-w-[75%] break-words sm:max-w-[70%]",
           "rounded-2xl p-3",
           messageBgClass,
-          "shadow-xs",
           "transition-all duration-200",
         )}
       >
@@ -71,9 +70,9 @@ function ChatMessageComponent({
         </div>
       </div>
       {isUser && (
-        <Avatar className="shrink-0 w-8 h-8 sm:h-10 sm:w-10">
+        <Avatar className="shrink-0 w-8 h-8 sm:h-10 sm:w-10 backdrop-blur-sm bg-white/30 dark:bg-gray-800/30 border border-white/20 dark:border-gray-700/30">
           <AvatarFallback>
-            <User className="w-5 h-5 text-gray-600" />
+            <UserCircle className="w-5 h-5 text-gray-600 dark:text-gray-400" />
           </AvatarFallback>
         </Avatar>
       )}
