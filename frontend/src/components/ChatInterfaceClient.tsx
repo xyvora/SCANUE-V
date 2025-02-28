@@ -1,7 +1,7 @@
 "use client";
 
 import type { AgentType, Message, SubmitEvent } from "@/app/interfaces/chat";
-import { Brain, Globe, Menu, Send } from "lucide-react";
+import { BrainCircuit, Globe2, Menu, Send } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChatContainer } from "@/components/ChatContainer";
 import { ChatService } from "@/services/ChatService";
@@ -31,9 +31,10 @@ export function ChatInterfaceClient() {
         content: "Hi there! I am your AI assistant. How can I help you today?",
         isUser: false,
         timestamp: new Date().toISOString(),
+        agentType: agentType,
       },
     ]);
-  }, []);
+  }, [agentType]);
 
   useEffect(() => {
     if (error) {
@@ -108,11 +109,17 @@ export function ChatInterfaceClient() {
         className="flex flex-col h-screen overflow-hidden text-gray-800 transition-colors duration-300 bg-linear-to-br from-blue-100 to-purple-200 dark:from-blue-900 dark:to-purple-900 dark:text-gray-100"
         data-testid="chat-interface"
       >
-        <header className="sticky top-0 z-10 flex items-center justify-between p-3 transition-colors duration-300 shadow-md rounded-b-2xl bg-white/70 backdrop-blur-md dark:bg-gray-900/70 sm:p-4">
+        <header className="sticky top-0 z-10 flex items-center justify-between p-3 transition-colors duration-300 shadow-md rounded-b-2xl bg-white/50 backdrop-blur-xl dark:bg-gray-900/50 sm:p-4 border-b border-white/20 dark:border-gray-800/30">
           <h1 className="text-lg font-semibold xs:text-xl gradient-text sm:text-2xl">
             SCANUEV Chat
           </h1>
           <div className="flex items-center space-x-2 sm:space-x-4">
+            <div className="flex items-center lg:hidden">
+              {agentType === "PFC" ?
+                <span className="flex items-center text-sm font-medium"><BrainCircuit className="w-4 h-4 mr-1 text-purple-600 dark:text-purple-400" /> PFC</span> :
+                <span className="flex items-center text-sm font-medium"><Globe2 className="w-4 h-4 mr-1 text-blue-600 dark:text-blue-400" /> General</span>
+              }
+            </div>
             <GradientButton
               className="lg:hidden"
               aria-label="Open menu"
@@ -122,17 +129,17 @@ export function ChatInterfaceClient() {
             <div className="hidden overflow-hidden rounded-lg lg:flex">
               <GradientButton
                 variant={agentType === "PFC" ? "default" : "outline"}
-                className="rounded-r-none"
+                className={`rounded-r-none ${agentType === "PFC" ? "bg-primary text-white" : "bg-transparent"}`}
                 onClick={() => handleAgentChange("PFC")}
               >
-                <Brain className="w-5 h-5 mr-2" /> PFC
+                <BrainCircuit className="w-5 h-5 mr-2 text-purple-600 dark:text-purple-400" /> PFC
               </GradientButton>
               <GradientButton
                 variant={agentType === "General" ? "default" : "outline"}
-                className="rounded-l-none"
+                className={`rounded-l-none ${agentType === "General" ? "bg-primary text-white" : "bg-transparent"}`}
                 onClick={() => handleAgentChange("General")}
               >
-                <Globe className="w-5 h-5 mr-2" /> General
+                <Globe2 className="w-5 h-5 mr-2 text-blue-600 dark:text-blue-400" /> General
               </GradientButton>
             </div>
           </div>
@@ -140,7 +147,7 @@ export function ChatInterfaceClient() {
         <main className="flex-1 overflow-y-auto">
           <ChatContainer messages={messages} onDelete={handleDeleteMessage} />
         </main>
-        <div className="fixed bottom-0 left-0 right-0 p-2 border-t bg-background/95 backdrop-blur-xs sm:p-4">
+        <div className="fixed bottom-0 left-0 right-0 p-2 border-t border-white/20 dark:border-gray-800/30 bg-white/40 dark:bg-gray-900/40 backdrop-blur-xl sm:p-4">
           <div className="w-full px-2 sm:px-4">
             <form onSubmit={handleSubmit} className="space-y-4" data-testid="chat-form">
               <div className="flex items-center gap-2">
@@ -157,9 +164,10 @@ export function ChatInterfaceClient() {
                         "w-full rounded-lg p-2 pr-10",
                         "border bg-muted/50 focus:border-primary",
                         "placeholder:text-muted-foreground/70",
-                        "focus:outline-hidden focus:ring-2 focus:ring-primary/20",
+                        "focus:outline-none focus:ring-2 focus:ring-primary/20",
                         "text-base sm:text-lg",
                         "h-10 sm:h-12",
+                        "transition-colors duration-200",
                       )}
                       disabled={isTyping}
                       aria-label={`Message ${agentType} agent`}
@@ -173,11 +181,11 @@ export function ChatInterfaceClient() {
                 </div>
                 <div className="p-4">
                   <GradientButton
-                    className="w-12 h-12 sm:w-14 sm:h-14"
+                    className="w-14 h-14 sm:w-16 sm:h-16 transform transition-transform duration-200 hover:scale-110"
                     type="submit"
                     id="chatSubmit"
                   >
-                    <Send className="w-5 h-5 sm:h-6 sm:w-6" />
+                    <Send className="w-6 h-6 sm:h-7 sm:w-7" />
                   </GradientButton>
                 </div>
               </div>

@@ -35,9 +35,11 @@ function MessageActionsComponent({ message, onDelete }: MessageActionsProps) {
           className={cn(
             "h-8 w-8 p-0",
             "rounded-full",
-            "hover:bg-gray-200 dark:hover:bg-gray-700",
+            "bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm",
+            "hover:bg-gray-200/50 dark:hover:bg-gray-700/50",
             "focus-visible:ring-2 focus-visible:ring-primary",
             "transition-colors duration-200",
+            "border border-white/20 dark:border-gray-700/20",
           )}
           aria-label="Message actions"
         >
@@ -50,8 +52,8 @@ function MessageActionsComponent({ message, onDelete }: MessageActionsProps) {
         sideOffset={8}
         className={cn(
           "w-48",
-          "bg-white dark:bg-gray-800",
-          "border border-gray-200 dark:border-gray-700",
+          "bg-white/80 dark:bg-gray-800/80 backdrop-blur-md",
+          "border border-gray-200/30 dark:border-gray-700/30",
           "shadow-lg",
           "animate-in fade-in-0 zoom-in-95",
           "duration-200",
@@ -63,6 +65,7 @@ function MessageActionsComponent({ message, onDelete }: MessageActionsProps) {
             "text-red-600 dark:text-red-400",
             "focus:text-red-600 dark:focus:text-red-400",
             "cursor-pointer",
+            "hover:bg-red-50/50 dark:hover:bg-red-900/20",
           )}
           onClick={handleDelete}
         >

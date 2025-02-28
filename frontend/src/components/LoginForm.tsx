@@ -56,7 +56,7 @@ export default function LoginForm() {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-white/90 backdrop-blur-sm dark:bg-gray-900/90">
+    <Card className="w-full max-w-md mx-auto bg-white/30 backdrop-blur-xl border border-white/20 shadow-xl dark:bg-gray-900/30 dark:border-white/10">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-center gradient-text">
           Welcome Back

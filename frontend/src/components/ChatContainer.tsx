@@ -21,6 +21,7 @@ export function ChatContainer({ messages, onDelete, className }: ChatContainerPr
         "flex flex-col overflow-hidden",
         "px-4 sm:px-6 lg:px-8",
         "mx-auto max-w-4xl",
+        "backdrop-blur-sm bg-white/10 dark:bg-gray-900/10",
         className,
       )}
     >
@@ -31,8 +32,9 @@ export function ChatContainer({ messages, onDelete, className }: ChatContainerPr
           "overflow-y-auto overflow-x-hidden",
           "overscroll-none scroll-smooth",
           "py-4 sm:py-6 lg:py-8",
-          "scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700",
+          "scrollbar-thin scrollbar-thumb-gray-300/60 dark:scrollbar-thumb-gray-700/60",
           "scrollbar-track-transparent scrollbar-thumb-rounded-full",
+          "transition-all duration-200",
         )}
       >
         <ul className="flex flex-col space-y-2">

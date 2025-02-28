@@ -1,5 +1,4 @@
-import { ArrowRight } from "lucide-react";
-import { Bot } from "lucide-react";
+import { ArrowRight, Bot } from "lucide-react";
 import { GradientButton } from "@/components/ui/gradient-button";
 import Link from "next/link";
 import { WavyBackground } from "@/components/ui/wavy-background";
@@ -8,7 +7,7 @@ import isLoggedIn from "@/utils/auth";
 export default async function Home() {
   const loggedIn = await isLoggedIn();
 
-  let button;
+  let button = <></>;
 
   if (loggedIn) {
     button = (
