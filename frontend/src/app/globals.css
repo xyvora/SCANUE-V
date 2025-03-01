@@ -39,7 +39,7 @@
   /* Enhanced animation variables for smoother transitions */
   --animate-accordion-down: accordion-down 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   --animate-accordion-up: accordion-up 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  
+
   /* Page transition variables with improved timing functions */
   --page-enter-duration: 350ms;
   --content-enter-duration: 450ms;
@@ -62,7 +62,7 @@
       height: 0;
     }
   }
-  
+
   /* Add fade and slide animations with improved easing */
   @keyframes fadeIn {
     from {
@@ -72,7 +72,7 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes fadeOut {
     from {
       opacity: 1;
@@ -81,7 +81,7 @@
       opacity: 0;
     }
   }
-  
+
   @keyframes slideUp {
     from {
       transform: translateY(10px);
@@ -92,7 +92,7 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes slideInFromRight {
     from {
       transform: translateX(10px);
@@ -103,7 +103,7 @@
       opacity: 1;
     }
   }
-  
+
   @keyframes slideInFromLeft {
     from {
       transform: translateX(-10px);
@@ -347,23 +347,23 @@
     box-sizing: border-box;
     font-family: "Inter", sans-serif;
   }
-  
+
   /* Smooth scrolling for better user experience */
   html {
     scroll-behavior: smooth;
   }
-  
+
   /* Improve focus styles for accessibility */
   :focus-visible {
     outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
   }
-  
+
   /* Prevent iOS text size adjustment when in landscape */
   html {
     -webkit-text-size-adjust: 100%;
   }
-  
+
   /* Better image handling */
   img, video {
     max-width: 100%;
@@ -386,20 +386,20 @@
   .gradient-focus {
     @reference focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
   }
-  
+
   /* Improved mobile responsiveness utilities */
   .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom, 0);
   }
-  
+
   .safe-top {
     padding-top: env(safe-area-inset-top, 0);
   }
-  
+
   .safe-left {
     padding-left: env(safe-area-inset-left, 0);
   }
-  
+
   .safe-right {
     padding-right: env(safe-area-inset-right, 0);
   }
@@ -408,19 +408,19 @@
   .stagger-1 {
     animation-delay: calc(var(--content-enter-delay) + 50ms);
   }
-  
+
   .stagger-2 {
     animation-delay: calc(var(--content-enter-delay) + 100ms);
   }
-  
+
   .stagger-3 {
     animation-delay: calc(var(--content-enter-delay) + 150ms);
   }
-  
+
   .stagger-4 {
     animation-delay: calc(var(--content-enter-delay) + 200ms);
   }
-  
+
   .stagger-5 {
     animation-delay: calc(var(--content-enter-delay) + 250ms);
   }
@@ -440,17 +440,17 @@
       height: 1.25rem;
     }
   }
-  
+
   /* Improved touch device handling */
   @media (hover: none) {
     .touch-device\:opacity-100 {
       opacity: 1 !important;
     }
-    
+
     .touch-device\:visible {
       visibility: visible !important;
     }
-    
+
     .touch-device\:scale-100 {
       transform: scale(1) !important;
     }
