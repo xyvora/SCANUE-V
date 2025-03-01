@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 import defaultTheme from "tailwindcss/defaultTheme";
 import typography from "@tailwindcss/typography";
-import animate from "tailwindcss-animate";
 
 const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
@@ -41,15 +41,56 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        chart: {
+          1: "hsl(var(--chart-1))",
+          2: "hsl(var(--chart-2))",
+          3: "hsl(var(--chart-3))",
+          4: "hsl(var(--chart-4))",
+          5: "hsl(var(--chart-5))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      animation: {
+        "accordion-down": "accordion-down var(--animate-accordion-down)",
+        "accordion-up": "accordion-up var(--animate-accordion-up)",
+        "fade-in": "fadeIn var(--page-enter-duration) cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        "fade-out": "fadeOut var(--page-exit-duration) cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        "slide-up": "slideUp var(--content-enter-duration) cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        "slide-in-from-right": "slideInFromRight var(--content-enter-duration) cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        "slide-in-from-left": "slideInFromLeft var(--content-enter-duration) cubic-bezier(0.22, 1, 0.36, 1) forwards",
+      },
+      transitionTimingFunction: {
+        "ease-spring": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "ease-out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "ease-in-out-expo": "cubic-bezier(0.87, 0, 0.13, 1)",
+      },
+      transitionDuration: {
+        "400": "400ms",
+        "450": "450ms",
+      },
+      screens: {
+        "xs": "480px",
+        ...defaultTheme.screens,
+        "3xl": "1920px",
+      },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: "1rem",
+          sm: "1.5rem",
+          lg: "2rem",
+        },
+      },
     },
   },
-  plugins: [typography, animate],
+  plugins: [
+    typography,
+    animate,
+  ],
 };
 
 export default config;

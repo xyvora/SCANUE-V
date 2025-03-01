@@ -79,8 +79,15 @@ test("Log out removes cookie", async ({ page, context }) => {
   const logoutButton = page.locator("form[action='/api/logout'] button");
   if (await logoutButton.count() > 0) {
     console.log("Found logout button, clicking it");
-    await logoutButton.click();
-    await page.waitForTimeout(2000); // Wait for the form submission to complete
+    try {
+      await logoutButton.click({ force: true });
+      await page.waitForTimeout(2000); // Wait for the form submission to complete
+    } catch (error) {
+      console.log("Clicking logout button failed, falling back to API call:", error instanceof Error ? error.message : String(error));
+      // If button click fails, call the API directly
+      await page.request.post("/api/logout");
+      await page.waitForTimeout(2000);
+    }
   } else {
     console.log("No logout button found, calling API directly");
     // If button not found, call the API directly

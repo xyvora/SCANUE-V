@@ -47,15 +47,12 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-4">
             <NavLink href="/">Home</NavLink>
-            <NavLink href="/features">Features</NavLink>
-            <NavLink href="/pricing">Pricing</NavLink>
           </div>
           <div className="flex items-center space-x-4">
             {isLoggedIn ? (
               <>
                 <NavLink href="/chat">Chat</NavLink>
                 <NavLink href="/account">Account</NavLink>
-                <NavLink href="/help">Help</NavLink>
                 <form action="/api/logout" method="POST">
                   <button
                     type="submit"
