@@ -105,10 +105,10 @@ SCANUE-V combines human-in-the-loop methodologies with specialized agent models 
    ```bash
    # On macOS
    brew install just
-   
+
    # On Windows (with Chocolatey)
    choco install just
-   
+
    # On Linux
    apt-get install just
    ```
@@ -242,4 +242,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - All contributors who have helped shape SCANUE-V
 - The research communities behind prefrontal cortex studies and biologically-inspired AI
-- The open-source communities behind Next.js, FastAPI, LangGraph, and all other technologies used in this project 
+- The open-source communities behind Next.js, FastAPI, LangGraph, and all other technologies used in this project
