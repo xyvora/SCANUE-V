@@ -1,7 +1,7 @@
 # SCANUE-V - Synthetic Cognitive Augmentation Network Using Experts
 
 <p align="center">
-  <img src="https://via.placeholder.com/200x200?text=SCANUE" alt="SCANUE Logo" width="200" height="200">
+  <img src="https://github.com/user-attachments/assets/a1cadb3e-f399-475a-a24e-b33f477f0615" alt="SCANUEV Logo">
 </p>
 
 ## 🚀 Overview
