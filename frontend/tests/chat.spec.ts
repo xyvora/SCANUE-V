@@ -4,7 +4,7 @@ import { randomEmail, randomPassword } from "./utils/random";
 
 test.use({ storageState: { cookies: [], origins: [] } });
 
-test("Error message displayed when not chat message is entered", async ({
+test("Error message displayed when no chat message is entered", async ({
   page,
 }) => {
   const email = randomEmail();
@@ -16,7 +16,7 @@ test("Error message displayed when not chat message is entered", async ({
 
   await page.goto("/chat");
 
-  const chatInput = await page.locator("input[name=\"txtChat\"]");
+  const chatInput = await page.locator('input[name="txtChat"]');
   await expect(chatInput).toBeVisible();
   await expect(chatInput).toHaveValue("");
 
